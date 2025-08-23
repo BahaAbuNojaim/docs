@@ -1,94 +1,107 @@
 ---
-title: 'Development'
-description: 'Preview changes locally to update your docs'
+title: 'AI Strategy Builder'
+description: 'Convert natural language ideas into backtested trading algorithms'
 ---
 
 <Info>
-  **Prerequisites**:
-  - Node.js version 19 or higher
-  - A docs repository with a `docs.json` file
+  **What you'll learn**:
+  - How to describe trading strategies in natural language
+  - Understanding AI-generated algorithm components
+  - Customizing and refining your strategies
 </Info>
 
-Follow these steps to install and run Mintlify on your operating system.
+The eZorro AI Strategy Builder transforms your trading ideas into executable algorithms using advanced natural language processing.
 
 <Steps>
-<Step title="Install the Mintlify CLI">
+<Step title="Access the AI Assistant">
 
-```bash
-npm i -g mint
+Navigate to the AI Strategy Builder in your eZorro platform:
+
+```
+https://platform.ezorro.app/assistant
 ```
 </Step>
 
-<Step title="Preview locally">
+<Step title="Describe your trading idea">
 
-Navigate to your docs directory where your `docs.json` file is located, and run the following command:
+Use natural language to describe your strategy. Be specific about:
 
-```bash
-mint dev
+- **Entry conditions**: When to buy/sell
+- **Exit conditions**: When to close positions  
+- **Asset selection**: What to trade
+- **Risk parameters**: Position sizing, stop losses
+
+**Example prompt:**
+```text
+Create a momentum strategy that buys stocks when their 20-day moving average crosses above the 50-day moving average. Only trade stocks with daily volume above 1 million shares and market cap above $1 billion. Set a 2% stop loss and take profits at 8% gain.
 ```
 
-A local preview of your documentation will be available at `http://localhost:3000`.
+</Step>
+
+<Step title="Review and customize">
+
+The AI will generate a complete strategy with:
+- Entry/exit logic
+- Risk management rules
+- Position sizing calculations
+- Backtesting parameters
+
+Review the generated code and make adjustments as needed.
 
 </Step>
 </Steps>
 
-## Custom ports
+## Strategy Components
 
-By default, Mintlify uses port 3000. You can customize the port Mintlify runs on by using the `--port` flag. For example, to run Mintlify on port 3333, use this command:
+The AI breaks down your strategy into key components:
 
-```bash
-mint dev --port 3333
-```
+### Entry Signals
+Conditions that trigger position opening:
+- Technical indicators (moving averages, RSI, MACD)
+- Fundamental filters (market cap, volume, sector)
+- Market conditions (volatility, trend strength)
 
-If you attempt to run Mintlify on a port that's already in use, it will use the next available port:
+### Exit Rules
+Automated position management:
+- Stop losses for risk management
+- Take profit levels for securing gains
+- Time-based exits for holding period limits
 
-```md
-Port 3000 is already in use. Trying 3001 instead.
-```
+### Risk Management
+Built-in controls to protect capital:
+- Position sizing based on volatility
+- Portfolio concentration limits
+- Maximum drawdown controls
 
-## Mintlify versions
+## Natural Language Examples
 
-Please note that each CLI release is associated with a specific version of Mintlify. If your local preview does not align with the production version, please update the CLI:
-
-```bash
-npm mint update
-```
-
-## Validating links
-
-The CLI can assist with validating links in your documentation. To identify any broken links, use the following command:
-
-```bash
-mint broken-links
-```
-
-## Deployment
-
-If the deployment is successful, you should see the following:
-
-<Frame>
-  <img src="/images/checks-passed.png" alt="Screenshot of a deployment confirmation message that says All checks have passed." style={{ borderRadius: '0.5rem' }} />
-</Frame>
-
-## Code formatting
-
-We suggest using extensions on your IDE to recognize and format MDX. If you're a VSCode user, consider the [MDX VSCode extension](https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx) for syntax highlighting, and [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) for code formatting.
-
-## Troubleshooting
+Here are effective ways to describe different strategy types:
 
 <AccordionGroup>
-  <Accordion title='Error: Could not load the "sharp" module using the darwin-arm64 runtime'>
-
-    This may be due to an outdated version of node. Try the following:
-    1. Remove the currently-installed version of the CLI: `npm remove -g mint`
-    2. Upgrade to Node v19 or higher.
-    3. Reinstall the CLI: `npm i -g mint`
+  <Accordion title="Mean Reversion Strategy">
+    "Buy stocks when they fall more than 10% below their 20-day average, but only if the overall market (SPY) is in an uptrend. Sell when the stock recovers to its 20-day average or after holding for 5 days maximum."
   </Accordion>
 
-  <Accordion title="Issue: Encountering an unknown error">
-  
-    Solution: Go to the root of your device and delete the `~/.mintlify` folder. Then run `mint dev` again.
+  <Accordion title="Breakout Strategy">
+    "Trade stocks that break above their 52-week high on volume at least 2x their average. Enter long positions and set stops at 5% below entry. Exit when momentum slows (RSI drops below 70)."
+  </Accordion>
+
+  <Accordion title="Sector Rotation">
+    "Rotate between technology and healthcare ETFs based on their relative strength. Invest in the sector with better 3-month performance vs SPY. Rebalance monthly and limit sector allocation to 50% of portfolio."
   </Accordion>
 </AccordionGroup>
 
-Curious about what changed in the latest CLI version? Check out the [CLI changelog](https://www.npmjs.com/package/mintlify?activeTab=versions).
+## Best Practices
+
+<Tip>
+  **Start simple**: Begin with basic strategies before adding complex conditions. The AI can always help you enhance strategies iteratively.
+</Tip>
+
+- Be specific about timeframes (daily, weekly, intraday)
+- Include risk management in your initial description
+- Mention any asset class preferences or restrictions
+- Specify your preferred backtesting period
+
+<Warning>
+  **Avoid overfitting**: Don't create strategies with too many specific conditions that only work in historical backtests.
+</Warning>

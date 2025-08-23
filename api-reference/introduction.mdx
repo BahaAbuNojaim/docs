@@ -1,33 +1,105 @@
 ---
-title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+title: 'API Reference'
+description: 'Complete API documentation for eZorro trading platform integration'
 ---
 
 <Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
+  The eZorro API enables programmatic access to strategy creation, backtesting, portfolio management, and live trading execution.
 </Note>
 
 ## Welcome
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+The eZorro API provides comprehensive access to our AI-powered trading platform. Whether you're building custom applications, integrating with existing systems, or automating your trading workflows, our RESTful API offers the tools you need.
 
 <Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
+  title="eZorro Trading APIs"
+  icon="chart-line"
+  href="/api-reference/openapi.json"
 >
-  View the OpenAPI specification file
+  View the complete OpenAPI specification
 </Card>
 
 ## Authentication
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+All API endpoints require authentication using API keys. You can generate API keys from your eZorro platform dashboard.
 
-```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
+```bash
+curl -X GET "https://api.ezorro.app/v1/strategies" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json"
 ```
+
+### Getting Your API Key
+
+1. Log in to your [eZorro platform account](https://platform.ezorro.app)
+2. Navigate to Settings → API Keys
+3. Generate a new API key with appropriate permissions
+4. Store your key securely - it won't be displayed again
+
+<Warning>
+  **Keep your API keys secure**: Never expose API keys in client-side code or public repositories.
+</Warning>
+
+## Rate Limits
+
+API requests are limited to prevent abuse:
+
+- **Free tier**: 100 requests per minute
+- **Pro tier**: 1,000 requests per minute  
+- **Enterprise**: Custom limits available
+
+Rate limit headers are included in all responses:
+
+```http
+X-RateLimit-Limit: 1000
+X-RateLimit-Remaining: 999
+X-RateLimit-Reset: 1640995200
+```
+
+## Base URLs
+
+- **Production**: `https://api.ezorro.app/v1`
+- **Sandbox**: `https://sandbox-api.ezorro.app/v1`
+
+<Tip>
+  Use the sandbox environment for testing and development. It provides the same functionality with simulated market data.
+</Tip>
+
+## Core Endpoints
+
+The eZorro API is organized around these main resources:
+
+<CardGroup cols={2}>
+  <Card title="Strategies" icon="brain" href="/api-reference/endpoint/get">
+    Create, manage, and execute trading strategies
+  </Card>
+  
+  <Card title="Backtests" icon="chart-bar" href="/api-reference/endpoint/create">
+    Run historical strategy performance tests
+  </Card>
+  
+  <Card title="Portfolio" icon="wallet" href="/api-reference/endpoint/delete">
+    Monitor positions, performance, and allocations
+  </Card>
+  
+  <Card title="Market Data" icon="chart-line" href="/api-reference/endpoint/webhook">
+    Access real-time and historical market information
+  </Card>
+</CardGroup>
+
+## SDKs and Libraries
+
+Official SDKs are available for popular programming languages:
+
+- **Python**: `pip install ezorro-python`
+- **JavaScript/Node.js**: `npm install ezorro-js`
+- **Java**: Available via Maven Central
+- **C#/.NET**: Available via NuGet
+
+<Card
+  title="Python SDK Documentation"
+  icon="python"
+  href="https://github.com/ezorro/ezorro-python"
+>
+  Get started with the Python SDK
+</Card>

@@ -1,16 +1,17 @@
-# Mintlify Starter Kit
+# eZorro Platform Documentation
 
-Use the starter kit to get your docs deployed and ready to customize.
+Complete documentation for the eZorro AI-powered trading platform.
 
-Click the green **Use this template** button at the top of this repo to copy the Mintlify starter kit. The starter kit contains examples with
+This documentation covers:
 
-- Guide pages
-- Navigation
-- Customizations
-- API reference pages
-- Use of popular components
+- Platform overview and getting started guide
+- AI strategy builder and natural language processing
+- Trading platform configuration and setup
+- Risk management and portfolio analytics
+- API reference and integrations
+- Strategy development and backtesting
 
-**[Follow the full quickstart guide](https://starter.mintlify.com/quickstart)**
+**[Get started with eZorro](https://platform.ezorro.app)**
 
 ## Development
 

@@ -1,11 +1,11 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "eZorro Platform",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#1E40AF",
+    "light": "#3B82F6",
+    "dark": "#1E3A8A"
   },
   "favicon": "/favicon.svg",
   "navigation": {
@@ -22,14 +22,14 @@
             ]
           },
           {
-            "group": "Customization",
+            "group": "Trading Platform",
             "pages": [
               "essentials/settings",
               "essentials/navigation"
             ]
           },
           {
-            "group": "Writing content",
+            "group": "Strategy Development",
             "pages": [
               "essentials/markdown",
               "essentials/code",
@@ -38,7 +38,7 @@
             ]
           },
           {
-            "group": "AI tools",
+            "group": "AI Assistant",
             "pages": [
               "ai-tools/cursor",
               "ai-tools/claude-code",
@@ -71,19 +71,19 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
+          "anchor": "Platform",
+          "href": "https://platform.ezorro.app",
+          "icon": "chart-line"
+        },
+        {
+          "anchor": "Support",
+          "href": "mailto:support@ezorro.app",
+          "icon": "life-ring"
         },
         {
           "anchor": "Community",
-          "href": "https://mintlify.com/community",
-          "icon": "slack"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+          "href": "https://discord.gg/ezorro",
+          "icon": "discord"
         }
       ]
     }
@@ -96,13 +96,13 @@
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "mailto:support@ezorro.app"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "Launch Platform",
+      "href": "https://platform.ezorro.app"
     }
   },
   "contextual": {
@@ -119,9 +119,9 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "x": "https://x.com/ezorro_app",
+      "github": "https://github.com/ezorro",
+      "linkedin": "https://linkedin.com/company/ezorro"
     }
   }
 }
