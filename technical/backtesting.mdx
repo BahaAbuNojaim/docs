@@ -1,612 +1,280 @@
 ---
-title: 'Backtesting Best Practices'
-description: 'Master realistic strategy backtesting and validation with eZorro platform'
+title: 'Test Your Strategies Before Risking Real Money'
+description: 'Learn how eZorro backtesting ensures your trading strategies work in real markets - no surprises!'
 icon: 'chart-bar'
 ---
 
-Learn to conduct rigorous backtests that provide reliable estimates of strategy performance in live trading.
+**Never risk your money on untested strategies again.** eZorro's advanced backtesting shows exactly how your strategy would have performed using real historical data.
 
-## Backtesting Framework
+## What Makes eZorro Backtesting Special?
 
-Build a comprehensive backtesting system that accounts for real-world trading conditions.
+Unlike simple backtesting tools, eZorro includes all the real-world factors that affect your returns.
 
-### Core Backtesting Engine
+### Realistic Trading Conditions
 
-```python
-class AdvancedBacktester:
-    def __init__(self, initial_capital=100000, commission=0.005, slippage=0.001):
-        self.initial_capital = initial_capital
-        self.commission = commission  # 0.5% per trade
-        self.slippage = slippage      # 0.1% slippage
-        self.positions = {}
-        self.trades = []
-        self.portfolio_value = []
-        
-    def execute_trade(self, symbol, quantity, price, timestamp, trade_type):
-        """
-        Execute trade with realistic costs and slippage
-        """
-        # Apply slippage based on trade direction
-        if trade_type == 'BUY':
-            execution_price = price * (1 + self.slippage)
-        else:  # SELL
-            execution_price = price * (1 - self.slippage)
-        
-        # Calculate commission
-        trade_value = abs(quantity) * execution_price
-        commission_cost = trade_value * self.commission
-        
-        # Record trade
-        trade_record = {
-            'timestamp': timestamp,
-            'symbol': symbol,
-            'quantity': quantity,
-            'price': execution_price,
-            'value': trade_value,
-            'commission': commission_cost,
-            'type': trade_type
-        }
-        
-        self.trades.append(trade_record)
-        return execution_price, commission_cost
-        
-    def calculate_portfolio_metrics(self):
-        """
-        Calculate comprehensive performance metrics
-        """
-        if not self.portfolio_value:
-            return {}
-            
-        portfolio_series = pd.Series(self.portfolio_value)
-        returns = portfolio_series.pct_change().dropna()
-        
-        # Calculate metrics
-        total_return = (portfolio_series.iloc[-1] / portfolio_series.iloc[0]) - 1
-        annualized_return = (1 + total_return) ** (252/len(portfolio_series)) - 1
-        volatility = returns.std() * np.sqrt(252)
-        sharpe_ratio = (annualized_return - 0.02) / volatility if volatility > 0 else 0
-        
-        # Maximum drawdown
-        rolling_max = portfolio_series.cummax()
-        drawdown = (portfolio_series - rolling_max) / rolling_max
-        max_drawdown = drawdown.min()
-        
-        return {
-            'total_return': total_return,
-            'annualized_return': annualized_return,
-            'volatility': volatility,
-            'sharpe_ratio': sharpe_ratio,
-            'max_drawdown': max_drawdown,
-            'total_trades': len(self.trades),
-            'win_rate': self.calculate_win_rate()
-        }
-```
+**We Include Everything That Costs Money**:
 
-### Data Quality and Preprocessing
+✅ **Commission Costs** - Your actual broker fees
+✅ **Slippage** - The difference between expected and actual prices  
+✅ **Market Impact** - How your trades affect stock prices
+✅ **Liquidity Limits** - You can't always buy/sell unlimited shares
+
+**Why This Matters**: Other backtesting tools show fantasy results. eZorro shows what you'd actually make.
+
+<Card title="Real Example: Strategy Reality Check" icon="chart-line">
+**Simple Backtest**: "Strategy made 45% last year"
+
+**eZorro Realistic Backtest**: "Strategy made 32% after all costs"
+
+**The 13% difference**: Commission, slippage, and realistic execution costs
+</Card>
+
+### Data Quality That Matters
+
+eZorro uses the highest quality data to give you accurate results:
 
 <Steps>
-<Step title="Survivorship Bias Elimination">
-Include delisted stocks to avoid survivorship bias:
+<Step title="No Survivorship Bias">
+**The Problem**: Most backtests only use stocks that are still trading today, ignoring companies that went bankrupt.
 
-```python
-def load_data_with_survivorship(start_date, end_date, universe):
-    """
-    Load data including delisted securities
-    """
-    # Load current universe
-    current_stocks = get_current_universe(universe)
-    
-    # Load historical universe (including delisted)
-    historical_stocks = get_historical_universe(start_date, end_date, universe)
-    
-    # Combine to get complete picture
-    complete_universe = set(current_stocks) | set(historical_stocks)
-    
-    # Load price data for complete universe
-    price_data = {}
-    for symbol in complete_universe:
-        data = load_stock_data(symbol, start_date, end_date)
-        if data is not None and len(data) > 0:
-            # Mark delisting dates
-            if symbol not in current_stocks:
-                data['is_delisted'] = True
-                data['delist_date'] = data.index[-1]
-            price_data[symbol] = data
-    
-    return price_data
-```
+**eZorro Solution**: We include ALL stocks that existed during your test period, including the failures.
+
+**Why Important**: This prevents inflated returns from only seeing the winners.
 </Step>
 
-<Step title="Corporate Actions Handling">
-Adjust for splits, dividends, and spin-offs:
+<Step title="Corporate Actions Included">
+**Stock Splits & Dividends Handled**: When Apple splits 2-for-1, we automatically adjust all historical prices.
 
-```python
-def adjust_for_corporate_actions(price_data, corporate_actions):
-    """
-    Adjust historical prices for corporate actions
-    """
-    adjusted_data = price_data.copy()
-    
-    for action in corporate_actions:
-        symbol = action['symbol']
-        action_date = action['date']
-        action_type = action['type']
-        
-        if symbol not in adjusted_data:
-            continue
-            
-        # Get data before action date
-        pre_action = adjusted_data[symbol][adjusted_data[symbol].index < action_date]
-        
-        if action_type == 'split':
-            split_ratio = action['ratio']  # e.g., 2.0 for 2:1 split
-            
-            # Adjust prices and volume
-            pre_action['open'] /= split_ratio
-            pre_action['high'] /= split_ratio
-            pre_action['low'] /= split_ratio
-            pre_action['close'] /= split_ratio
-            pre_action['volume'] *= split_ratio
-            
-        elif action_type == 'dividend':
-            dividend_amount = action['amount']
-            
-            # Adjust prices for dividend
-            pre_action['open'] -= dividend_amount
-            pre_action['high'] -= dividend_amount
-            pre_action['low'] -= dividend_amount
-            pre_action['close'] -= dividend_amount
-    
-    return adjusted_data
-```
+**Spin-offs Tracked**: When companies split into separate companies, we track both.
+
+**Mergers & Acquisitions**: Handles when companies get bought out.
 </Step>
 
-<Step title="Point-in-Time Data">
-Ensure data reflects what was known at each point in time:
+<Step title="Real-Time Data Simulation">
+**No Future Peeking**: Our backtest only uses information that was actually available on each trading day.
 
-```python
-def create_point_in_time_universe(base_date, universe_criteria):
-    """
-    Create universe as it would have been known on base_date
-    """
-    # Get fundamental data as of base_date
-    fundamental_data = get_fundamental_data_as_of(base_date)
-    
-    # Apply universe criteria using only information available on base_date
-    qualified_stocks = []
-    for symbol, data in fundamental_data.items():
-        # Market cap criterion
-        if data.get('market_cap', 0) >= universe_criteria.get('min_market_cap', 0):
-            # Volume criterion (use trailing 30-day average)
-            avg_volume = data.get('avg_volume_30d', 0)
-            if avg_volume >= universe_criteria.get('min_volume', 0):
-                # Price criterion
-                if data.get('price', 0) >= universe_criteria.get('min_price', 0):
-                    qualified_stocks.append(symbol)
-    
-    return qualified_stocks
-```
+**Example**: If testing a strategy on January 1, 2020, we only use earnings reports published before that date.
+
+**Result**: Prevents unrealistic "crystal ball" backtests.
 </Step>
 </Steps>
 
-## Advanced Backtesting Techniques
+## Advanced Testing That Pros Use
 
-### Walk-Forward Analysis
+eZorro automatically runs sophisticated tests that hedge funds pay millions to develop.
 
-```python
-def walk_forward_optimization(strategy_function, data, optimization_window=252, 
-                            test_window=63, step_size=21):
-    """
-    Walk-forward analysis with parameter optimization
-    """
-    results = []
-    
-    for start_idx in range(optimization_window, len(data) - test_window, step_size):
-        # Define windows
-        opt_start = start_idx - optimization_window
-        opt_end = start_idx
-        test_start = start_idx
-        test_end = start_idx + test_window
-        
-        # Optimization period data
-        opt_data = data.iloc[opt_start:opt_end]
-        
-        # Find optimal parameters
-        best_params = optimize_strategy_parameters(strategy_function, opt_data)
-        
-        # Test period data
-        test_data = data.iloc[test_start:test_end]
-        
-        # Run strategy with optimal parameters
-        test_results = run_strategy(strategy_function, test_data, best_params)
-        
-        results.append({
-            'optimization_period': (opt_data.index[0], opt_data.index[-1]),
-            'test_period': (test_data.index[0], test_data.index[-1]),
-            'optimal_parameters': best_params,
-            'test_returns': test_results['returns'],
-            'test_sharpe': test_results['sharpe_ratio'],
-            'test_max_drawdown': test_results['max_drawdown']
-        })
-    
-    return analyze_walk_forward_results(results)
+### Walk-Forward Testing
 
-def optimize_strategy_parameters(strategy_function, data, param_ranges):
-    """
-    Optimize strategy parameters using grid search or genetic algorithm
-    """
-    from itertools import product
-    
-    # Generate parameter combinations
-    param_names = list(param_ranges.keys())
-    param_values = [param_ranges[name] for name in param_names]
-    param_combinations = list(product(*param_values))
-    
-    best_sharpe = -np.inf
-    best_params = None
-    
-    for params in param_combinations:
-        param_dict = dict(zip(param_names, params))
-        
-        try:
-            results = run_strategy(strategy_function, data, param_dict)
-            
-            # Use Sharpe ratio as optimization metric
-            if results['sharpe_ratio'] > best_sharpe:
-                best_sharpe = results['sharpe_ratio']
-                best_params = param_dict
-                
-        except Exception as e:
-            # Skip parameter combinations that cause errors
-            continue
-    
-    return best_params
-```
+**How It Works**: Instead of testing on all historical data at once, eZorro tests your strategy period by period, just like real trading.
 
-### Monte Carlo Simulation
+**Process**:
+1. Use 1 year of data to optimize strategy
+2. Test next 3 months with those settings
+3. Re-optimize with new year of data
+4. Test next 3 months again
+5. Repeat through entire history
 
-```python
-def monte_carlo_backtest(strategy_returns, num_simulations=1000, rebalance_frequency=21):
-    """
-    Monte Carlo analysis of strategy performance
-    """
-    simulation_results = []
-    
-    for simulation in range(num_simulations):
-        # Bootstrap resample returns
-        n_periods = len(strategy_returns)
-        resampled_returns = np.random.choice(strategy_returns, size=n_periods, replace=True)
-        
-        # Calculate cumulative performance
-        cumulative_returns = (1 + resampled_returns).cumprod()
-        
-        # Calculate metrics for this simulation
-        total_return = cumulative_returns[-1] - 1
-        sharpe = resampled_returns.mean() / resampled_returns.std() * np.sqrt(252)
-        
-        # Maximum drawdown
-        rolling_max = pd.Series(cumulative_returns).cummax()
-        drawdown = (pd.Series(cumulative_returns) - rolling_max) / rolling_max
-        max_drawdown = drawdown.min()
-        
-        simulation_results.append({
-            'total_return': total_return,
-            'sharpe_ratio': sharpe,
-            'max_drawdown': max_drawdown,
-            'final_value': cumulative_returns[-1]
-        })
-    
-    # Analyze simulation results
-    results_df = pd.DataFrame(simulation_results)
-    
-    return {
-        'mean_return': results_df['total_return'].mean(),
-        'return_std': results_df['total_return'].std(),
-        'return_percentiles': results_df['total_return'].quantile([0.05, 0.25, 0.5, 0.75, 0.95]),
-        'probability_positive': (results_df['total_return'] > 0).mean(),
-        'probability_outperform_market': (results_df['sharpe_ratio'] > 0.5).mean(),
-        'worst_case_drawdown': results_df['max_drawdown'].min(),
-        'best_case_return': results_df['total_return'].max()
-    }
-```
+**Why Better**: Shows if your strategy adapts to changing markets or just got lucky once.
 
-## Realistic Market Conditions
+<Card title="Walk-Forward Results Example" icon="chart-mixed">
+**Consistent Strategy**:
+- Q1 2020: +8.5%
+- Q2 2020: +6.2%
+- Q3 2020: +7.1%
+- Q4 2020: +9.3%
 
-### Transaction Cost Modeling
+**Over-Optimized Strategy**:
+- Q1 2020: +45% (got lucky)
+- Q2 2020: -12% (failed)
+- Q3 2020: -8% (failed)
+- Q4 2020: +2% (barely worked)
+</Card>
 
-<Accordion title="Dynamic Commission Structure">
-```python
-class DynamicCommissionModel:
-    def __init__(self):
-        # Commission tiers based on volume
-        self.commission_tiers = {
-            (0, 1000): 0.01,      # 1% for small trades
-            (1000, 10000): 0.005,  # 0.5% for medium trades
-            (10000, float('inf')): 0.002  # 0.2% for large trades
-        }
-        
-    def calculate_commission(self, trade_value, volume):
-        # Base commission based on trade size
-        for (min_val, max_val), rate in self.commission_tiers.items():
-            if min_val <= trade_value < max_val:
-                base_commission = trade_value * rate
-                break
-        
-        # Volume-based adjustment
-        volume_discount = min(0.5, volume / 100000)  # Up to 50% discount
-        final_commission = base_commission * (1 - volume_discount)
-        
-        return max(final_commission, 1.0)  # Minimum $1 commission
-```
-</Accordion>
+### Monte Carlo Testing
 
-<Accordion title="Market Impact Model">
-```python
-def calculate_market_impact(order_size, average_volume, volatility, liquidity_factor=0.1):
-    """
-    Estimate market impact of trading
-    """
-    # Participation rate (what % of average volume is our trade)
-    participation_rate = order_size / average_volume
-    
-    # Base impact increases with participation rate
-    base_impact = liquidity_factor * np.sqrt(participation_rate)
-    
-    # Volatility adjustment
-    volatility_multiplier = min(2.0, volatility / 0.20)  # Cap at 2x for 20%+ volatility
-    
-    # Final market impact
-    market_impact = base_impact * volatility_multiplier
-    
-    return min(market_impact, 0.05)  # Cap at 5% impact
-```
-</Accordion>
+**What It Does**: Runs your strategy 1,000+ times with different random scenarios to see all possible outcomes.
 
-### Liquidity Constraints
+**Shows You**:
+- Best case scenario
+- Worst case scenario  
+- Most likely outcomes
+- Probability of losing money
+- How bad drawdowns could get
 
-```python
-def apply_liquidity_constraints(order, market_data, max_participation=0.10):
-    """
-    Ensure orders don't exceed liquidity limits
-    """
-    symbol = order['symbol']
-    desired_quantity = order['quantity']
-    
-    # Get average daily volume
-    avg_volume = market_data[symbol]['volume'].rolling(20).mean().iloc[-1]
-    
-    # Calculate maximum tradeable quantity
-    max_quantity = avg_volume * max_participation
-    
-    if abs(desired_quantity) > max_quantity:
-        # Split order across multiple days
-        num_days = np.ceil(abs(desired_quantity) / max_quantity)
-        daily_quantity = desired_quantity / num_days
-        
-        return {
-            'can_execute_immediately': False,
-            'daily_quantity': daily_quantity,
-            'execution_days': num_days,
-            'total_market_impact': calculate_market_impact(
-                abs(desired_quantity), avg_volume, 
-                market_data[symbol]['returns'].std()
-            )
-        }
-    
-    return {
-        'can_execute_immediately': True,
-        'execution_quantity': desired_quantity,
-        'market_impact': calculate_market_impact(
-            abs(desired_quantity), avg_volume,
-            market_data[symbol]['returns'].std()
-        )
-    }
-```
+**Real Example**: 
+- 85% chance of making money
+- Expected return: 18% annually
+- Worst case: -22% in bad year
+- 95% confidence: Between +8% and +28%
 
-## Backtesting Validation
+## Real Market Conditions Included
+
+### Transaction Costs That Matter
+
+**Dynamic Commission Structure**:
+- Small trades ($0-$1,000): Higher percentage fees
+- Medium trades ($1,000-$10,000): Standard broker rates  
+- Large trades ($10,000+): Negotiated lower rates
+- High-volume traders: Automatic discounts
+
+**Market Impact Modeling**: 
+When you buy 10,000 shares, the price moves up slightly. eZorro calculates this "slippage" based on:
+- How much you're buying vs daily volume
+- Current market volatility
+- Time of day and liquidity
+
+<Tip>
+**Real Example**: Buying $50,000 of a small-cap stock might increase your purchase price by 0.3%, while buying $50,000 of Apple might only increase it by 0.05%.
+</Tip>
+
+### Liquidity Reality Check
+
+**You Can't Always Trade What You Want**: 
+- Can't buy $1 million of a penny stock in one day
+- Large orders get spread across multiple days
+- Some stocks have trading halts
+- After-hours trading has wider spreads
+
+**eZorro Handles This**: Automatically splits large orders and shows realistic execution timeline.
+
+## Avoiding The "Backtest Trap"
 
 ### Out-of-Sample Testing
 
-```python
-def out_of_sample_validation(strategy, full_dataset, train_ratio=0.7):
-    """
-    Rigorous out-of-sample testing
-    """
-    # Split data
-    split_point = int(len(full_dataset) * train_ratio)
-    train_data = full_dataset.iloc[:split_point]
-    test_data = full_dataset.iloc[split_point:]
-    
-    # Develop strategy on training data
-    optimized_strategy = develop_strategy(strategy, train_data)
-    
-    # Test on completely unseen data
-    oos_results = run_backtest(optimized_strategy, test_data)
-    
-    # Compare in-sample vs out-of-sample performance
-    is_results = run_backtest(optimized_strategy, train_data)
-    
-    performance_decay = {
-        'return_decay': (oos_results['annualized_return'] - is_results['annualized_return']) / is_results['annualized_return'],
-        'sharpe_decay': (oos_results['sharpe_ratio'] - is_results['sharpe_ratio']) / is_results['sharpe_ratio'],
-        'consistency': calculate_consistency_score(oos_results, is_results)
-    }
-    
-    return {
-        'in_sample': is_results,
-        'out_of_sample': oos_results,
-        'performance_decay': performance_decay
-    }
-```
+**The Problem**: Most strategies look amazing when tested on the same data used to create them.
 
-### Cross-Validation for Trading Strategies
+**eZorro Solution**: 
+1. **Training Period**: Use 70% of data to develop strategy
+2. **Testing Period**: Test on completely unused 30% of data
+3. **Reality Check**: Compare results between both periods
 
-```python
-def time_series_cross_validation(strategy, data, n_splits=5, gap_days=30):
-    """
-    Time series cross-validation for trading strategies
-    """
-    results = []
-    n = len(data)
-    fold_size = n // (n_splits + 1)
-    
-    for i in range(n_splits):
-        # Training set: all data up to split point
-        train_end = (i + 1) * fold_size
-        train_data = data.iloc[:train_end]
-        
-        # Gap to prevent data leakage
-        test_start = train_end + gap_days
-        test_end = test_start + fold_size
-        
-        if test_end > n:
-            break
-            
-        test_data = data.iloc[test_start:test_end]
-        
-        # Train strategy
-        trained_strategy = train_strategy(strategy, train_data)
-        
-        # Test strategy
-        test_results = run_backtest(trained_strategy, test_data)
-        
-        results.append({
-            'fold': i + 1,
-            'train_period': (train_data.index[0], train_data.index[-1]),
-            'test_period': (test_data.index[0], test_data.index[-1]),
-            'test_results': test_results
-        })
-    
-    return analyze_cv_results(results)
-```
+**What Good Results Look Like**:
+- Training period: 22% returns
+- Testing period: 18% returns
+- **Conclusion**: Strategy is robust
 
-## Performance Attribution
+**Red Flags**:
+- Training period: 45% returns  
+- Testing period: 8% returns
+- **Conclusion**: Over-optimized, won't work in real life
 
-### Factor Analysis
+### Multiple Time Period Validation
 
-```python
-def factor_attribution_analysis(strategy_returns, factor_returns):
-    """
-    Analyze strategy performance attribution to various factors
-    """
-    from sklearn.linear_model import LinearRegression
-    
-    # Prepare factor matrix
-    X = np.array([factor_returns[factor] for factor in factor_returns.keys()]).T
-    y = np.array(strategy_returns)
-    
-    # Fit regression model
-    model = LinearRegression().fit(X, y)
-    
-    # Calculate factor exposures
-    factor_exposures = dict(zip(factor_returns.keys(), model.coef_))
-    alpha = model.intercept_
-    
-    # Calculate attribution
-    factor_contributions = {}
-    for i, factor in enumerate(factor_returns.keys()):
-        factor_return = np.mean(factor_returns[factor])
-        contribution = model.coef_[i] * factor_return
-        factor_contributions[factor] = contribution
-    
-    # Model fit statistics
-    r_squared = model.score(X, y)
-    
-    return {
-        'alpha': alpha * 252,  # Annualized alpha
-        'factor_exposures': factor_exposures,
-        'factor_contributions': factor_contributions,
-        'r_squared': r_squared,
-        'unexplained_return': alpha + sum(factor_contributions.values())
-    }
-```
+**Time Series Cross-Validation**: Tests your strategy across multiple time periods to ensure consistency.
 
-### Regime Analysis
+**Process**:
+- Test 1: Train on 2018-2019, test on 2020
+- Test 2: Train on 2018-2020, test on 2021  
+- Test 3: Train on 2018-2021, test on 2022
+- Test 4: Train on 2018-2022, test on 2023
+- Test 5: Train on 2018-2023, test on 2024
 
-```python
-def regime_performance_analysis(strategy_returns, market_data):
-    """
-    Analyze strategy performance across different market regimes
-    """
-    # Define market regimes
-    volatility = market_data['returns'].rolling(30).std() * np.sqrt(252)
-    vol_threshold = volatility.quantile(0.7)
-    
-    trend = market_data['close'] / market_data['close'].rolling(60).mean() - 1
-    trend_threshold = 0.05
-    
-    # Classify regimes
-    regimes = pd.Series(index=market_data.index, dtype=str)
-    regimes[(volatility <= vol_threshold) & (trend >= trend_threshold)] = 'Bull_Low_Vol'
-    regimes[(volatility > vol_threshold) & (trend >= trend_threshold)] = 'Bull_High_Vol'
-    regimes[(volatility <= vol_threshold) & (trend < -trend_threshold)] = 'Bear_Low_Vol'
-    regimes[(volatility > vol_threshold) & (trend < -trend_threshold)] = 'Bear_High_Vol'
-    regimes[(abs(trend) < trend_threshold)] = 'Sideways'
-    
-    # Calculate performance by regime
-    regime_performance = {}
-    for regime in regimes.unique():
-        if pd.isna(regime):
-            continue
-            
-        regime_mask = regimes == regime
-        regime_returns = strategy_returns[regime_mask]
-        
-        if len(regime_returns) > 0:
-            regime_performance[regime] = {
-                'avg_return': regime_returns.mean() * 252,
-                'volatility': regime_returns.std() * np.sqrt(252),
-                'sharpe': regime_returns.mean() / regime_returns.std() * np.sqrt(252),
-                'win_rate': (regime_returns > 0).mean(),
-                'num_observations': len(regime_returns)
-            }
-    
-    return regime_performance
-```
+**Gives You**: Confidence that strategy works across different market conditions.
 
-## Backtesting Pitfalls to Avoid
+## Understanding Your Results
 
-<Warning>
-**Common Backtesting Errors:**
+### What's Driving Your Returns?
 
-1. **Look-ahead bias**: Using future information
-2. **Survivorship bias**: Only including current market constituents
-3. **Data snooping**: Over-optimizing on historical data
-4. **Transaction cost underestimation**: Ignoring realistic trading costs
-5. **Liquidity assumptions**: Assuming unlimited liquidity
-6. **Regime blindness**: Not testing across different market conditions
-</Warning>
+**Factor Analysis**: eZorro tells you WHY your strategy makes money:
+
+**Example Breakdown**:
+- **Market Beta**: 60% of returns from general market moves
+- **Size Factor**: 15% from favoring small-cap stocks  
+- **Value Factor**: 10% from buying undervalued companies
+- **Pure Alpha**: 15% from your strategy's unique edge
+
+**Why Important**: Helps you understand if you're just riding the market or adding real value.
+
+### Performance Across Market Conditions
+
+**Regime Analysis**: See how your strategy performs in different markets:
 
 <CardGroup cols={2}>
-  <Card title="Data Quality Checklist" icon="check-circle">
-    ✅ Include delisted securities
+  <Card title="Bull Market (Low Vol)" icon="chart-line-up">
+    Strategy Return: +25% annually
     
-    ✅ Adjust for corporate actions
-    
-    ✅ Use point-in-time data
-    
-    ✅ Account for trading halts
+    Best environment for growth strategies
   </Card>
   
-  <Card title="Execution Reality Check" icon="exclamation-triangle">
-    ✅ Model realistic slippage
+  <Card title="Bull Market (High Vol)" icon="chart-mixed">
+    Strategy Return: +18% annually
     
-    ✅ Include commission costs
+    Good returns but higher risk
+  </Card>
+  
+  <Card title="Bear Market (Low Vol)" icon="chart-line-down">
+    Strategy Return: +5% annually
     
-    ✅ Consider market impact
+    Still positive during market decline
+  </Card>
+  
+  <Card title="Sideways Market" icon="minus">
+    Strategy Return: +12% annually
     
-    ✅ Respect liquidity constraints
+    Steady performance when market flat
   </Card>
 </CardGroup>
 
+## Common Backtesting Mistakes (That eZorro Avoids)
+
+<Warning>
+**Expensive Backtesting Errors**:
+
+1. **Crystal Ball Problem**: Using tomorrow's news to make today's trades
+2. **Survivor Bias**: Only testing on companies that didn't go bankrupt
+3. **Over-Optimization**: Making strategy perfect for past data (but terrible for future)
+4. **Ignoring Costs**: Forgetting commissions, slippage, and taxes
+5. **Unlimited Money Myth**: Assuming you can buy unlimited shares instantly
+6. **One-Trick Pony**: Only testing in bull markets
+</Warning>
+
+<CardGroup cols={2}>
+  <Card title="What eZorro Does Right" icon="check-circle">
+    ✅ Uses only historical information
+    
+    ✅ Includes failed companies
+    
+    ✅ Realistic transaction costs
+    
+    ✅ Tests across all market conditions
+    
+    ✅ Respects liquidity limits
+    
+    ✅ Prevents over-optimization
+  </Card>
+  
+  <Card title="Your Results Are Trustworthy" icon="shield">
+    ✅ Conservative return estimates
+    
+    ✅ Realistic drawdown expectations
+    
+    ✅ Honest win rate calculations
+    
+    ✅ No hidden assumptions
+    
+    ✅ What you see is what you get
+  </Card>
+</CardGroup>
+
+## Ready to Trust Your Strategy?
+
+<Card title="Start Backtesting Your Ideas" icon="rocket" href="https://platform.ezorro.app">
+**See exactly how your strategy would have performed** with real historical data. No surprises, no false promises - just honest results you can trust.
+
+✅ 15+ years of historical data
+✅ All costs and fees included  
+✅ Realistic market conditions
+✅ Professional-grade analysis
+</Card>
+
 ## Next Steps
 
-Ready to deploy your backtested strategy? 
-
-<Card
-  title="Paper Trading Guide"
-  icon="play"
-  href="/essentials/reusable-snippets"
->
-  Test your strategy with real market data before risking capital
-</Card>
+<CardGroup cols={2}>
+  <Card title="Test Proven Strategies" icon="template" href="/trading-strategies/beginner-strategies">
+    Start with our backtested winning strategies
+  </Card>
+  
+  <Card title="Learn Strategy Building" icon="tools" href="/technical/strategy-construction">
+    Create your own custom trading strategies
+  </Card>
+</CardGroup>

@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(apt:*)",
-      "Bash(apt install:*)"
+      "Bash(apt install:*)",
+      "Bash(rm:*)"
     ],
     "deny": []
   }

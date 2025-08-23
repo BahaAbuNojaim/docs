@@ -29,13 +29,12 @@
             ]
           },
           {
-            "group": "Strategy Development",
+            "group": "Trading Strategies",
             "pages": [
               "trading-strategies/beginner-strategies",
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
+              "trading-strategies/advanced-strategies",
+              "trading-strategies/risk-management",
+              "trading-strategies/portfolio-optimization"
             ]
           },
           {
@@ -43,37 +42,13 @@
             "pages": [
               "technical/indicators",
               "technical/strategy-construction",
-              "technical/risk-management",
               "technical/backtesting"
             ]
           },
           {
-            "group": "AI Assistant",
+            "group": "AI Trading Assistant",
             "pages": [
-              "ai-agent/conversational-assistant",
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "API reference",
-        "groups": [
-          {
-            "group": "API documentation",
-            "pages": [
-              "api-reference/introduction"
-            ]
-          },
-          {
-            "group": "Endpoint examples",
-            "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "ai-agent/conversational-assistant"
             ]
           }
         ]
