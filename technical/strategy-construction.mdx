@@ -1,0 +1,430 @@
+---
+title: 'Strategy Construction'
+description: 'Step-by-step guide to building robust algorithmic trading strategies'
+icon: 'hammer'
+---
+
+Learn how to construct profitable, risk-managed trading strategies using the eZorro platform's comprehensive tools.
+
+## Strategy Development Framework
+
+Follow this systematic approach to build reliable trading algorithms.
+
+### 1. Strategy Conceptualization
+
+<Steps>
+<Step title="Define Market Hypothesis">
+Start with a clear market belief or observation:
+
+- **Trend Following**: "Markets that break to new highs often continue higher"
+- **Mean Reversion**: "Oversold stocks in strong sectors bounce back quickly"  
+- **Momentum**: "Earnings surprises create persistent price movements"
+- **Arbitrage**: "Related assets maintain predictable price relationships"
+</Step>
+
+<Step title="Choose Market Regime">
+Identify the market conditions where your strategy should work:
+
+```python Market Regime Detection
+def detect_market_regime(data, lookback=60):
+    # Volatility regime
+    volatility = data['returns'].rolling(lookback).std()
+    high_vol = volatility > volatility.rolling(252).quantile(0.7)
+    
+    # Trend regime  
+    trend_strength = abs(data['close'].rolling(lookback).mean().pct_change(20))
+    trending = trend_strength > trend_strength.rolling(252).quantile(0.6)
+    
+    return high_vol, trending
+```
+</Step>
+
+<Step title="Select Asset Universe">
+Define what you'll trade:
+
+- **Single Asset**: Focus on one instrument (e.g., SPY)
+- **Sector Rotation**: Trade sector ETFs or industry leaders
+- **Cross-Asset**: Combine stocks, bonds, commodities, currencies
+- **Pairs Trading**: Trade related assets against each other
+
+```python Universe Definition
+# Example: Large-cap momentum universe
+universe = {
+    'market_cap_min': 10e9,  # $10B minimum
+    'volume_min': 1e6,       # 1M shares daily
+    'price_min': 20,         # $20 minimum price
+    'sectors': ['Technology', 'Healthcare', 'Financials'],
+    'max_positions': 20      # Portfolio size limit
+}
+```
+</Step>
+</Steps>
+
+### 2. Signal Generation
+
+Transform your hypothesis into quantifiable trading signals.
+
+#### Entry Signal Construction
+
+<CodeGroup>
+```python Trend Following Entry
+def trend_following_entry(data):
+    # Multiple timeframe confirmation
+    sma_20 = data['close'].rolling(20).mean()
+    sma_50 = data['close'].rolling(50).mean()
+    
+    # Volume confirmation
+    volume_avg = data['volume'].rolling(20).mean()
+    high_volume = data['volume'] > volume_avg * 1.2
+    
+    # Momentum filter
+    rsi = calculate_rsi(data, 14)
+    momentum_ok = rsi > 50
+    
+    # Combined entry signal
+    entry = (sma_20 > sma_50) & high_volume & momentum_ok
+    return entry
+```
+
+```python Mean Reversion Entry
+def mean_reversion_entry(data):
+    # Bollinger Band setup
+    upper, middle, lower = calculate_bollinger_bands(data, 20, 2)
+    
+    # RSI oversold condition
+    rsi = calculate_rsi(data, 14)
+    oversold = rsi < 30
+    
+    # Price near lower band
+    near_lower = data['close'] <= lower * 1.02
+    
+    # Market not in strong downtrend
+    market_trend = data['close'] > data['close'].rolling(100).mean()
+    
+    entry = oversold & near_lower & market_trend
+    return entry
+```
+
+```python Breakout Entry
+def breakout_entry(data, lookback=20):
+    # Price breakout above resistance
+    resistance = data['high'].rolling(lookback).max()
+    breakout = data['close'] > resistance.shift(1)
+    
+    # Volume surge confirmation
+    volume_avg = data['volume'].rolling(lookback).mean()
+    volume_surge = data['volume'] > volume_avg * 1.5
+    
+    # Not overbought
+    rsi = calculate_rsi(data, 14)
+    not_overbought = rsi < 80
+    
+    entry = breakout & volume_surge & not_overbought
+    return entry
+```
+</CodeGroup>
+
+#### Exit Signal Design
+
+```python
+def construct_exit_signals(data, entry_price, atr_period=14):
+    atr = calculate_atr(data, atr_period)
+    
+    # Multiple exit conditions
+    exits = {
+        # Profit target: 2x ATR above entry
+        'take_profit': data['close'] >= entry_price + (2 * atr),
+        
+        # Stop loss: 1.5x ATR below entry
+        'stop_loss': data['close'] <= entry_price - (1.5 * atr),
+        
+        # Time-based exit: Maximum 10 days
+        'time_exit': True,  # Implement based on holding period
+        
+        # Technical exit: RSI overbought
+        'tech_exit': calculate_rsi(data) > 75,
+        
+        # Trailing stop: 1x ATR trailing
+        'trailing_stop': data['close'] <= data['close'].rolling(5).max() - atr
+    }
+    
+    return exits
+```
+
+### 3. Risk Management Integration
+
+Build risk controls directly into your strategy logic.
+
+<Accordion title="Position Sizing Methods">
+```python Position Sizing Strategies
+def calculate_position_size(capital, price, risk_per_trade=0.02, method='fixed_risk'):
+    if method == 'fixed_risk':
+        # Risk fixed percentage of capital per trade
+        risk_amount = capital * risk_per_trade
+        stop_distance = price * 0.05  # 5% stop loss
+        shares = risk_amount / stop_distance
+        
+    elif method == 'volatility_adjusted':
+        # Adjust size based on volatility
+        atr = calculate_atr(data)
+        volatility = atr / price
+        base_size = capital * 0.05  # 5% base allocation
+        shares = base_size / price / volatility
+        
+    elif method == 'kelly_criterion':
+        # Kelly formula: f = (bp - q) / b
+        # Where b=odds, p=win_prob, q=loss_prob
+        win_rate = 0.55  # Historical win rate
+        avg_win = 0.08   # Average winning trade
+        avg_loss = 0.04  # Average losing trade
+        
+        b = avg_win / avg_loss
+        kelly_fraction = (b * win_rate - (1 - win_rate)) / b
+        shares = (capital * kelly_fraction * 0.5) / price  # Use half Kelly
+    
+    # Apply maximum position limits
+    max_position_value = capital * 0.10  # 10% max per position
+    max_shares = max_position_value / price
+    
+    return min(shares, max_shares)
+```
+</Accordion>
+
+<Accordion title="Portfolio-Level Risk Controls">
+```python Portfolio Risk Management
+class PortfolioRiskManager:
+    def __init__(self, max_positions=20, max_sector_weight=0.3, max_correlation=0.7):
+        self.max_positions = max_positions
+        self.max_sector_weight = max_sector_weight
+        self.max_correlation = max_correlation
+        self.positions = {}
+        
+    def can_add_position(self, symbol, sector, correlation_matrix):
+        # Check position count limit
+        if len(self.positions) >= self.max_positions:
+            return False
+            
+        # Check sector concentration
+        sector_weight = sum(pos['weight'] for pos in self.positions.values() 
+                           if pos['sector'] == sector)
+        if sector_weight > self.max_sector_weight:
+            return False
+            
+        # Check correlation with existing positions
+        for existing_symbol in self.positions:
+            if correlation_matrix.loc[symbol, existing_symbol] > self.max_correlation:
+                return False
+                
+        return True
+    
+    def add_position(self, symbol, weight, sector):
+        self.positions[symbol] = {
+            'weight': weight,
+            'sector': sector,
+            'entry_date': datetime.now()
+        }
+```
+</Accordion>
+
+### 4. Strategy Validation Framework
+
+Test your strategy thoroughly before deployment.
+
+#### Walk-Forward Analysis
+
+```python
+def walk_forward_analysis(strategy_func, data, train_periods=252, test_periods=63):
+    """
+    Walk-forward analysis to test strategy robustness
+    """
+    results = []
+    
+    for start in range(train_periods, len(data) - test_periods, test_periods):
+        # Training period
+        train_data = data.iloc[start - train_periods:start]
+        
+        # Optimize strategy parameters on training data
+        optimal_params = optimize_strategy_parameters(strategy_func, train_data)
+        
+        # Test on out-of-sample period
+        test_data = data.iloc[start:start + test_periods]
+        test_results = strategy_func(test_data, **optimal_params)
+        
+        results.append({
+            'period_start': test_data.index[0],
+            'period_end': test_data.index[-1],
+            'returns': test_results['returns'],
+            'sharpe': test_results['sharpe'],
+            'max_drawdown': test_results['max_drawdown']
+        })
+    
+    return pd.DataFrame(results)
+```
+
+#### Monte Carlo Simulation
+
+```python
+def monte_carlo_validation(strategy_returns, num_simulations=1000):
+    """
+    Monte Carlo simulation to test strategy robustness
+    """
+    original_sharpe = strategy_returns.mean() / strategy_returns.std() * np.sqrt(252)
+    simulation_results = []
+    
+    for i in range(num_simulations):
+        # Bootstrap resample returns
+        bootstrapped = np.random.choice(strategy_returns, size=len(strategy_returns), replace=True)
+        simulated_sharpe = bootstrapped.mean() / bootstrapped.std() * np.sqrt(252)
+        simulation_results.append(simulated_sharpe)
+    
+    # Calculate confidence intervals
+    confidence_95 = np.percentile(simulation_results, [2.5, 97.5])
+    
+    return {
+        'original_sharpe': original_sharpe,
+        'simulated_mean': np.mean(simulation_results),
+        'confidence_interval': confidence_95,
+        'probability_positive': sum(1 for x in simulation_results if x > 0) / len(simulation_results)
+    }
+```
+
+### 5. Strategy Types and Templates
+
+Common strategy patterns you can adapt:
+
+<CardGroup cols={2}>
+  <Card title="Momentum Strategies" icon="rocket">
+    **Characteristics**: Follow strong price trends
+    
+    **Entry**: Breakouts, moving average crossovers
+    
+    **Best Markets**: Trending, low-volatility periods
+    
+    **Risk**: Trend reversals, whipsaws
+  </Card>
+  
+  <Card title="Mean Reversion" icon="arrows-rotate">
+    **Characteristics**: Profit from price reversals
+    
+    **Entry**: Oversold/overbought conditions
+    
+    **Best Markets**: Range-bound, high-volatility
+    
+    **Risk**: Catching falling knives, trend continuation
+  </Card>
+  
+  <Card title="Arbitrage" icon="scale-balanced">
+    **Characteristics**: Exploit price differences
+    
+    **Entry**: Statistical or fundamental mispricing
+    
+    **Best Markets**: Any, but needs tight spreads
+    
+    **Risk**: Model breakdown, liquidity issues
+  </Card>
+  
+  <Card title="Carry Strategies" icon="piggy-bank">
+    **Characteristics**: Earn yield while holding
+    
+    **Entry**: High-yield assets with stable prices
+    
+    **Best Markets**: Low volatility, stable rates
+    
+    **Risk**: Currency moves, yield curve changes
+  </Card>
+</CardGroup>
+
+### 6. Advanced Strategy Concepts
+
+#### Multi-Strategy Allocation
+
+```python
+def meta_strategy_allocation(strategies_performance, lookback=60):
+    """
+    Dynamically allocate capital between multiple strategies
+    """
+    # Calculate recent performance metrics
+    recent_returns = {name: perf['returns'].tail(lookback) 
+                     for name, perf in strategies_performance.items()}
+    
+    # Risk-adjusted performance (Sharpe ratios)
+    sharpe_ratios = {name: returns.mean() / returns.std() if returns.std() > 0 else 0
+                    for name, returns in recent_returns.items()}
+    
+    # Correlation matrix for diversification
+    returns_df = pd.DataFrame(recent_returns)
+    correlation_matrix = returns_df.corr()
+    
+    # Optimize allocation using mean-variance optimization
+    allocations = optimize_portfolio_allocation(sharpe_ratios, correlation_matrix)
+    
+    return allocations
+```
+
+#### Dynamic Parameter Adjustment
+
+```python
+def adaptive_strategy_parameters(data, base_params, lookback=100):
+    """
+    Adjust strategy parameters based on market conditions
+    """
+    current_volatility = data['returns'].tail(lookback).std() * np.sqrt(252)
+    historical_volatility = data['returns'].std() * np.sqrt(252)
+    
+    vol_regime = current_volatility / historical_volatility
+    
+    # Adjust parameters based on volatility regime
+    adjusted_params = base_params.copy()
+    
+    if vol_regime > 1.5:  # High volatility
+        adjusted_params['stop_loss_pct'] *= 1.5  # Wider stops
+        adjusted_params['position_size'] *= 0.7   # Smaller positions
+        adjusted_params['holding_period'] *= 0.8  # Shorter holds
+        
+    elif vol_regime < 0.7:  # Low volatility
+        adjusted_params['stop_loss_pct'] *= 0.8  # Tighter stops
+        adjusted_params['position_size'] *= 1.2   # Larger positions
+        adjusted_params['holding_period'] *= 1.3  # Longer holds
+    
+    return adjusted_params
+```
+
+## Strategy Implementation Checklist
+
+<Accordion title="Pre-Deployment Checklist">
+✅ **Strategy Logic**
+- [ ] Clear entry and exit rules defined
+- [ ] Risk management integrated
+- [ ] Position sizing calculated
+- [ ] Market regime filters applied
+
+✅ **Backtesting**
+- [ ] Minimum 3 years of historical data tested
+- [ ] Out-of-sample testing performed
+- [ ] Transaction costs included
+- [ ] Realistic slippage assumptions
+
+✅ **Risk Management**
+- [ ] Maximum drawdown limits set
+- [ ] Portfolio concentration limits defined
+- [ ] Correlation monitoring enabled
+- [ ] Stop-loss mechanisms tested
+
+✅ **Implementation**
+- [ ] Code reviewed and tested
+- [ ] Data quality checks passed
+- [ ] Broker integration configured
+- [ ] Monitoring alerts set up
+</Accordion>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Risk Management Deep Dive" icon="shield-check" href="/technical/risk-management">
+    Learn advanced risk management techniques for strategy protection
+  </Card>
+  
+  <Card title="Backtesting Best Practices" icon="chart-bar" href="/technical/backtesting">
+    Master the art of realistic strategy backtesting and validation
+  </Card>
+</CardGroup>

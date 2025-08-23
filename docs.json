@@ -38,8 +38,18 @@
             ]
           },
           {
+            "group": "Technical Analysis",
+            "pages": [
+              "technical/indicators",
+              "technical/strategy-construction",
+              "technical/risk-management",
+              "technical/backtesting"
+            ]
+          },
+          {
             "group": "AI Assistant",
             "pages": [
+              "ai-agent/conversational-assistant",
               "ai-tools/cursor",
               "ai-tools/claude-code",
               "ai-tools/windsurf"

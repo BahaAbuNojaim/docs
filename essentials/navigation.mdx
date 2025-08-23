@@ -1,87 +1,376 @@
 ---
-title: 'Navigation'
-description: 'The navigation field in docs.json defines the pages that go in the navigation menu'
-icon: 'map'
+title: 'Platform Navigation'
+description: 'Navigate the eZorro trading platform dashboard and key features'
+icon: 'compass'
 ---
 
-The navigation menu is the list of links on every website.
+Master the eZorro platform interface to efficiently manage your AI-powered trading strategies.
 
-You will likely update `docs.json` every time you add a new page. Pages do not show up automatically.
+## Dashboard Overview
 
-## Navigation syntax
+The eZorro platform provides a comprehensive trading environment with integrated AI assistance.
 
-Our navigation syntax is recursive which means you can make nested navigation groups. You don't need to include `.mdx` in page names.
+<Frame>
+<img src="/images/dashboard-overview.png" alt="eZorro platform dashboard showing portfolio performance, active strategies, and market overview" />
+</Frame>
 
-<CodeGroup>
+### Main Navigation Sections
 
-```json Regular Navigation
-"navigation": {
-  "tabs": [
-    {
-      "tab": "Docs",
-      "groups": [
-        {
-          "group": "Getting Started",
-          "pages": ["quickstart"]
-        }
-      ]
-    }
-  ]
+<CardGroup cols={2}>
+  <Card title="Strategy Builder" icon="brain" href="/development">
+    AI-powered natural language strategy creation and optimization
+  </Card>
+  
+  <Card title="Portfolio Dashboard" icon="chart-line">
+    Real-time performance monitoring, position tracking, and analytics
+  </Card>
+  
+  <Card title="Risk Management" icon="shield-check" href="/essentials/settings">
+    Portfolio risk controls, position monitoring, and alert systems
+  </Card>
+  
+  <Card title="Market Data" icon="chart-candlestick">
+    Real-time and historical market information across all asset classes
+  </Card>
+</CardGroup>
+
+## Strategy Management Interface
+
+### Active Strategies Panel
+
+Monitor and control your live trading algorithms:
+
+```python Strategy Status Display
+# Example of strategy status information shown in the interface
+strategy_status = {
+    'name': 'Momentum Crossover V2',
+    'status': 'ACTIVE',
+    'allocated_capital': 50000,
+    'current_positions': 8,
+    'daily_pnl': 1247.50,
+    'total_return': 0.184,
+    'sharpe_ratio': 1.42,
+    'max_drawdown': 0.087,
+    'last_signal': '2024-01-15 14:30:00'
 }
 ```
 
-```json Nested Navigation
-"navigation": {
-  "tabs": [
-    {
-      "tab": "Docs",
-      "groups": [
-        {
-          "group": "Getting Started",
-          "pages": [
-            "quickstart",
-            {
-              "group": "Nested Reference Pages",
-              "pages": ["nested-reference-page"]
-            }
-          ]
-        }
-      ]
-    }
-  ]
-}
-```
+<Accordion title="Strategy Controls">
+**Available Actions:**
+- **Pause Strategy**: Stop new position entries
+- **Resume Strategy**: Continue normal operation  
+- **Modify Parameters**: Adjust risk settings or signals
+- **View Performance**: Detailed analytics and charts
+- **Export Data**: Download trade history and metrics
+</Accordion>
 
-</CodeGroup>
+### Strategy Builder Navigation
 
-## Folders
+<Steps>
+<Step title="AI Assistant Access">
+Click the **"Create Strategy"** button to launch the natural language interface:
 
-Simply put your MDX files in folders and update the paths in `docs.json`.
+- Describe your trading idea in plain English
+- Review AI-generated algorithm logic
+- Customize parameters and risk controls
+- Run initial backtests
+</Step>
 
-For example, to have a page at `https://yoursite.com/your-folder/your-page` you would make a folder called `your-folder` containing an MDX file called `your-page.mdx`.
+<Step title="Parameter Optimization">
+Navigate to **Strategy → Optimize** to fine-tune your algorithm:
 
-<Warning>
+- Define parameter ranges for testing
+- Select optimization metrics (Sharpe, return, drawdown)
+- Run walk-forward analysis
+- Review out-of-sample results
+</Step>
 
-You cannot use `api` for the name of a folder unless you nest it inside another folder. Mintlify uses Next.js which reserves the top-level `api` folder for internal server calls. A folder name such as `api-reference` would be accepted.
+<Step title="Deployment Workflow">
+Move from development to live trading:
 
-</Warning>
+1. **Backtest Results** → Validate historical performance
+2. **Paper Trading** → Test with live data, zero risk
+3. **Live Deployment** → Allocate real capital
+4. **Monitor Performance** → Track and adjust as needed
+</Step>
+</Steps>
 
-```json Navigation With Folder
-"navigation": {
-  "tabs": [
-    {
-      "tab": "Docs",
-      "groups": [
-        {
-          "group": "Group Name",
-          "pages": ["your-folder/your-page"]
-        }
-      ]
-    }
-  ]
-}
-```
+## Portfolio Dashboard Features
 
-## Hidden pages
+### Performance Analytics
 
-MDX files not included in `docs.json` will not show up in the sidebar but are accessible through the search bar and by linking directly to them.
+<Frame>
+<img src="/images/performance-dashboard.png" alt="Portfolio performance dashboard with equity curve, drawdown chart, and risk metrics" />
+</Frame>
+
+**Key Metrics Displayed:**
+- Real-time P&L and portfolio value
+- Daily, monthly, and inception-to-date returns
+- Risk-adjusted performance (Sharpe, Sortino ratios)
+- Maximum drawdown and current drawdown
+- Win rate and profit factor
+
+### Position Management
+
+<Accordion title="Position Viewer">
+**Columns Available:**
+- Symbol and company name
+- Current price and change %  
+- Position size (shares and $)
+- Unrealized P&L and %
+- Entry date and price
+- Stop loss and take profit levels
+- Strategy that opened position
+</Accordion>
+
+<Accordion title="Risk Monitoring">
+**Real-time Risk Alerts:**
+- Portfolio drawdown warnings
+- Individual position loss limits
+- Correlation breach notifications  
+- Volatility spike alerts
+- Margin requirement updates
+</Accordion>
+
+## Quick Access Features
+
+### Global Search and Navigation
+
+<Tip>
+**Keyboard Shortcuts:**
+- `Ctrl+K` → Global search (find strategies, positions, settings)
+- `Ctrl+N` → Create new strategy
+- `Ctrl+B` → Open backtesting interface
+- `Ctrl+P` → View portfolio dashboard
+- `Ctrl+R` → Access risk management tools
+</Tip>
+
+### Market Data Interface
+
+Navigate market information efficiently:
+
+<CardGroup cols={3}>
+  <Card title="Watchlists" icon="list">
+    Custom lists of symbols to monitor
+    
+    - Create themed watchlists
+    - Real-time price updates
+    - Technical indicator overlays
+  </Card>
+  
+  <Card title="Screeners" icon="filter">
+    Find trading opportunities
+    
+    - Pre-built fundamental screens
+    - Custom technical filters  
+    - AI-powered opportunity finder
+  </Card>
+  
+  <Card title="Charts" icon="chart-line">
+    Advanced charting tools
+    
+    - Multiple timeframes
+    - 100+ technical indicators
+    - Strategy signal overlays
+  </Card>
+</CardGroup>
+
+## Settings and Configuration
+
+### Platform Preferences
+
+Access settings via the gear icon in the top-right corner:
+
+<ResponseField name="Theme Settings" type="object">
+  Customize visual appearance
+  
+  <Expandable>
+    <ResponseField name="color_scheme" type="string">
+      Choose between light, dark, or auto themes
+    </ResponseField>
+    <ResponseField name="chart_style" type="string">
+      Candlesticks, line, or bar chart default
+    </ResponseField>
+    <ResponseField name="density" type="string">
+      Compact or comfortable layout spacing
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="Trading Preferences" type="object">
+  Configure trading behavior
+  
+  <Expandable>
+    <ResponseField name="default_order_type" type="string">
+      Market, limit, or stop orders as default
+    </ResponseField>
+    <ResponseField name="confirmation_required" type="boolean">
+      Require confirmation before placing orders
+    </ResponseField>
+    <ResponseField name="position_sizing_method" type="string">
+      Fixed dollar, percentage, or risk-based sizing
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### Account Management
+
+<Accordion title="Broker Integration Setup">
+**Navigation**: Settings → Accounts → Add Broker
+
+**Supported Brokers:**
+- Interactive Brokers (IBKR)
+- TD Ameritrade  
+- Alpaca Markets
+- Charles Schwab
+- E*TRADE
+
+**Required Information:**
+- Account number
+- API credentials (key and secret)
+- Account type (cash, margin, retirement)
+- Trading permissions verification
+</Accordion>
+
+<Accordion title="Data Subscriptions">
+**Navigation**: Settings → Market Data → Subscriptions
+
+**Available Data Feeds:**
+- **Level I**: Real-time quotes and trades
+- **Level II**: Order book depth
+- **Historical**: Minute, daily, and tick data
+- **Fundamental**: Earnings, financials, estimates
+- **Options**: Chains, Greeks, and flow data
+
+**Pricing Tiers:**
+- **Free**: 15-minute delayed data
+- **Professional**: Real-time US equities ($25/month)
+- **Premium**: Multi-asset real-time ($75/month)
+</Accordion>
+
+## Mobile Navigation
+
+Access eZorro on-the-go with our mobile interface:
+
+<CardGroup cols={2}>
+  <Card title="Portfolio Monitoring" icon="mobile">
+    **Quick Access:**
+    - Current P&L and positions
+    - Strategy performance alerts
+    - Risk limit notifications
+    - Order status updates
+  </Card>
+  
+  <Card title="Emergency Controls" icon="exclamation-triangle">
+    **Critical Functions:**
+    - Emergency stop all strategies
+    - Close all positions
+    - Contact support directly
+    - View account balances
+  </Card>
+</CardGroup>
+
+## Notification Management
+
+### Alert Configuration
+
+<ResponseField name="Alert Types" type="array">
+Configure which events trigger notifications
+
+<Expandable title="Available Alert Types">
+  <ResponseField name="trade_executions" type="boolean" default="true">
+    Notify when orders are filled
+  </ResponseField>
+  <ResponseField name="strategy_signals" type="boolean" default="false">
+    Alert on new buy/sell signals
+  </ResponseField>
+  <ResponseField name="risk_breaches" type="boolean" default="true">
+    Warn when risk limits are exceeded
+  </ResponseField>
+  <ResponseField name="performance_milestones" type="boolean" default="true">
+    Celebrate wins and warn of losses
+  </ResponseField>
+</Expandable>
+</ResponseField>
+
+### Delivery Channels
+
+<CardGroup cols={2}>
+  <Card title="In-Platform" icon="bell">
+    **Features:**
+    - Real-time notifications panel
+    - Historical alert log
+    - Customizable sound alerts
+    - Visual indicators on charts
+  </Card>
+  
+  <Card title="External Delivery" icon="paper-plane">
+    **Options:**
+    - Email notifications
+    - SMS text messages
+    - Discord webhooks
+    - Slack integrations
+    - Mobile push notifications
+  </Card>
+</CardGroup>
+
+## Keyboard Shortcuts Reference
+
+<Accordion title="Global Shortcuts">
+| Shortcut | Action |
+|----------|--------|
+| `Ctrl+K` | Global search |
+| `Ctrl+/` | Show all shortcuts |
+| `Esc` | Close current modal |
+| `F1` | Help documentation |
+| `F5` | Refresh data |
+</Accordion>
+
+<Accordion title="Trading Shortcuts">
+| Shortcut | Action |
+|----------|--------|
+| `Ctrl+N` | New strategy |
+| `Ctrl+B` | Backtest interface |
+| `Ctrl+O` | Open orders |
+| `Ctrl+P` | Portfolio view |
+| `Ctrl+R` | Risk dashboard |
+| `Ctrl+T` | Trade history |
+</Accordion>
+
+<Accordion title="Chart Shortcuts">
+| Shortcut | Action |
+|----------|--------|
+| `Space` | Play/pause chart |
+| `←/→` | Move chart left/right |
+| `+/-` | Zoom in/out |
+| `R` | Reset zoom |
+| `I` | Add indicator |
+| `D/W/M` | Daily/weekly/monthly view |
+</Accordion>
+
+## Getting Help
+
+<Card title="Support Resources" icon="life-ring">
+**Available 24/7:**
+- In-platform help documentation
+- Video tutorial library  
+- Community Discord server
+- Email support: support@ezorro.app
+- Live chat during market hours
+</Card>
+
+<Tip>
+**Pro Tip**: Use the global search (Ctrl+K) to quickly find any feature, setting, or piece of information within the platform. It's the fastest way to navigate eZorro.
+</Tip>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Platform Configuration" icon="settings" href="/essentials/settings">
+    Set up risk management and trading parameters
+  </Card>
+  
+  <Card title="Create Your First Strategy" icon="rocket" href="/quickstart">
+    Follow our 5-minute quickstart guide
+  </Card>
+</CardGroup>

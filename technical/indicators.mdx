@@ -1,0 +1,331 @@
+---
+title: 'Technical Indicators'
+description: 'Comprehensive guide to technical indicators available in eZorro for strategy development'
+icon: 'chart-line'
+---
+
+Master technical indicators to build sophisticated trading algorithms with the eZorro platform.
+
+## Trend Indicators
+
+Identify market direction and momentum with these essential trend-following indicators.
+
+### Moving Averages
+
+**Simple Moving Average (SMA)**
+```python
+# Calculate 20-day and 50-day simple moving averages
+sma_20 = data['close'].rolling(window=20).mean()
+sma_50 = data['close'].rolling(window=50).mean()
+
+# Golden cross signal (bullish)
+golden_cross = (sma_20 > sma_50) & (sma_20.shift(1) <= sma_50.shift(1))
+```
+
+**Exponential Moving Average (EMA)**
+```python
+# EMA gives more weight to recent prices
+ema_12 = data['close'].ewm(span=12).mean()
+ema_26 = data['close'].ewm(span=26).mean()
+
+# MACD line calculation
+macd_line = ema_12 - ema_26
+```
+
+<CardGroup cols={2}>
+  <Card title="SMA Strategy" icon="chart-simple">
+    **Use Case**: Trend confirmation and crossover signals
+    
+    **Best For**: Medium to long-term strategies
+    
+    **Parameters**: 20/50 day periods most common
+  </Card>
+  
+  <Card title="EMA Strategy" icon="chart-line-up">
+    **Use Case**: Faster reaction to price changes
+    
+    **Best For**: Short to medium-term strategies  
+    
+    **Parameters**: 12/26 day for MACD, 9/21 for signals
+  </Card>
+</CardGroup>
+
+### MACD (Moving Average Convergence Divergence)
+
+```python
+# Complete MACD calculation
+def calculate_macd(data, fast=12, slow=26, signal=9):
+    ema_fast = data['close'].ewm(span=fast).mean()
+    ema_slow = data['close'].ewm(span=slow).mean()
+    
+    macd_line = ema_fast - ema_slow
+    signal_line = macd_line.ewm(span=signal).mean()
+    histogram = macd_line - signal_line
+    
+    return macd_line, signal_line, histogram
+
+# Trading signals
+macd, signal, histogram = calculate_macd(data)
+bullish_crossover = (macd > signal) & (macd.shift(1) <= signal.shift(1))
+```
+
+<Tip>
+**MACD Best Practices**: Look for divergences between MACD and price action. When price makes new highs but MACD doesn't, it often signals trend weakness.
+</Tip>
+
+## Momentum Indicators
+
+Measure the speed and strength of price movements.
+
+### RSI (Relative Strength Index)
+
+```python
+def calculate_rsi(data, period=14):
+    delta = data['close'].diff()
+    gain = (delta.where(delta > 0, 0)).rolling(window=period).mean()
+    loss = (-delta.where(delta < 0, 0)).rolling(window=period).mean()
+    
+    rs = gain / loss
+    rsi = 100 - (100 / (1 + rs))
+    return rsi
+
+# RSI trading signals
+rsi = calculate_rsi(data)
+oversold = rsi < 30  # Buy signal
+overbought = rsi > 70  # Sell signal
+```
+
+### Stochastic Oscillator
+
+```python
+def calculate_stochastic(data, k_period=14, d_period=3):
+    lowest_low = data['low'].rolling(window=k_period).min()
+    highest_high = data['high'].rolling(window=k_period).max()
+    
+    k_percent = 100 * (data['close'] - lowest_low) / (highest_high - lowest_low)
+    d_percent = k_percent.rolling(window=d_period).mean()
+    
+    return k_percent, d_percent
+
+k, d = calculate_stochastic(data)
+buy_signal = (k < 20) & (d < 20) & (k > d)  # Bullish crossover in oversold
+```
+
+<Warning>
+**Avoid Momentum Traps**: RSI and Stochastic can remain oversold/overbought for extended periods during strong trends. Always combine with trend indicators.
+</Warning>
+
+## Volatility Indicators
+
+Measure market volatility for position sizing and stop-loss placement.
+
+### Bollinger Bands
+
+```python
+def calculate_bollinger_bands(data, period=20, std_dev=2):
+    sma = data['close'].rolling(window=period).mean()
+    std = data['close'].rolling(window=period).std()
+    
+    upper_band = sma + (std * std_dev)
+    lower_band = sma - (std * std_dev)
+    
+    return upper_band, sma, lower_band
+
+upper, middle, lower = calculate_bollinger_bands(data)
+
+# Mean reversion signals
+buy_signal = data['close'] <= lower  # Price touching lower band
+sell_signal = data['close'] >= upper  # Price touching upper band
+```
+
+### Average True Range (ATR)
+
+```python
+def calculate_atr(data, period=14):
+    high_low = data['high'] - data['low']
+    high_close = np.abs(data['high'] - data['close'].shift())
+    low_close = np.abs(data['low'] - data['close'].shift())
+    
+    true_range = np.maximum(high_low, np.maximum(high_close, low_close))
+    atr = true_range.rolling(window=period).mean()
+    return atr
+
+# Use ATR for position sizing and stops
+atr = calculate_atr(data)
+stop_loss = data['close'] - (atr * 2.0)  # 2x ATR stop loss
+position_size = 0.01 / atr  # Risk-adjusted position sizing
+```
+
+## Volume Indicators
+
+Analyze trading volume to confirm price movements.
+
+### On-Balance Volume (OBV)
+
+```python
+def calculate_obv(data):
+    obv = np.where(data['close'] > data['close'].shift(1), data['volume'],
+           np.where(data['close'] < data['close'].shift(1), -data['volume'], 0))
+    return obv.cumsum()
+
+obv = calculate_obv(data)
+
+# Volume divergence analysis
+price_trend = data['close'].rolling(20).mean().diff()
+volume_trend = pd.Series(obv).rolling(20).mean().diff()
+divergence = (price_trend > 0) & (volume_trend < 0)  # Bearish divergence
+```
+
+### Volume Weighted Average Price (VWAP)
+
+```python
+def calculate_vwap(data):
+    typical_price = (data['high'] + data['low'] + data['close']) / 3
+    cumulative_volume = data['volume'].cumsum()
+    cumulative_price_volume = (typical_price * data['volume']).cumsum()
+    
+    vwap = cumulative_price_volume / cumulative_volume
+    return vwap
+
+vwap = calculate_vwap(data)
+
+# VWAP trading strategy
+above_vwap = data['close'] > vwap  # Bullish when above VWAP
+below_vwap = data['close'] < vwap  # Bearish when below VWAP
+```
+
+## Multi-Timeframe Analysis
+
+Combine indicators across different timeframes for robust signals.
+
+<Accordion title="Daily + Hourly Confirmation Strategy">
+```python
+# Daily trend confirmation with hourly entry signals
+def multi_timeframe_strategy(daily_data, hourly_data):
+    # Daily trend: 50-day moving average
+    daily_trend = daily_data['close'] > daily_data['close'].rolling(50).mean()
+    
+    # Hourly entry: RSI oversold in uptrend
+    hourly_rsi = calculate_rsi(hourly_data, period=14)
+    entry_signal = daily_trend & (hourly_rsi < 35)
+    
+    return entry_signal
+```
+</Accordion>
+
+<Accordion title="Weekly + Daily Momentum Strategy">
+```python
+# Weekly momentum with daily mean reversion
+def momentum_reversion_combo(weekly_data, daily_data):
+    # Weekly momentum: MACD above zero
+    weekly_macd, _, _ = calculate_macd(weekly_data)
+    momentum = weekly_macd > 0
+    
+    # Daily mean reversion: Bollinger Band squeeze
+    upper, middle, lower = calculate_bollinger_bands(daily_data)
+    band_squeeze = (upper - lower) / middle < 0.1
+    
+    return momentum & band_squeeze
+```
+</Accordion>
+
+## Custom Indicators
+
+Build your own indicators tailored to specific strategies.
+
+```python
+# Custom volatility-adjusted momentum indicator
+def custom_momentum_indicator(data, lookback=10, vol_period=20):
+    # Price momentum
+    momentum = data['close'].pct_change(lookback)
+    
+    # Volatility adjustment
+    volatility = data['close'].pct_change().rolling(vol_period).std()
+    
+    # Risk-adjusted momentum
+    risk_adj_momentum = momentum / volatility
+    
+    return risk_adj_momentum
+
+# Implementation
+custom_momentum = custom_momentum_indicator(data)
+strong_momentum = custom_momentum > custom_momentum.rolling(50).quantile(0.8)
+```
+
+## Indicator Combinations
+
+Powerful strategies emerge from combining multiple indicators.
+
+<CardGroup cols={2}>
+  <Card title="Trend + Momentum" icon="trending-up">
+    **Example**: SMA direction + RSI divergence
+    
+    **Signal Quality**: High - filters false breakouts
+    
+    **Best Markets**: Trending markets with periodic pullbacks
+  </Card>
+  
+  <Card title="Mean Reversion + Volume" icon="arrows-rotate">
+    **Example**: Bollinger Bands + OBV confirmation
+    
+    **Signal Quality**: Medium - requires volume confirmation
+    
+    **Best Markets**: Range-bound or volatile markets
+  </Card>
+</CardGroup>
+
+## Performance Optimization
+
+Tips for efficient indicator calculations in backtesting:
+
+<Tip>
+**Vectorization**: Use pandas built-in functions instead of loops. `data['close'].rolling(20).mean()` is much faster than manual calculation.
+</Tip>
+
+<Warning>
+**Look-ahead Bias**: Never use future data in indicator calculations. Always ensure indicators only use historical data available at each point in time.
+</Warning>
+
+```python
+# Efficient indicator calculation for backtesting
+class IndicatorCalculator:
+    def __init__(self, data):
+        self.data = data
+        self.indicators = {}
+    
+    def add_sma(self, period, column='close'):
+        key = f'sma_{period}'
+        self.indicators[key] = self.data[column].rolling(period).mean()
+        return self
+    
+    def add_rsi(self, period=14, column='close'):
+        self.indicators['rsi'] = calculate_rsi(self.data, period)
+        return self
+    
+    def get_signals(self):
+        # Combine indicators for trading signals
+        signals = pd.DataFrame(index=self.data.index)
+        
+        # Example: SMA crossover + RSI confirmation
+        if 'sma_20' in self.indicators and 'sma_50' in self.indicators:
+            sma_signal = self.indicators['sma_20'] > self.indicators['sma_50']
+            rsi_confirm = self.indicators['rsi'] > 40  # Not oversold
+            signals['buy'] = sma_signal & rsi_confirm
+        
+        return signals
+
+# Usage
+calc = IndicatorCalculator(data)
+calc.add_sma(20).add_sma(50).add_rsi()
+signals = calc.get_signals()
+```
+
+## Next Steps
+
+<Card
+  title="Strategy Construction Guide"
+  icon="wrench"
+  href="/technical/strategy-construction"
+>
+  Learn how to combine these indicators into complete trading strategies
+</Card>

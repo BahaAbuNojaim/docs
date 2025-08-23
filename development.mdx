@@ -1,53 +1,54 @@
 ---
 title: 'AI Strategy Builder'
-description: 'Convert natural language ideas into backtested trading algorithms'
+description: 'Master natural language conversations with eZorro AI agent to create executable trading strategies'
 ---
 
 <Info>
   **What you'll learn**:
-  - How to describe trading strategies in natural language
-  - Understanding AI-generated algorithm components
-  - Customizing and refining your strategies
+  - How to communicate effectively with the AI conversational agent
+  - Best practices for describing trading strategies in natural language
+  - Understanding the iterative refinement process
+  - Using supported variables and actions for strategy creation
 </Info>
 
-The eZorro AI Strategy Builder transforms your trading ideas into executable algorithms using advanced natural language processing.
+The eZorro AI Strategy Builder uses a conversational AI agent that helps you refine, validate, and confirm trading strategies through natural dialogue.
+
+## 🧠 Conversational AI Approach
+
+Unlike traditional strategy builders, eZorro uses an **intelligent conversational agent** that works with you iteratively to create perfect strategies.
+
+### 💬 How Conversations Work
 
 <Steps>
-<Step title="Access the AI Assistant">
+<Step title="🎯 Start the Conversation">
 
-Navigate to the AI Strategy Builder in your eZorro platform:
+Navigate to your eZorro dashboard and click **"Create New Strategy"** to start chatting with the AI agent:
 
-```
-https://platform.ezorro.app/assistant
-```
+**🎨 Example Opening:**
+*"I want to buy **AAPL** when it drops below **$150** and sell when it hits **$180**"*
 </Step>
 
-<Step title="Describe your trading idea">
+<Step title="❓ AI Asks Clarifying Questions">
 
-Use natural language to describe your strategy. Be specific about:
+The AI agent will ask follow-up questions to ensure completeness:
 
-- **Entry conditions**: When to buy/sell
-- **Exit conditions**: When to close positions  
-- **Asset selection**: What to trade
-- **Risk parameters**: Position sizing, stop losses
+**🤖 AI Response:**
+*"I understand you want to trade AAPL between $150-$180. A few questions: 1) Should I set up alerts or place actual orders? 2) What's your position size? 3) Do you want a stop loss below $150?"*
 
-**Example prompt:**
-```text
-Create a momentum strategy that buys stocks when their 20-day moving average crosses above the 50-day moving average. Only trade stocks with daily volume above 1 million shares and market cap above $1 billion. Set a 2% stop loss and take profits at 8% gain.
-```
-
+**🎯 Your Response:**
+*"Set up limit orders. Use 5% of my portfolio. Yes, stop loss at $145."*
 </Step>
 
-<Step title="Review and customize">
+<Step title="✅ Confirm Final Strategy">
 
-The AI will generate a complete strategy with:
-- Entry/exit logic
-- Risk management rules
-- Position sizing calculations
-- Backtesting parameters
+The AI presents your complete strategy for confirmation:
 
-Review the generated code and make adjustments as needed.
+**🤖 Final Proposal:**
+*"Here's your strategy: Place limit buy order for AAPL at $150. Place limit sell order at $180. Set stop loss at $145. Use 5% position sizing. Is this correct?"*
 
+**✅ Your Confirmation:** *"Perfect! Let's do it."*
+
+**🚀 Result**: Strategy is ready for scheduling and execution!
 </Step>
 </Steps>
 

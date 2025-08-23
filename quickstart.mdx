@@ -5,77 +5,106 @@ description: "Create your first AI-powered trading strategy in under 5 minutes"
 
 ## Get started with eZorro in three steps
 
-Transform your trading idea into a backtested algorithmic strategy with AI assistance.
+Connect your broker, chat with our AI agent, and schedule your first automated trading strategy.
 
-### Step 1: Access the eZorro Platform
+### Step 1: Connect Your Broker Account 🔗
 
 <AccordionGroup>
-  <Accordion icon="user-plus" title="Create your account">
-    Visit [platform.ezorro.app](https://platform.ezorro.app) and sign up for a free account. You'll get immediate access to the AI assistant and paper trading environment.
+  <Accordion icon="user-plus" title="Create your eZorro account">
+    Visit [**platform.ezorro.app**](https://platform.ezorro.app) and sign up for your free account. 
     
-    No credit card required to start building and testing strategies.
+    ✅ **No credit card required** - start building strategies immediately.
   </Accordion>
-  <Accordion icon="chart-line" title="Connect to market data">
-    1. Navigate to the Data Sources section
-    2. Choose from our integrated providers (free tier includes delayed data)
-    3. For real-time data, connect your preferred market data provider
+  <Accordion icon="bank" title="Link your broker via SnapTrade">
+    **Supported Brokers:**
     
-    <Tip>Start with our free delayed data to learn the platform before upgrading.</Tip>
+    📈 **Interactive Brokers** • **TD Ameritrade** • **Charles Schwab**  
+    📊 **E*TRADE** • **Fidelity** • **Alpaca** • **Robinhood** • **Webull**  
+    🏦 **Plus 4+ more major brokers**
+    
+    1. Click **"Connect Broker"** in your dashboard
+    2. Select your broker from the SnapTrade integration
+    3. Authenticate securely with your broker credentials
+    4. ✅ **Connection confirmed** - your account is now linked!
+    
+    <Tip>🔐 **Security**: SnapTrade uses bank-level encryption. eZorro never stores your broker login credentials.</Tip>
   </Accordion>
 </AccordionGroup>
 
-### Step 2: Create your first strategy
+### Step 2: Chat with the AI Agent 🧠
 
 <AccordionGroup>
-  <Accordion icon="brain" title="Describe your strategy idea">
-    Use natural language to describe your trading concept to the AI assistant:
+  <Accordion icon="comments" title="Start a conversation with the AI">
+    Click **"Create New Strategy"** and start chatting with our AI agent in natural language:
     
-    *"I want to buy stocks when their 20-day moving average crosses above the 50-day moving average, and sell when it crosses below. Only trade stocks with volume above 1 million shares."*
+    **💬 Example conversation:**
+    
+    **You:** *"I want to buy **AAPL** when it drops to **$150** and sell if it goes above **$180**"*
+    
+    **AI Agent:** *"I understand you want to buy AAPL at $150 and sell at $180. Would you like me to set up alerts for these price levels, or should I create limit orders? Also, what's your risk tolerance and position size?"*
+    
+    **You:** *"Set up alerts and use limit orders. I want to risk 2% of my portfolio."*
 </Accordion>
-<Accordion icon="code" title="Review generated algorithm">
-    The AI will convert your description into a complete trading algorithm:
+<Accordion icon="check-circle" title="AI refines and validates your strategy">
+    The AI agent will:
 
-    1. Review the generated strategy logic
-    2. Adjust parameters like position size, stop losses, and timeframes
-    3. Add additional filters or conditions as needed
+    ✅ **Ask clarifying questions** to ensure completeness  
+    📊 **Validate** all parameters and conditions  
+    🎯 **Use only supported variables** (RSI, MACD, moving averages, volume, etc.)  
+    💡 **Suggest improvements** based on your risk tolerance  
 
-    <Tip>The AI explains each part of the algorithm in plain English!</Tip>
+    <Tip>🧠 The AI ensures your strategy is **complete** and **executable** before finalizing!</Tip>
   </Accordion>
 </AccordionGroup>
 
-### Step 3: Backtest and deploy
+### Step 3: Schedule Your Strategy 📅
 
-<Accordion icon="chart-bar" title="Run historical backtests">
-  1. Select your backtesting timeframe (1 year recommended for first test)
-  2. Choose your asset universe (S&P 500, NASDAQ, etc.)
-  3. Click "Run Backtest" and analyze the results
-  4. Review performance metrics: returns, Sharpe ratio, maximum drawdown
+<Accordion icon="calendar-check" title="Confirm and schedule automated execution">
+  Once your strategy is complete and validated by the AI:
+  
+  1. **✅ Review Final Strategy** - The AI presents your completed strategy in plain language
+  2. **🎯 Confirm Details** - Verify all conditions, prices, and risk parameters  
+  3. **📅 Schedule Execution** - Choose when your strategy should start running
+  4. **⚡ Go Live** - Your strategy begins monitoring markets and executing trades automatically
+  
+  **🎨 Example Final Strategy:**
+  *"Alert me when **AAPL** current price equals **$150.00**. Place a limit buy order for AAPL at **$150.00** when this happens. Risk **2%** of portfolio per trade."*
 </Accordion>
 
-## Next steps
+## Next Steps 🚀
 
 Now that you have your first strategy running, explore these advanced features:
 
 <CardGroup cols={2}>
 
-<Card title="Strategy Templates" icon="file-code" href="/essentials/markdown">
-  Start with proven algorithmic patterns and customize them for your needs.
+<Card title="🧠 Advanced AI Conversations" icon="brain" href="/development">
+  Learn how to create complex multi-condition strategies using natural language.
 </Card>
 
-<Card title="Risk Management" icon="shield-check" href="/essentials/settings">
-  Configure position sizing, stop losses, and portfolio-level risk controls.
+<Card title="⚙️ Strategy Management" icon="settings" href="/essentials/settings">
+  Monitor, pause, modify, or stop your running strategies from the dashboard.
 </Card>
 
-<Card title="Paper Trading" icon="play" href="/essentials/code">
-  Test strategies in real-time without risking capital.
+<Card title="📊 Technical Indicators" icon="chart-line" href="/technical/indicators">
+  Use RSI, MACD, Bollinger Bands, and 20+ other indicators in your strategies.
 </Card>
 
-<Card title="API Integration" icon="terminal" href="/api-reference/introduction">
-  Connect to brokers and execute live trades programmatically.
+<Card title="🔧 Strategy Construction" icon="hammer" href="/technical/strategy-construction">
+  Master advanced strategy building with our comprehensive guide.
 </Card>
 
 </CardGroup>
 
+## 💡 Pro Tips for Success
+
+<Card title="🎯 Best Practices" icon="lightbulb">
+**✅ Start Simple:** Begin with basic buy/sell conditions before adding complex indicators  
+**📊 Use Alerts:** Set up alerts first to understand market behavior before placing orders  
+**🛡️ Manage Risk:** Always define your risk tolerance and position sizing upfront  
+**📈 Monitor Performance:** Check your strategies tab regularly to track performance  
+**🔄 Iterate:** Refine your strategies based on real market performance
+</Card>
+
 <Note>
-  **Need help?** Contact our support team at [support@ezorro.app](mailto:support@ezorro.app) or join our [Discord community](https://discord.gg/ezorro).
+  **🆘 Need help?** Our AI agent is available 24/7 to help refine your strategies. You can also contact our support team at [**support@ezorro.app**](mailto:support@ezorro.app) or join our [**Discord community**](https://discord.gg/ezorro).
 </Note>

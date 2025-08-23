@@ -1,0 +1,494 @@
+---
+title: 'Risk Management'
+description: 'Advanced risk management techniques for protecting capital and optimizing returns'
+icon: 'shield-check'
+---
+
+Master sophisticated risk management techniques to protect your capital and enhance strategy performance.
+
+## Portfolio Risk Framework
+
+A comprehensive approach to managing risk at multiple levels.
+
+### Risk Hierarchy
+
+<Steps>
+<Step title="Position-Level Risk">
+Controls for individual trades and positions:
+
+```python Position Risk Controls
+def calculate_position_risk(entry_price, stop_loss, position_size, portfolio_value):
+    # Risk per position
+    risk_per_share = abs(entry_price - stop_loss)
+    total_position_risk = risk_per_share * position_size
+    risk_percentage = total_position_risk / portfolio_value
+    
+    # Position sizing limits
+    max_position_value = portfolio_value * 0.05  # 5% max per position
+    actual_position_value = entry_price * position_size
+    
+    return {
+        'risk_amount': total_position_risk,
+        'risk_percentage': risk_percentage,
+        'position_within_limits': actual_position_value <= max_position_value,
+        'recommended_size': min(position_size, max_position_value / entry_price)
+    }
+```
+</Step>
+
+<Step title="Strategy-Level Risk">
+Risk controls for individual trading strategies:
+
+```python Strategy Risk Monitoring
+class StrategyRiskMonitor:
+    def __init__(self, max_drawdown=0.15, max_daily_loss=0.03):
+        self.max_drawdown = max_drawdown
+        self.max_daily_loss = max_daily_loss
+        self.peak_value = 0
+        
+    def check_risk_limits(self, current_value, daily_pnl):
+        # Update peak value
+        self.peak_value = max(self.peak_value, current_value)
+        
+        # Calculate current drawdown
+        current_drawdown = (self.peak_value - current_value) / self.peak_value
+        
+        # Check daily loss limit
+        daily_loss_pct = abs(daily_pnl) / current_value if daily_pnl < 0 else 0
+        
+        alerts = []
+        if current_drawdown > self.max_drawdown:
+            alerts.append(f"Drawdown limit exceeded: {current_drawdown:.1%}")
+            
+        if daily_loss_pct > self.max_daily_loss:
+            alerts.append(f"Daily loss limit exceeded: {daily_loss_pct:.1%}")
+            
+        return alerts
+```
+</Step>
+
+<Step title="Portfolio-Level Risk">
+Overall portfolio risk management:
+
+```python Portfolio Risk Assessment
+def assess_portfolio_risk(positions, correlation_matrix, market_data):
+    # Calculate Value at Risk (VaR)
+    portfolio_weights = np.array([pos['weight'] for pos in positions.values()])
+    portfolio_returns = calculate_portfolio_returns(positions, market_data)
+    
+    # 95% VaR calculation
+    var_95 = np.percentile(portfolio_returns, 5)
+    
+    # Expected Shortfall (Conditional VaR)
+    expected_shortfall = portfolio_returns[portfolio_returns <= var_95].mean()
+    
+    # Concentration risk
+    max_position_weight = max(portfolio_weights)
+    herfindahl_index = sum(w**2 for w in portfolio_weights)
+    
+    # Correlation risk
+    avg_correlation = correlation_matrix.values[np.triu_indices_from(correlation_matrix.values, k=1)].mean()
+    
+    return {
+        'var_95': var_95,
+        'expected_shortfall': expected_shortfall,
+        'max_concentration': max_position_weight,
+        'diversification_ratio': 1 / herfindahl_index,
+        'average_correlation': avg_correlation
+    }
+```
+</Step>
+</Steps>
+
+## Advanced Risk Metrics
+
+### Value at Risk (VaR) Implementation
+
+<CodeGroup>
+```python Historical VaR
+def calculate_historical_var(returns, confidence_level=0.95, lookback_days=252):
+    """
+    Historical simulation VaR
+    """
+    recent_returns = returns.tail(lookback_days)
+    var_percentile = (1 - confidence_level) * 100
+    var = np.percentile(recent_returns, var_percentile)
+    
+    return {
+        'var': var,
+        'var_dollar': var * portfolio_value,
+        'expected_shortfall': recent_returns[recent_returns <= var].mean()
+    }
+```
+
+```python Parametric VaR
+def calculate_parametric_var(returns, confidence_level=0.95):
+    """
+    Parametric VaR assuming normal distribution
+    """
+    from scipy import stats
+    
+    mean_return = returns.mean()
+    return_volatility = returns.std()
+    
+    # Z-score for confidence level
+    z_score = stats.norm.ppf(1 - confidence_level)
+    
+    var = mean_return + z_score * return_volatility
+    
+    return {
+        'var': var,
+        'var_dollar': var * portfolio_value,
+        'assumption': 'Normal distribution'
+    }
+```
+
+```python Monte Carlo VaR
+def calculate_monte_carlo_var(portfolio_weights, expected_returns, covariance_matrix, 
+                             confidence_level=0.95, num_simulations=10000):
+    """
+    Monte Carlo VaR simulation
+    """
+    simulated_returns = []
+    
+    for _ in range(num_simulations):
+        # Generate random returns from multivariate normal distribution
+        random_returns = np.random.multivariate_normal(expected_returns, covariance_matrix)
+        
+        # Calculate portfolio return
+        portfolio_return = np.dot(portfolio_weights, random_returns)
+        simulated_returns.append(portfolio_return)
+    
+    simulated_returns = np.array(simulated_returns)
+    var_percentile = (1 - confidence_level) * 100
+    var = np.percentile(simulated_returns, var_percentile)
+    
+    return {
+        'var': var,
+        'var_dollar': var * portfolio_value,
+        'num_simulations': num_simulations
+    }
+```
+</CodeGroup>
+
+### Maximum Drawdown Analysis
+
+```python
+def analyze_drawdowns(equity_curve):
+    """
+    Comprehensive drawdown analysis
+    """
+    # Calculate running maximum (peak)
+    running_max = equity_curve.cummax()
+    
+    # Calculate drawdown
+    drawdown = (equity_curve - running_max) / running_max
+    
+    # Find drawdown periods
+    is_drawdown = drawdown < 0
+    drawdown_groups = (is_drawdown != is_drawdown.shift()).cumsum()
+    
+    drawdown_stats = []
+    for group in drawdown_groups[is_drawdown].unique():
+        group_data = drawdown[drawdown_groups == group]
+        
+        drawdown_stats.append({
+            'start_date': group_data.index[0],
+            'end_date': group_data.index[-1],
+            'duration_days': len(group_data),
+            'max_drawdown': group_data.min(),
+            'recovery_time': None  # Calculate separately
+        })
+    
+    return {
+        'current_drawdown': drawdown.iloc[-1],
+        'max_drawdown': drawdown.min(),
+        'average_drawdown': drawdown[is_drawdown].mean(),
+        'drawdown_periods': drawdown_stats,
+        'time_underwater_pct': is_drawdown.sum() / len(drawdown)
+    }
+```
+
+## Dynamic Risk Adjustment
+
+### Volatility-Based Position Sizing
+
+```python
+def volatility_adjusted_sizing(asset_volatility, target_volatility=0.15, base_allocation=0.05):
+    """
+    Adjust position sizes based on asset volatility
+    """
+    volatility_scalar = target_volatility / asset_volatility
+    adjusted_allocation = base_allocation * volatility_scalar
+    
+    # Apply minimum and maximum bounds
+    min_allocation = 0.01  # 1% minimum
+    max_allocation = 0.10  # 10% maximum
+    
+    final_allocation = np.clip(adjusted_allocation, min_allocation, max_allocation)
+    
+    return {
+        'base_allocation': base_allocation,
+        'volatility_scalar': volatility_scalar,
+        'adjusted_allocation': final_allocation,
+        'volatility_contribution': final_allocation * asset_volatility
+    }
+```
+
+### Kelly Criterion Implementation
+
+```python
+def kelly_position_sizing(win_rate, avg_win, avg_loss, capital, conservative_factor=0.5):
+    """
+    Kelly Criterion for optimal position sizing
+    """
+    if avg_loss <= 0:
+        return 0  # Avoid division by zero
+    
+    # Kelly formula: f = (bp - q) / b
+    # where b = odds received on the wager (avg_win/avg_loss)
+    # p = probability of winning
+    # q = probability of losing (1 - p)
+    
+    b = avg_win / avg_loss
+    p = win_rate
+    q = 1 - win_rate
+    
+    kelly_fraction = (b * p - q) / b
+    
+    # Apply conservative factor (typically 0.25 to 0.5)
+    conservative_kelly = kelly_fraction * conservative_factor
+    
+    # Ensure positive and reasonable bounds
+    final_fraction = np.clip(conservative_kelly, 0, 0.20)  # Max 20% of capital
+    
+    return {
+        'full_kelly': kelly_fraction,
+        'conservative_kelly': conservative_kelly,
+        'final_fraction': final_fraction,
+        'position_value': capital * final_fraction
+    }
+```
+
+## Risk Monitoring Systems
+
+### Real-Time Risk Dashboard
+
+```python
+class RealTimeRiskMonitor:
+    def __init__(self, portfolio, risk_limits):
+        self.portfolio = portfolio
+        self.risk_limits = risk_limits
+        self.alerts = []
+        
+    def check_all_risk_limits(self):
+        current_time = datetime.now()
+        risk_metrics = self.calculate_current_risk()
+        
+        # Check each risk limit
+        for limit_type, limit_value in self.risk_limits.items():
+            current_value = risk_metrics.get(limit_type, 0)
+            
+            if self.is_limit_breached(limit_type, current_value, limit_value):
+                alert = {
+                    'timestamp': current_time,
+                    'type': limit_type,
+                    'current_value': current_value,
+                    'limit_value': limit_value,
+                    'severity': self.get_alert_severity(limit_type, current_value, limit_value)
+                }
+                self.alerts.append(alert)
+                self.send_alert(alert)
+                
+    def calculate_current_risk(self):
+        # Real-time risk calculations
+        positions = self.portfolio.get_current_positions()
+        market_data = self.portfolio.get_current_market_data()
+        
+        return {
+            'portfolio_var': self.calculate_portfolio_var(positions, market_data),
+            'max_position_weight': max(pos.weight for pos in positions),
+            'current_drawdown': self.calculate_current_drawdown(),
+            'daily_pnl_pct': self.calculate_daily_pnl_percent(),
+            'correlation_max': self.calculate_max_correlation(positions)
+        }
+        
+    def send_alert(self, alert):
+        if alert['severity'] == 'CRITICAL':
+            # Stop trading, close positions
+            self.portfolio.stop_trading()
+            self.send_emergency_notification(alert)
+        elif alert['severity'] == 'WARNING':
+            # Reduce position sizes
+            self.portfolio.reduce_position_sizes(0.5)
+            self.send_warning_notification(alert)
+```
+
+### Stress Testing Framework
+
+<Accordion title="Market Crash Scenario">
+```python
+def stress_test_market_crash(portfolio, crash_scenarios):
+    """
+    Test portfolio performance under various market crash scenarios
+    """
+    results = {}
+    
+    for scenario_name, scenario_params in crash_scenarios.items():
+        # Apply scenario to portfolio
+        stressed_portfolio = apply_market_shock(portfolio, scenario_params)
+        
+        # Calculate impact metrics
+        portfolio_loss = (stressed_portfolio.value - portfolio.value) / portfolio.value
+        positions_affected = sum(1 for pos in stressed_portfolio.positions 
+                               if pos.unrealized_pnl < -0.10)  # 10%+ loss
+        
+        results[scenario_name] = {
+            'portfolio_loss': portfolio_loss,
+            'positions_affected': positions_affected,
+            'largest_position_loss': min(pos.unrealized_pnl for pos in stressed_portfolio.positions),
+            'recovery_estimate_days': estimate_recovery_time(portfolio_loss)
+        }
+    
+    return results
+
+# Define stress scenarios
+crash_scenarios = {
+    '2008_financial_crisis': {'equity_decline': -0.40, 'credit_spread_widening': 400},
+    'covid_crash': {'equity_decline': -0.35, 'volatility_spike': 3.0},
+    'flash_crash': {'equity_decline': -0.10, 'liquidity_evaporation': True},
+    'interest_rate_shock': {'rate_increase': 0.03, 'duration_impact': True}
+}
+```
+</Accordion>
+
+<Accordion title="Sector Rotation Stress Test">
+```python
+def stress_test_sector_rotation(portfolio, rotation_scenarios):
+    """
+    Test impact of sudden sector rotation
+    """
+    current_sector_weights = portfolio.get_sector_allocation()
+    
+    stress_results = {}
+    
+    for scenario_name, sector_changes in rotation_scenarios.items():
+        portfolio_impact = 0
+        
+        for sector, change_pct in sector_changes.items():
+            sector_weight = current_sector_weights.get(sector, 0)
+            sector_impact = sector_weight * change_pct
+            portfolio_impact += sector_impact
+            
+        stress_results[scenario_name] = {
+            'total_portfolio_impact': portfolio_impact,
+            'most_affected_sectors': sorted(sector_changes.items(), key=lambda x: x[1]),
+            'diversification_benefit': abs(portfolio_impact) < abs(max(sector_changes.values()))
+        }
+    
+    return stress_results
+```
+</Accordion>
+
+## Risk-Adjusted Performance Metrics
+
+### Advanced Performance Attribution
+
+```python
+def calculate_risk_adjusted_metrics(returns, benchmark_returns, risk_free_rate=0.02):
+    """
+    Comprehensive risk-adjusted performance metrics
+    """
+    # Convert to numpy arrays
+    returns = np.array(returns)
+    benchmark_returns = np.array(benchmark_returns)
+    
+    # Basic metrics
+    total_return = (1 + returns).prod() - 1
+    volatility = returns.std() * np.sqrt(252)
+    
+    # Sharpe Ratio
+    excess_returns = returns - risk_free_rate/252
+    sharpe_ratio = excess_returns.mean() / excess_returns.std() * np.sqrt(252)
+    
+    # Sortino Ratio (downside deviation)
+    downside_returns = returns[returns < 0]
+    downside_deviation = downside_returns.std() * np.sqrt(252) if len(downside_returns) > 0 else 0
+    sortino_ratio = (returns.mean() * 252 - risk_free_rate) / downside_deviation if downside_deviation > 0 else np.inf
+    
+    # Information Ratio (vs benchmark)
+    active_returns = returns - benchmark_returns
+    information_ratio = active_returns.mean() / active_returns.std() * np.sqrt(252) if active_returns.std() > 0 else 0
+    
+    # Calmar Ratio (return/max drawdown)
+    equity_curve = (1 + returns).cumprod()
+    max_drawdown = ((equity_curve.cummax() - equity_curve) / equity_curve.cummax()).max()
+    calmar_ratio = (total_return * 252/len(returns)) / max_drawdown if max_drawdown > 0 else np.inf
+    
+    # Beta and Alpha
+    covariance = np.cov(returns, benchmark_returns)[0, 1]
+    benchmark_variance = np.var(benchmark_returns)
+    beta = covariance / benchmark_variance if benchmark_variance > 0 else 0
+    alpha = (returns.mean() * 252) - (risk_free_rate + beta * (benchmark_returns.mean() * 252 - risk_free_rate))
+    
+    return {
+        'total_return': total_return,
+        'annualized_return': total_return * 252/len(returns),
+        'volatility': volatility,
+        'sharpe_ratio': sharpe_ratio,
+        'sortino_ratio': sortino_ratio,
+        'information_ratio': information_ratio,
+        'calmar_ratio': calmar_ratio,
+        'max_drawdown': max_drawdown,
+        'beta': beta,
+        'alpha': alpha,
+        'win_rate': (returns > 0).mean(),
+        'profit_factor': returns[returns > 0].sum() / abs(returns[returns < 0].sum()) if (returns < 0).any() else np.inf
+    }
+```
+
+## Risk Management Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Position Management" icon="chess-rook">
+    - Never risk more than 2% per trade
+    - Limit position size to 5-10% of portfolio
+    - Use stop losses on every position
+    - Scale out of winning positions
+  </Card>
+  
+  <Card title="Portfolio Diversification" icon="chart-pie">
+    - Maintain correlation below 0.7
+    - Limit sector concentration to 30%
+    - Use different strategy types
+    - Consider cross-asset diversification
+  </Card>
+  
+  <Card title="Dynamic Adjustments" icon="sliders">
+    - Increase cash in high volatility
+    - Reduce leverage during drawdowns
+    - Adjust position sizes by volatility
+    - Monitor regime changes
+  </Card>
+  
+  <Card title="Monitoring Systems" icon="radar">
+    - Real-time risk dashboards
+    - Automated alert systems
+    - Regular stress testing
+    - Performance attribution analysis
+  </Card>
+</CardGroup>
+
+<Warning>
+**Risk Management is Not Optional**: The difference between successful and failed trading strategies is almost always risk management. Never deploy a strategy without comprehensive risk controls.
+</Warning>
+
+## Next Steps
+
+<Card
+  title="Backtesting Framework"
+  icon="chart-bar"
+  href="/technical/backtesting"
+>
+  Learn to backtest your risk-managed strategies with realistic market conditions
+</Card>

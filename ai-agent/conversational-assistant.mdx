@@ -1,0 +1,306 @@
+---
+title: 'AI Conversational Agent'
+description: 'Master conversations with eZorro AI agent to create, refine, and optimize trading strategies'
+icon: 'robot'
+---
+
+Learn how to effectively communicate with eZorro's AI conversational agent to create sophisticated trading strategies from natural language.
+
+## 🧠 How the AI Agent Works
+
+The eZorro AI agent helps you **refine, validate, and confirm** investment strategies through natural conversation, ensuring all necessary information is present and your intent is accurately captured.
+
+### 🎯 Core Capabilities
+
+<CardGroup cols={2}>
+  <Card title="🔍 Strategy Refinement" icon="magnifying-glass">
+    **Takes existing ideas and perfects them**
+    
+    ✅ Validates all conditions and parameters  
+    📊 Ensures supported variables are used  
+    🎯 Clarifies ambiguous requirements  
+    ⚡ Confirms user intent is captured
+  </Card>
+  
+  <Card title="💡 Strategy Creation" icon="lightbulb">
+    **Builds new strategies from scratch**
+    
+    🎨 Proposes strategies based on your profile  
+    📈 Suggests optimal technical indicators  
+    🛡️ Incorporates risk management  
+    🔄 Iterates until you're satisfied
+  </Card>
+</CardGroup>
+
+## 💬 Conversation Flow
+
+The AI agent uses a structured approach to ensure strategy completeness:
+
+### 📋 Information Gathering Phase
+
+<Steps>
+<Step title="🎯 Understand Your Intent">
+The AI analyzes your input to identify:
+
+- **Trading Actions**: Buy, sell, alert, start/stop strategies
+- **Market Conditions**: Price levels, technical indicators, volume thresholds  
+- **Order Types**: Market orders, limit orders, stop orders, trailing stops
+- **Risk Parameters**: Position sizing, stop losses, take profits
+</Step>
+
+<Step title="❓ Ask Clarifying Questions">
+If information is missing, the AI will prompt you:
+
+**Example Questions:**
+- *"What price level should trigger this action?"*
+- *"What's your risk tolerance - conservative, moderate, or aggressive?"*
+- *"Should this be a limit order or market order?"*
+- *"How much capital do you want to allocate to this strategy?"*
+</Step>
+
+<Step title="✅ Validate and Confirm">
+The AI presents your complete strategy and asks for explicit confirmation:
+
+*"Here's your refined strategy: [Plain language description]. Is this exactly what you want? Please confirm this is correct before I finalize it."*
+</Step>
+</Steps>
+
+## 🎨 Example Conversations
+
+### 🔧 Strategy Refinement Example
+
+<Accordion title="💬 Refining an Existing Strategy">
+**👤 User:** *"Alert me when **TSLA**'s price reaches **$250**, and place a limit buy order at **$245**."*
+
+**🤖 AI Agent:** 
+```json
+{
+  "Handover": "No",
+  "message": "I understand you want to be alerted when TSLA reaches $250 and place a limit buy order at $245. Should these actions happen simultaneously when the price hits $250, or do you want the limit order placed separately?",
+  "final_strategy": ""
+}
+```
+
+**👤 User:** *"Yes, both should happen when the price reaches **$250**."*
+
+**🤖 AI Agent:** 
+```json
+{
+  "Handover": "No", 
+  "message": "Perfect! Here's your refined strategy: 'Alert me when the current price of TSLA equals $250.00. Place a limit buy order for TSLA at $245.00 when this happens.' Is this exactly what you want? Please confirm before I finalize it.",
+  "final_strategy": ""
+}
+```
+
+**👤 User:** *"Yes, that's perfect!"*
+
+**🤖 AI Agent:**
+```json
+{
+  "Handover": "Yes",
+  "message": "Your strategy has been confirmed and is ready to be implemented.",
+  "final_strategy": "Alert me when the current price of TSLA equals $250.00. Place a limit buy order for TSLA at $245.00 when this happens."
+}
+```
+</Accordion>
+
+### 🎯 Strategy Creation Example
+
+<Accordion title="💡 Creating a New Strategy">
+**👤 User:** *"I want a medium-term growth strategy for tech stocks. I have **$50k** and moderate risk tolerance."*
+
+**🤖 AI Agent:**
+```json
+{
+  "Handover": "No",
+  "message": "I'd be happy to help create a medium-term growth strategy for tech stocks! To better tailor this: 1) What specific tech stocks interest you, or would you like suggestions? 2) What timeframe is 'medium-term' for you? 3) Any preferred technical indicators?",
+  "final_strategy": ""
+}
+```
+
+**👤 User:** *"I like **AAPL** and **MSFT**, medium-term is about 1 year, and I prefer using **RSI**."*
+
+**🤖 AI Agent:**
+```json
+{
+  "Handover": "No",
+  "message": "Excellent! Here's a potential strategy: 'Focus on AAPL and MSFT for 1-year growth with moderate risk tolerance. Set alerts when 14-day RSI for either stock falls below 30 (oversold conditions = buying opportunities). Allocate $25k each to AAPL and MSFT with 5% position sizing.' Does this align with your goals?",
+  "final_strategy": ""
+}
+```
+
+**👤 User:** *"Perfect! Let's do it."*
+
+**🤖 AI Agent:**
+```json
+{
+  "Handover": "Yes",
+  "message": "Your strategy has been confirmed and is ready to be implemented.",
+  "final_strategy": "Focus on AAPL and MSFT for 1-year growth with moderate risk tolerance. Set alerts when 14-day RSI for either stock falls below 30 (oversold conditions = buying opportunities). Allocate $25k each to AAPL and MSFT with 5% position sizing."
+}
+```
+</Accordion>
+
+## 🔧 Supported Variables & Actions
+
+The AI agent only works with supported elements to ensure strategy execution compatibility:
+
+### 📊 Technical Indicators Available
+
+<CardGroup cols={3}>
+  <Card title="📈 Price Variables" icon="chart-line">
+    • `current_price_TICKER`  
+    • `closing_price_TICKER`  
+    • `opening_price_TICKER`  
+    • `high_price_TICKER`  
+    • `low_price_TICKER`
+  </Card>
+  
+  <Card title="📊 Volume & Momentum" icon="chart-bar">
+    • `volume_TICKER`  
+    • `average_volume_Nd_TICKER`  
+    • `momentum_Nd_TICKER`  
+    • `ATR_TICKER`
+  </Card>
+  
+  <Card title="🎯 Technical Analysis" icon="crosshairs">
+    • `moving_average_Nd_TICKER`  
+    • `EMA_Nd_TICKER`  
+    • `RSI_Nd_TICKER`  
+    • `MACD_line_TICKER`  
+    • `Bollinger_Band_TICKER`
+  </Card>
+</CardGroup>
+
+### ⚡ Trading Actions Available
+
+<Accordion title="🔔 Alert Actions">
+**Description:** Send notifications when conditions are met
+
+**Usage:** Simply mention "alert me when..." in your conversation
+
+**Example:** *"Alert me when AAPL RSI goes below 30"*
+</Accordion>
+
+<Accordion title="📝 Order Types">
+**Available Order Types:**
+- **🎯 Market Order**: Execute at current market price  
+- **💰 Limit Order**: Execute at specified price or better  
+- **🛑 Stop Order**: Execute when price reaches stop level  
+- **📈 Trailing Stop**: Follows price movements maintaining set distance
+
+**Example:** *"Place a limit buy order for MSFT at $320"*
+</Accordion>
+
+<Accordion title="⚙️ Strategy Control">
+**Start Strategies:** Activate other strategies when conditions are met  
+**Stop Strategies:** Deactivate strategies based on triggers
+
+**Example:** *"Stop my momentum strategy when VIX goes above 25"*
+</Accordion>
+
+## 🎯 Best Practices for AI Conversations
+
+### ✅ Do's
+
+<Card title="🎨 Effective Communication" icon="comments">
+**📢 Be Specific with Numbers**  
+*"Buy AAPL at $150"* ✅  
+*"Buy AAPL when it's cheap"* ❌
+
+**🎯 Use Clear Tickers**  
+*"Alert me when TSLA reaches $250"* ✅  
+*"Alert me when Tesla reaches 250"* ⚠️
+
+**🛡️ Mention Risk Tolerance**  
+*"I want moderate risk with 2% position sizing"* ✅  
+*"I don't want to lose money"* ❌
+
+**⏰ Specify Timeframes**  
+*"Use 14-day RSI"* ✅  
+*"Use RSI"* ⚠️
+</Card>
+
+### ❌ Common Pitfalls to Avoid
+
+<Warning>
+**🚫 Unsupported Elements**
+
+The AI will politely exclude anything not supported:
+- Complex derivatives or options strategies
+- Fundamental ratios not in supported variables
+- News sentiment or social media indicators
+- Custom indicators not in the supported list
+
+**💡 Pro Tip**: If you mention unsupported elements, the AI will suggest alternatives from the supported variables list.
+</Warning>
+
+## 🔄 Conversation Patterns
+
+### 🎯 Pattern 1: Quick Strategy Setup
+
+```
+👤 "Buy AAPL at $150, sell at $180, stop loss at $140"
+🤖 "I'll set up limit orders for AAPL: buy at $150, sell at $180, stop at $140. What position size?"
+👤 "5% of my portfolio"
+🤖 "Perfect! Strategy confirmed: Buy AAPL with limit at $150, sell limit at $180, stop loss at $140, using 5% position size."
+```
+
+### 🧠 Pattern 2: Strategy Optimization  
+
+```
+👤 "I want to trade momentum stocks"
+🤖 "Great! For momentum strategies: 1) Which stocks/sectors? 2) What indicators (RSI, MACD, moving averages)? 3) Risk tolerance?"
+👤 "Tech stocks, RSI above 60, moderate risk"
+🤖 "How about: Monitor AAPL, MSFT, GOOGL. Alert when 14-day RSI > 60. Use 3% position sizing for moderate risk?"
+👤 "Perfect!"
+🤖 "✅ Strategy confirmed and ready!"
+```
+
+### 📊 Pattern 3: Complex Multi-Condition
+
+```
+👤 "Alert me when TSLA RSI is oversold AND volume is above average"
+🤖 "I'll create alerts when TSLA 14-day RSI < 30 AND volume > 20-day average volume. Correct timeframes?"
+👤 "Yes, exactly"
+🤖 "✅ Complex condition strategy confirmed!"
+```
+
+## 🚀 Advanced AI Features
+
+### 🎯 Strategy Suggestions
+
+The AI can **proactively suggest** strategy improvements:
+
+- **📈 Risk-Adjusted Position Sizing**: *"Consider using 2% risk per trade for better risk management"*
+- **🔄 Multiple Timeframe Confirmation**: *"Would you like to add a weekly trend filter for better entry timing?"*
+- **🛡️ Additional Risk Controls**: *"Should I add a maximum drawdown limit to protect your capital?"*
+
+### 🧠 Learning from Context
+
+The AI remembers context within conversations:
+
+- **Your risk preferences** from earlier in the chat
+- **Ticker symbols** you've mentioned
+- **Strategy patterns** you prefer
+- **Position sizing methods** you use
+
+<Tip>
+**🎨 Pro Tip**: The AI gets smarter as you chat longer. If you're building multiple related strategies, keep them in the same conversation for better context awareness!
+</Tip>
+
+## 📋 Next Steps
+
+<CardGroup cols={2}>
+  <Card title="📅 Schedule Your Strategy" icon="calendar" href="/essentials/navigation">
+    Learn how to schedule confirmed strategies for automatic execution
+  </Card>
+  
+  <Card title="⚙️ Strategy Management" icon="settings" href="/essentials/settings">
+    Monitor, modify, and optimize your running strategies
+  </Card>
+</CardGroup>
+
+---
+
+**💡 Remember**: The AI agent is designed to be your strategic partner. Don't hesitate to ask questions, request clarifications, or iterate on ideas until you have the perfect strategy! 🎯
