@@ -3,7 +3,8 @@
     "allow": [
       "Bash(apt:*)",
       "Bash(apt install:*)",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "WebFetch(domain:docs.deepmyst.com)"
     ],
     "deny": []
   }
