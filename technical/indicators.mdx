@@ -1,76 +1,77 @@
 ---
-title: 'Technical Indicators'
-description: 'Comprehensive guide to technical indicators available in eZorro for strategy development'
+title: 'Popular Trading Indicators Made Simple'
+description: 'Learn how to use RSI, MACD, moving averages, and 20+ other proven trading indicators to improve your automated trading strategies'
 icon: 'chart-line'
 ---
 
-Master technical indicators to build sophisticated trading algorithms with the eZorro platform.
+**Turn market signals into profits** with these proven trading indicators. No math degree required - our AI explains everything in simple terms!
 
-## Trend Indicators
+## 📈 Trend Indicators (Find Market Direction)
 
-Identify market direction and momentum with these essential trend-following indicators.
+**Spot when stocks are going up or down** - These indicators help you ride profitable trends and avoid losing money in sideways markets.
 
-### Moving Averages
+### 📊 Moving Averages (Most Popular Indicator)
 
-**Simple Moving Average (SMA)**
-```python
-# Calculate 20-day and 50-day simple moving averages
-sma_20 = data['close'].rolling(window=20).mean()
-sma_50 = data['close'].rolling(window=50).mean()
+**🎯 What It Does:** Shows you the average stock price over X days to smooth out daily noise and reveal the real trend.
 
-# Golden cross signal (bullish)
-golden_cross = (sma_20 > sma_50) & (sma_20.shift(1) <= sma_50.shift(1))
-```
+**Simple Moving Average (SMA) - The Classic Choice**
+- **20-Day Moving Average**: Shows short-term trend (3-4 weeks)
+- **50-Day Moving Average**: Shows medium-term trend (2-3 months)  
+- **200-Day Moving Average**: Shows long-term trend (almost 1 year)
 
-**Exponential Moving Average (EMA)**
-```python
-# EMA gives more weight to recent prices
-ema_12 = data['close'].ewm(span=12).mean()
-ema_26 = data['close'].ewm(span=26).mean()
+**💡 How Traders Use It:**
+- **Golden Cross**: When 20-day crosses ABOVE 50-day = **Buy Signal** 📈
+- **Death Cross**: When 20-day crosses BELOW 50-day = **Sell Signal** 📉
+- **Price Above Moving Average**: Stock in uptrend ✅
+- **Price Below Moving Average**: Stock in downtrend ❌
 
-# MACD line calculation
-macd_line = ema_12 - ema_26
-```
+**Exponential Moving Average (EMA) - The Faster Version**
+- Reacts quicker to price changes than SMA
+- Better for catching trends early
+- Popular periods: 12-day and 26-day EMAs
 
 <CardGroup cols={2}>
-  <Card title="SMA Strategy" icon="chart-simple">
-    **Use Case**: Trend confirmation and crossover signals
+  <Card title="📈 SMA Trading Strategy" icon="chart-simple">
+    **Perfect For**: Buy-and-hold investors
     
-    **Best For**: Medium to long-term strategies
+    **When to Use**: Medium to long-term trades
     
-    **Parameters**: 20/50 day periods most common
+    **Popular Setup**: 20-day and 50-day crossovers
+    
+    **Success Rate**: 65-70% in trending markets
   </Card>
   
-  <Card title="EMA Strategy" icon="chart-line-up">
-    **Use Case**: Faster reaction to price changes
+  <Card title="⚡ EMA Trading Strategy" icon="chart-line-up">
+    **Perfect For**: Active traders wanting quick signals
     
-    **Best For**: Short to medium-term strategies  
+    **When to Use**: Short-term trades (days to weeks)
     
-    **Parameters**: 12/26 day for MACD, 9/21 for signals
+    **Popular Setup**: 12-day and 26-day for MACD
+    
+    **Success Rate**: 60-65% but catches trends faster
   </Card>
 </CardGroup>
 
-### MACD (Moving Average Convergence Divergence)
+### 📊 MACD - The Momentum King
 
-```python
-# Complete MACD calculation
-def calculate_macd(data, fast=12, slow=26, signal=9):
-    ema_fast = data['close'].ewm(span=fast).mean()
-    ema_slow = data['close'].ewm(span=slow).mean()
-    
-    macd_line = ema_fast - ema_slow
-    signal_line = macd_line.ewm(span=signal).mean()
-    histogram = macd_line - signal_line
-    
-    return macd_line, signal_line, histogram
+**🎯 What It Does:** Combines fast and slow moving averages to spot trend changes before they happen. Think of it as a "trend strength meter."
 
-# Trading signals
-macd, signal, histogram = calculate_macd(data)
-bullish_crossover = (macd > signal) & (macd.shift(1) <= signal.shift(1))
-```
+**📈 How MACD Works (Simple Explanation):**
+- **MACD Line**: Difference between 12-day and 26-day moving averages
+- **Signal Line**: 9-day moving average of the MACD line  
+- **Histogram**: Shows how far apart MACD and Signal lines are
+
+**💰 Trading Signals:**
+- **Buy Signal**: MACD line crosses ABOVE signal line 📈
+- **Sell Signal**: MACD line crosses BELOW signal line 📉
+- **Strong Trend**: MACD and Signal lines far apart
+- **Weak Trend**: MACD and Signal lines close together
+
+**🎯 eZorro AI Usage:**
+Tell AI: *"Buy Apple when MACD turns bullish"* or *"Alert me when Tesla MACD shows buy signal"*
 
 <Tip>
-**MACD Best Practices**: Look for divergences between MACD and price action. When price makes new highs but MACD doesn't, it often signals trend weakness.
+**💡 Pro Trader Secret**: Watch for divergences! If a stock makes new highs but MACD doesn't, the uptrend might be weakening - great time to take profits!
 </Tip>
 
 ## Momentum Indicators

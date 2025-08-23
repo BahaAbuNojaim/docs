@@ -31,6 +31,7 @@
           {
             "group": "Strategy Development",
             "pages": [
+              "trading-strategies/beginner-strategies",
               "essentials/markdown",
               "essentials/code",
               "essentials/images",
