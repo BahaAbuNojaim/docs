@@ -22,13 +22,6 @@
             ]
           },
           {
-            "group": "Trading Platform",
-            "pages": [
-              "essentials/settings",
-              "essentials/navigation"
-            ]
-          },
-          {
             "group": "Trading Strategies",
             "pages": [
               "trading-strategies/beginner-strategies",
