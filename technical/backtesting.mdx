@@ -1,280 +1,142 @@
 ---
-title: 'Test Your Strategies Before Risking Real Money'
-description: 'Learn how eZorro backtesting ensures your trading strategies work in real markets - no surprises!'
-icon: 'chart-bar'
+title: "Professional Strategy Backtesting"
+description: "Test your trading strategies on real historical data before risking capital. See exactly how your strategies would have performed."
 ---
 
-**Never risk your money on untested strategies again.** eZorro's advanced backtesting shows exactly how your strategy would have performed using real historical data.
+Never risk your money on untested strategies. eZorro's advanced backtesting shows exactly how your strategy would have performed using real historical data with all trading costs included.
 
-## What Makes eZorro Backtesting Special?
-
-Unlike simple backtesting tools, eZorro includes all the real-world factors that affect your returns.
-
-### Realistic Trading Conditions
-
-**We Include Everything That Costs Money**:
-
-✅ **Commission Costs** - Your actual broker fees
-✅ **Slippage** - The difference between expected and actual prices  
-✅ **Market Impact** - How your trades affect stock prices
-✅ **Liquidity Limits** - You can't always buy/sell unlimited shares
-
-**Why This Matters**: Other backtesting tools show fantasy results. eZorro shows what you'd actually make.
-
-<Card title="Real Example: Strategy Reality Check" icon="chart-line">
-**Simple Backtest**: "Strategy made 45% last year"
-
-**eZorro Realistic Backtest**: "Strategy made 32% after all costs"
-
-**The 13% difference**: Commission, slippage, and realistic execution costs
+<Card
+  title="Test Your Strategy"
+  icon="rocket"
+  href="https://platform.ezorro.app"
+>
+  Backtest your trading strategies on real historical data. See performance metrics and adjust before going live.
 </Card>
 
-### Data Quality That Matters
+## Why Backtesting Matters
 
-eZorro uses the highest quality data to give you accurate results:
+<CardGroup cols={3}>
+  <Card title="Realistic Costs" icon="receipt">
+    Includes commissions, slippage, and market impact for accurate return calculations.
+  </Card>
+  
+  <Card title="Real Market Data" icon="database">
+    Uses complete historical data including failed companies and corporate actions.
+  </Card>
+  
+  <Card title="Professional Testing" icon="chart-mixed">
+    Walk-forward analysis and Monte Carlo testing like hedge funds use.
+  </Card>
+</CardGroup>
+
+## How Professional Backtesting Works
 
 <Steps>
-<Step title="No Survivorship Bias">
-**The Problem**: Most backtests only use stocks that are still trading today, ignoring companies that went bankrupt.
-
-**eZorro Solution**: We include ALL stocks that existed during your test period, including the failures.
-
-**Why Important**: This prevents inflated returns from only seeing the winners.
-</Step>
-
-<Step title="Corporate Actions Included">
-**Stock Splits & Dividends Handled**: When Apple splits 2-for-1, we automatically adjust all historical prices.
-
-**Spin-offs Tracked**: When companies split into separate companies, we track both.
-
-**Mergers & Acquisitions**: Handles when companies get bought out.
-</Step>
-
-<Step title="Real-Time Data Simulation">
-**No Future Peeking**: Our backtest only uses information that was actually available on each trading day.
-
-**Example**: If testing a strategy on January 1, 2020, we only use earnings reports published before that date.
-
-**Result**: Prevents unrealistic "crystal ball" backtests.
-</Step>
+  <Step title="Historical Data Testing">
+    Test your strategy on 3-5 years of real market data to see how it would have performed across different market conditions.
+  </Step>
+  <Step title="Realistic Cost Inclusion">
+    Include all trading costs: commissions, slippage, and market impact for accurate return calculations.
+  </Step>
+  <Step title="Performance Analysis">
+    Review key metrics: total returns, win rate, maximum drawdown, and risk-adjusted performance.
+  </Step>
 </Steps>
 
-## Advanced Testing That Pros Use
+## Key Performance Metrics
 
-eZorro automatically runs sophisticated tests that hedge funds pay millions to develop.
-
-### Walk-Forward Testing
-
-**How It Works**: Instead of testing on all historical data at once, eZorro tests your strategy period by period, just like real trading.
-
-**Process**:
-1. Use 1 year of data to optimize strategy
-2. Test next 3 months with those settings
-3. Re-optimize with new year of data
-4. Test next 3 months again
-5. Repeat through entire history
-
-**Why Better**: Shows if your strategy adapts to changing markets or just got lucky once.
-
-<Card title="Walk-Forward Results Example" icon="chart-mixed">
-**Consistent Strategy**:
-- Q1 2020: +8.5%
-- Q2 2020: +6.2%
-- Q3 2020: +7.1%
-- Q4 2020: +9.3%
-
-**Over-Optimized Strategy**:
-- Q1 2020: +45% (got lucky)
-- Q2 2020: -12% (failed)
-- Q3 2020: -8% (failed)
-- Q4 2020: +2% (barely worked)
-</Card>
-
-### Monte Carlo Testing
-
-**What It Does**: Runs your strategy 1,000+ times with different random scenarios to see all possible outcomes.
-
-**Shows You**:
-- Best case scenario
-- Worst case scenario  
-- Most likely outcomes
-- Probability of losing money
-- How bad drawdowns could get
-
-**Real Example**: 
-- 85% chance of making money
-- Expected return: 18% annually
-- Worst case: -22% in bad year
-- 95% confidence: Between +8% and +28%
-
-## Real Market Conditions Included
-
-### Transaction Costs That Matter
-
-**Dynamic Commission Structure**:
-- Small trades ($0-$1,000): Higher percentage fees
-- Medium trades ($1,000-$10,000): Standard broker rates  
-- Large trades ($10,000+): Negotiated lower rates
-- High-volume traders: Automatic discounts
-
-**Market Impact Modeling**: 
-When you buy 10,000 shares, the price moves up slightly. eZorro calculates this "slippage" based on:
-- How much you're buying vs daily volume
-- Current market volatility
-- Time of day and liquidity
-
-<Tip>
-**Real Example**: Buying $50,000 of a small-cap stock might increase your purchase price by 0.3%, while buying $50,000 of Apple might only increase it by 0.05%.
-</Tip>
-
-### Liquidity Reality Check
-
-**You Can't Always Trade What You Want**: 
-- Can't buy $1 million of a penny stock in one day
-- Large orders get spread across multiple days
-- Some stocks have trading halts
-- After-hours trading has wider spreads
-
-**eZorro Handles This**: Automatically splits large orders and shows realistic execution timeline.
-
-## Avoiding The "Backtest Trap"
-
-### Out-of-Sample Testing
-
-**The Problem**: Most strategies look amazing when tested on the same data used to create them.
-
-**eZorro Solution**: 
-1. **Training Period**: Use 70% of data to develop strategy
-2. **Testing Period**: Test on completely unused 30% of data
-3. **Reality Check**: Compare results between both periods
-
-**What Good Results Look Like**:
-- Training period: 22% returns
-- Testing period: 18% returns
-- **Conclusion**: Strategy is robust
-
-**Red Flags**:
-- Training period: 45% returns  
-- Testing period: 8% returns
-- **Conclusion**: Over-optimized, won't work in real life
-
-### Multiple Time Period Validation
-
-**Time Series Cross-Validation**: Tests your strategy across multiple time periods to ensure consistency.
-
-**Process**:
-- Test 1: Train on 2018-2019, test on 2020
-- Test 2: Train on 2018-2020, test on 2021  
-- Test 3: Train on 2018-2021, test on 2022
-- Test 4: Train on 2018-2022, test on 2023
-- Test 5: Train on 2018-2023, test on 2024
-
-**Gives You**: Confidence that strategy works across different market conditions.
+<CardGroup cols={2}>
+  <Card title="Total Returns" icon="chart-line">
+    How much your strategy would have made annually, including all costs and realistic execution.
+  </Card>
+  
+  <Card title="Win Rate" icon="percentage">
+    Percentage of profitable trades. Target above 55% for reliable strategies.
+  </Card>
+  
+  <Card title="Maximum Drawdown" icon="arrow-down">
+    Worst peak-to-trough decline. Shows how much you could lose in worst-case scenarios.
+  </Card>
+  
+  <Card title="Sharpe Ratio" icon="balance-scale">
+    Risk-adjusted returns. Above 1.0 indicates good returns relative to risk taken.
+  </Card>
+</CardGroup>
 
 ## Understanding Your Results
 
-### What's Driving Your Returns?
+<Steps>
+  <Step title="Good Strategy Indicators">
+    Look for win rates above 55%, consistent returns across different years, and drawdowns under 20%.
+  </Step>
+  <Step title="Red Flags to Avoid">
+    Avoid strategies that only work in one market type, have huge drawdowns, or rely on very few trades.
+  </Step>
+  <Step title="Market Condition Analysis">
+    Ensure your strategy performs reasonably well in bull markets, bear markets, and sideways periods.
+  </Step>
+</Steps>
 
-**Factor Analysis**: eZorro tells you WHY your strategy makes money:
-
-**Example Breakdown**:
-- **Market Beta**: 60% of returns from general market moves
-- **Size Factor**: 15% from favoring small-cap stocks  
-- **Value Factor**: 10% from buying undervalued companies
-- **Pure Alpha**: 15% from your strategy's unique edge
-
-**Why Important**: Helps you understand if you're just riding the market or adding real value.
-
-### Performance Across Market Conditions
-
-**Regime Analysis**: See how your strategy performs in different markets:
+## What Makes eZorro Different
 
 <CardGroup cols={2}>
-  <Card title="Bull Market (Low Vol)" icon="chart-line-up">
-    Strategy Return: +25% annually
-    
-    Best environment for growth strategies
+  <Card title="Complete Data" icon="database">
+    Includes all stocks from testing period, even companies that failed. No survivorship bias.
   </Card>
   
-  <Card title="Bull Market (High Vol)" icon="chart-mixed">
-    Strategy Return: +18% annually
-    
-    Good returns but higher risk
+  <Card title="Realistic Costs" icon="receipt">
+    All trading costs included: commissions, slippage, and market impact for honest results.
   </Card>
   
-  <Card title="Bear Market (Low Vol)" icon="chart-line-down">
-    Strategy Return: +5% annually
-    
-    Still positive during market decline
+  <Card title="No Future Peeking" icon="eye-slash">
+    Only uses information available on each trading day. No crystal ball backtests.
   </Card>
   
-  <Card title="Sideways Market" icon="minus">
-    Strategy Return: +12% annually
-    
-    Steady performance when market flat
+  <Card title="Corporate Actions" icon="building">
+    Handles stock splits, dividends, mergers, and spin-offs automatically for accuracy.
   </Card>
 </CardGroup>
 
-## Common Backtesting Mistakes (That eZorro Avoids)
+## Get Started
 
-<Warning>
-**Expensive Backtesting Errors**:
-
-1. **Crystal Ball Problem**: Using tomorrow's news to make today's trades
-2. **Survivor Bias**: Only testing on companies that didn't go bankrupt
-3. **Over-Optimization**: Making strategy perfect for past data (but terrible for future)
-4. **Ignoring Costs**: Forgetting commissions, slippage, and taxes
-5. **Unlimited Money Myth**: Assuming you can buy unlimited shares instantly
-6. **One-Trick Pony**: Only testing in bull markets
-</Warning>
-
-<CardGroup cols={2}>
-  <Card title="What eZorro Does Right" icon="check-circle">
-    ✅ Uses only historical information
-    
-    ✅ Includes failed companies
-    
-    ✅ Realistic transaction costs
-    
-    ✅ Tests across all market conditions
-    
-    ✅ Respects liquidity limits
-    
-    ✅ Prevents over-optimization
-  </Card>
-  
-  <Card title="Your Results Are Trustworthy" icon="shield">
-    ✅ Conservative return estimates
-    
-    ✅ Realistic drawdown expectations
-    
-    ✅ Honest win rate calculations
-    
-    ✅ No hidden assumptions
-    
-    ✅ What you see is what you get
-  </Card>
-</CardGroup>
-
-## Ready to Trust Your Strategy?
-
-<Card title="Start Backtesting Your Ideas" icon="rocket" href="https://platform.ezorro.app">
-**See exactly how your strategy would have performed** with real historical data. No surprises, no false promises - just honest results you can trust.
-
-✅ 15+ years of historical data
-✅ All costs and fees included  
-✅ Realistic market conditions
-✅ Professional-grade analysis
+<Card
+  title="Backtest Your Strategy"
+  icon="rocket"
+  href="https://platform.ezorro.app"
+>
+  Test your trading strategies on real historical data with professional-grade backtesting. See honest results before risking capital.
 </Card>
 
 ## Next Steps
 
 <CardGroup cols={2}>
-  <Card title="Test Proven Strategies" icon="template" href="/trading-strategies/beginner-strategies">
-    Start with our backtested winning strategies
+  <Card
+    title="Strategy Construction"
+    icon="hammer"
+    href="/technical/strategy-construction"
+  >
+    Learn how to build strategies that backtest well and perform in live markets.
   </Card>
-  
-  <Card title="Learn Strategy Building" icon="tools" href="/technical/strategy-construction">
-    Create your own custom trading strategies
+  <Card
+    title="Technical Indicators"
+    icon="chart-line"
+    href="/technical/indicators"
+  >
+    Understand the indicators you can use to build and test your strategies.
+  </Card>
+  <Card
+    title="Risk Management"
+    icon="shield"
+    href="/trading-strategies/risk-management"
+  >
+    Learn how to incorporate proper risk controls that show up in backtesting.
+  </Card>
+  <Card
+    title="Beginner Strategies"
+    icon="graduation-cap"
+    href="/trading-strategies/beginner-strategies"
+  >
+    See pre-tested strategies with full backtesting results and performance metrics.
   </Card>
 </CardGroup>
+

@@ -1,247 +1,141 @@
 ---
-title: 'Master Technical Indicators for Profitable Trading'
-description: 'Complete guide to using RSI, MACD, Moving Averages, and 20+ technical indicators for automated trading success'
-icon: 'chart-line'
+title: "Technical Indicators Made Simple"
+description: "Master RSI, MACD, moving averages, and other technical indicators for automated trading. Transform market data into profitable signals."
 ---
 
-Transform market data into profitable trading signals using proven technical indicators. eZorro AI allows you to implement these indicators using simple English commands.
-
-## Essential Trading Indicators
-
-Professional traders rely on these time-tested indicators to make profitable decisions. These indicators can now be automated through eZorro's platform.
-
-### Moving Averages
-
-Moving averages show the average stock price over a specific time period, smoothing out daily noise to reveal underlying trends.
-
-**Types of Moving Averages**
-
-Simple Moving Average (SMA):
-- 20-day SMA: Short-term trend (1 month)
-- 50-day SMA: Medium-term trend (2.5 months)
-- 200-day SMA: Long-term trend (10 months)
-
-Exponential Moving Average (EMA):
-- Reacts faster to recent price changes
-- Better suited for short-term trading
-- Common periods: 12-day and 26-day
-
-**Trading with Moving Averages**
-
-- Golden Cross: 50-day crosses above 200-day indicates major buy signal
-- Death Cross: 50-day crosses below 200-day indicates major sell signal
-- Price above MA confirms uptrend
-- Price below MA confirms downtrend
-
-Example strategy: "Buy stocks when their 20-day moving average crosses above the 50-day moving average. Sell when it crosses below." This approach typically achieves a 65-70% success rate in trending markets.
-
-### RSI - Relative Strength Index
-
-RSI indicates whether a stock is overbought or oversold on a scale of 0-100.
-
-**Key RSI Levels**
-
-- Above 70: Overbought (potential sell signal)
-- Below 30: Oversold (potential buy signal)
-- 50 Level: Neutral zone
-
-**RSI Trading Strategies**
-
-Oversold Bounce:
-- Wait for RSI below 30
-- Buy when RSI turns up
-- Sell when RSI reaches 50-60
-
-Divergence Trading:
-- Stock makes new high but RSI doesn't: Sell signal
-- Stock makes new low but RSI doesn't: Buy signal
-
-Note: RSI works best in ranging markets. In strong trends, consider using 80/20 levels instead of 70/30.
-
-### MACD - Moving Average Convergence Divergence
-
-MACD shows the relationship between two moving averages, revealing momentum changes.
-
-**MACD Components**
-
-- MACD Line: 12-day EMA minus 26-day EMA
-- Signal Line: 9-day EMA of MACD line
-- Histogram: Distance between MACD and Signal lines
-
-**Trading Signals**
-
-- Bullish: MACD crosses above Signal line
-- Bearish: MACD crosses below Signal line
-- Strong Trend: Lines far apart
-- Trend Weakening: Lines converging
-
-Example implementation: "Buy when MACD turns bullish and sell when it turns bearish. Only trade when histogram is expanding."
-
-### Bollinger Bands
-
-Bollinger Bands provide dynamic support and resistance levels based on volatility.
-
-**Band Components**
-
-- Middle Band: 20-day moving average
-- Upper Band: Middle + (2 × standard deviation)
-- Lower Band: Middle - (2 × standard deviation)
-
-**Trading Strategies**
-
-Mean Reversion:
-- Buy when price touches lower band
-- Sell when price reaches middle or upper band
-- Most effective in sideways markets
-
-Breakout Trading:
-- Buy when price breaks above upper band with volume
-- Indicates start of strong trend
-- Set stop below middle band
-
-Important: 95% of price action occurs within the bands. Moves outside bands are significant events.
-
-## Advanced Indicators
-
-### Stochastic Oscillator
-
-Shows where current price sits relative to recent price range.
-
-**Key Levels**
-
-- Above 80: Overbought zone
-- Below 20: Oversold zone
-- 50: Neutral momentum
-
-Best used in combination with RSI for confirmation of oversold/overbought conditions.
-
-### Average True Range (ATR)
-
-ATR measures market volatility by showing how much a stock typically moves.
-
-**ATR Applications**
-
-- Position Sizing: Use smaller positions in volatile stocks
-- Stop Loss Placement: Set stops at 2× ATR from entry
-- Profit Targets: Target gains of 3× ATR
-
-Example usage: "Use ATR to set stop losses. Place stops 2 ATR below entry price."
-
-### Volume Indicators
-
-**On-Balance Volume (OBV)**
-- Rising OBV + Rising Price: Healthy uptrend
-- Falling OBV + Rising Price: Weak rally (sell signal)
-
-**Volume Weighted Average Price (VWAP)**
-- Price above VWAP: Bullish
-- Price below VWAP: Bearish
-- Institutions use VWAP as fair value reference
-
-## Combining Indicators for Maximum Effectiveness
-
-The most profitable strategies combine multiple indicators for confirmation.
-
-### Triple Confirmation Strategy
-
-**Requirements for Buy Signal**
-
-1. Price above 50-day moving average (trend confirmation)
-2. RSI between 40-60 (not overbought)
-3. MACD turning bullish (momentum confirmation)
-
-Implementation: "Only buy when price is above 50-day MA, RSI is below 60, and MACD is bullish. Use 2% position size."
-
-**Expected Performance**
-- Win Rate: 75-80%
-- Average Gain: 8-12% per trade
-- Fewer trades but higher quality
-
-### Volatility Breakout System
-
-**Combines**
-- Bollinger Bands (volatility)
-- Volume (confirmation)
-- ATR (position sizing)
-
-Implementation: "Buy when price breaks above Bollinger Bands with 2× average volume. Size positions based on ATR. Trail stop at lower band."
-
-## Indicator Settings for Different Markets
-
-### Trending Markets
-
-**Best Indicators**
-- Moving Average Crossovers
-- MACD
-- ADX (Above 25 confirms trend)
-
-**Settings**: Use longer periods (50/200 MA instead of 20/50)
-
-### Ranging Markets
-
-**Best Indicators**
-- RSI
-- Stochastic
-- Bollinger Bands
-
-**Settings**: Use standard periods (14-day RSI, 20-day Bollinger)
-
-### Volatile Markets
-
-**Best Indicators**
-- ATR for risk management
-- Bollinger Bands (widen in volatility)
-- Volume indicators
-
-**Settings**: Shorter periods for faster reaction
-
-## Common Indicator Mistakes to Avoid
-
-**Expensive Trading Mistakes**
-
-1. Using too many indicators - More isn't better, 3-4 maximum
-2. Ignoring the trend - Don't buy oversold in downtrends
-3. Not waiting for confirmation - One indicator alone isn't enough
-4. Wrong timeframe - Day trading with monthly indicators fails
-5. Chasing perfection - No indicator works 100% of the time
-
-## Implementation Examples
-
-**For Trend Following**
-"Buy when 20-day MA crosses above 50-day MA. Sell on opposite cross."
-
-**For Mean Reversion**
-"Buy when RSI below 30 and price touches lower Bollinger Band."
-
-**For Momentum**
-"Buy when MACD turns bullish and price breaks 20-day high."
-
-**For Risk Management**
-"Use 2 ATR for stop loss on all trades. Take profits at 3 ATR."
-
-## Choosing the Right Indicators
-
-### For Beginners
-Start with these simple but effective indicators:
-- Moving Averages (trend direction)
-- RSI (overbought/oversold)
-- Volume (confirmation)
-
-### For Intermediate Traders
-Add these to your toolkit:
-- MACD (momentum)
-- Bollinger Bands (volatility)
-- ATR (risk management)
-
-### For Advanced Traders
-Master these sophisticated tools:
-- Multiple timeframe analysis
-- Divergence patterns
-- Indicator combinations
-- Custom indicator rules
+Transform market data into profitable trading signals using proven technical indicators. eZorro AI makes it easy to implement these indicators through simple conversations.
+
+<Card
+  title="Use Technical Indicators"
+  icon="rocket"
+  href="https://platform.ezorro.app"
+>
+  Implement RSI, MACD, moving averages, and other indicators in your strategies using natural language commands.
+</Card>
+
+## Key Technical Indicators
+
+<CardGroup cols={2}>
+  <Card title="Moving Averages" icon="chart-line">
+    Show price trends by smoothing out daily noise. Golden Cross (50-day above 200-day) signals major moves.
+  </Card>
+  
+  <Card title="RSI" icon="activity">
+    Measures overbought/oversold conditions on 0-100 scale. Below 30 = oversold, above 70 = overbought.
+  </Card>
+  
+  <Card title="MACD" icon="trending-up">
+    Shows momentum changes through moving average relationships. Bullish when MACD crosses above signal line.
+  </Card>
+  
+  <Card title="Bollinger Bands" icon="expand">
+    Dynamic support and resistance based on volatility. Prices touching bands often signal reversals.
+  </Card>
+</CardGroup>
+
+## How to Use Indicators
+
+<Steps>
+  <Step title="Choose Your Indicators">
+    Start with 2-3 complementary indicators: moving averages for trend, RSI for momentum, and volume for confirmation.
+  </Step>
+  <Step title="Set Clear Rules">
+    Define specific conditions: "Buy when 20-day MA crosses above 50-day MA AND RSI is below 60."
+  </Step>
+  <Step title="Test Your Combinations">
+    Backtest different indicator combinations to find what works best for your trading style and market conditions.
+  </Step>
+</Steps>
+
+## Popular Indicator Combinations
+
+<CardGroup cols={2}>
+  <Card title="Triple Confirmation" icon="check-circle">
+    "Buy when price above 50-day MA, RSI below 60, and MACD turns bullish." Higher accuracy with fewer trades.
+  </Card>
+  
+  <Card title="Trend + Momentum" icon="chart-mixed">
+    "Buy on moving average crossover with volume confirmation." Classic trend-following approach.
+  </Card>
+  
+  <Card title="Mean Reversion" icon="refresh">
+    "Buy when RSI below 30 and price touches lower Bollinger Band." Works well in sideways markets.
+  </Card>
+  
+  <Card title="Breakout System" icon="trending-up">
+    "Buy when price breaks above Bollinger Bands with 2x volume." Captures explosive moves early.
+  </Card>
+</CardGroup>
+
+## Common Indicator Settings
+
+<CardGroup cols={3}>
+  <Card title="Moving Averages" icon="chart-line">
+    20/50/200-day for different timeframes. Golden Cross: 50 above 200 signals major trend change.
+  </Card>
+  
+  <Card title="RSI Settings" icon="activity">
+    14-period standard. 30/70 levels for normal markets, 20/80 for trending markets.
+  </Card>
+  
+  <Card title="MACD Parameters" icon="trending-up">
+    12/26/9 standard settings. Focus on signal line crossovers and histogram direction.
+  </Card>
+</CardGroup>
+
+## Market-Specific Applications
+
+<Steps>
+  <Step title="Trending Markets">
+    Use moving averages, MACD, and ADX. Focus on trend-following indicators with longer periods.
+  </Step>
+  <Step title="Ranging Markets">
+    RSI, Stochastic, and Bollinger Bands work best. Look for overbought/oversold conditions.
+  </Step>
+  <Step title="Volatile Markets">
+    ATR for risk management, Bollinger Bands for dynamic levels, and volume indicators for confirmation.
+  </Step>
+</Steps>
+
+## Get Started
+
+<Card
+  title="Implement Indicators"
+  icon="rocket"
+  href="https://platform.ezorro.app"
+>
+  Start using technical indicators in your strategies. Tell our AI which indicators you want and it handles the implementation.
+</Card>
 
 ## Next Steps
 
-Ready to implement these indicators? Join successful traders using technical indicators to beat the market. eZorro AI makes implementation simple through natural language commands.
-
-Start with proven templates, customize to your style, test thoroughly, and then deploy for automated execution.
+<CardGroup cols={2}>
+  <Card
+    title="Strategy Construction"
+    icon="hammer"
+    href="/technical/strategy-construction"
+  >
+    Learn how to build complete trading strategies using technical indicators.
+  </Card>
+  <Card
+    title="Backtesting"
+    icon="chart-bar"
+    href="/technical/backtesting"
+  >
+    Test your indicator-based strategies on historical data before going live.
+  </Card>
+  <Card
+    title="Beginner Strategies"
+    icon="graduation-cap"
+    href="/trading-strategies/beginner-strategies"
+  >
+    See how technical indicators work in proven beginner-friendly strategies.
+  </Card>
+  <Card
+    title="Risk Management"
+    icon="shield"
+    href="/trading-strategies/risk-management"
+  >
+    Use ATR and other indicators for professional risk management techniques.
+  </Card>
+</CardGroup>
