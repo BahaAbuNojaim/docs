@@ -16,9 +16,9 @@
           {
             "group": "Getting started",
             "pages": [
+              "user-guide",
               "index",
               "quickstart",
-              "user-guide",
               "development"
             ]
           },
