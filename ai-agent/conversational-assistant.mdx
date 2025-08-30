@@ -1,298 +1,159 @@
 ---
-title: 'Talk to AI Like Your Personal Trading Coach'
-description: 'Learn how to chat with eZorro AI to create winning trading strategies using everyday language. No technical knowledge required!'
-icon: 'comments'
+title: "Your AI Trading Assistant"
+description: "Learn how to communicate with eZorro AI to create winning trading strategies using natural language. No technical knowledge required."
 ---
 
-**Master the art of talking to AI** to create profitable automated trading strategies. Our AI understands normal trading language and helps you build bulletproof strategies through simple conversations.
+Master the art of talking to AI to create profitable automated trading strategies. Our AI understands normal trading language and helps you build robust strategies through simple conversations.
 
-## 🤖 Your AI Trading Coach Understands You
-
-Think of our AI as **your personal trading mentor** who never sleeps, never gets tired, and has analyzed thousands of successful trading strategies.
-
-### 🎯 What Makes Our AI Special
-
-<CardGroup cols={2}>
-  <Card title="🗣️ Speaks Your Language" icon="comments">
-    **No Technical Jargon Required**
-    
-    ✅ Say *"Buy Apple when it's cheap"* - AI knows what you mean  
-    📊 Converts everyday language into precise trading rules  
-    🎯 Asks clarifying questions in plain English  
-    ⚡ Explains everything like a patient teacher
-  </Card>
-  
-  <Card title="🧠 Makes You a Better Trader" icon="graduation-cap">
-    **Learns Your Style & Improves Your Ideas**
-    
-    🎨 Suggests better entry and exit points  
-    📈 Recommends proven technical indicators  
-    🛡️ Adds safety measures you might forget  
-    🔄 Keeps refining until strategy is perfect
-  </Card>
-</CardGroup>
-
-## 💬 How Conversations Work (Step-by-Step)
-
-Our AI follows a **proven 3-step process** to turn your trading ideas into money-making strategies:
-
-### 🎯 The Magic 3-Step Process
-
-<Steps>
-<Step title="🗣️ You Tell AI What You Want">
-**Just talk normally about trading - AI figures out the rest!**
-
-**What You Might Say:**
-- *"I want to buy Tesla when it drops"*
-- *"Alert me if Apple goes above $200"*
-- *"Sell my Microsoft if it falls below $300"*
-- *"I want to make money when Netflix goes up"*
-
-**AI Understands:** Buy signals, sell signals, alerts, price levels, and your trading goals.
-</Step>
-
-<Step title="❓ AI Asks Smart Follow-Up Questions">
-**The AI acts like your experienced trading buddy who wants to help you succeed:**
-
-**Typical AI Questions:**
-- *"How much money do you want to invest in this trade?"*
-- *"Should I alert you or automatically place the order?"*
-- *"What if the stock keeps dropping - want a safety stop?"*
-- *"Are you looking for quick profits or long-term gains?"*
-
-**Why AI Asks:** To make sure your strategy is complete and protects your money!
-</Step>
-
-<Step title="✅ Get Your Perfect Trading Strategy">
-**AI presents your finalized strategy in crystal-clear language:**
-
-*"Here's your bulletproof trading strategy: When Tesla drops to $200, I'll buy $1,000 worth using a limit order. If Tesla falls to $180, I'll sell to protect your money. If Tesla goes to $250, I'll sell to lock in profits. Sound good?"*
-
-**You Simply Say:** *"Perfect, let's do it!"* ✨
-</Step>
-</Steps>
-
-## 🎯 Real Conversation Examples
-
-**See how easy it is to create profitable trading strategies through simple conversations:**
-
-### 💰 Example 1: Quick Profit Strategy
-
-<Accordion title="🚀 Making money on Tesla stock movement">
-**👤 You:** *"I think Tesla is going to go up soon. I want to buy some when it reaches **$250**."*
-
-**🤖 AI:** *"Great choice! Tesla has good momentum. A few questions: Should I automatically buy Tesla at $250, or just alert you when it hits that price? Also, how much do you want to invest?"*
-
-**👤 You:** *"Alert me when it hits $250, and I want to put **$2,000** into this trade."*
-
-**🤖 AI:** *"Perfect! I'll set up an alert for when Tesla reaches $250. What's your plan if Tesla keeps going up after you buy - should I automatically sell at a certain profit level? And do you want protection if it goes down instead?"*
-
-**👤 You:** *"Sell if it goes to **$300** for profits, and sell if it drops to **$230** to limit losses."*
-
-**🤖 AI:** *"Excellent strategy! Here's your complete plan: Alert you when Tesla hits $250. Buy $2,000 worth. Automatically sell at $300 for profits ($400 gain) or at $230 to limit losses. Ready to activate?"*
-
-**👤 You:** *"Yes, let's do it!"*
-
-**✅ Result:** Your automated Tesla profit strategy is now active!
-</Accordion>
-
-### 🎯 Strategy Creation Example
-
-<Accordion title="💡 Creating a New Strategy">
-**👤 User:** *"I want a medium-term growth strategy for tech stocks. I have **$50k** and moderate risk tolerance."*
-
-**🤖 AI Agent:**
-```json
-{
-  "Handover": "No",
-  "message": "I'd be happy to help create a medium-term growth strategy for tech stocks! To better tailor this: 1) What specific tech stocks interest you, or would you like suggestions? 2) What timeframe is 'medium-term' for you? 3) Any preferred technical indicators?",
-  "final_strategy": ""
-}
-```
-
-**👤 User:** *"I like **AAPL** and **MSFT**, medium-term is about 1 year, and I prefer using **RSI**."*
-
-**🤖 AI Agent:**
-```json
-{
-  "Handover": "No",
-  "message": "Excellent! Here's a potential strategy: 'Focus on AAPL and MSFT for 1-year growth with moderate risk tolerance. Set alerts when 14-day RSI for either stock falls below 30 (oversold conditions = buying opportunities). Allocate $25k each to AAPL and MSFT with 5% position sizing.' Does this align with your goals?",
-  "final_strategy": ""
-}
-```
-
-**👤 User:** *"Perfect! Let's do it."*
-
-**🤖 AI Agent:**
-```json
-{
-  "Handover": "Yes",
-  "message": "Your strategy has been confirmed and is ready to be implemented.",
-  "final_strategy": "Focus on AAPL and MSFT for 1-year growth with moderate risk tolerance. Set alerts when 14-day RSI for either stock falls below 30 (oversold conditions = buying opportunities). Allocate $25k each to AAPL and MSFT with 5% position sizing."
-}
-```
-</Accordion>
-
-## 🔧 Supported Variables & Actions
-
-The AI agent only works with supported elements to ensure strategy execution compatibility:
-
-### 📊 Technical Indicators Available
-
-<CardGroup cols={3}>
-  <Card title="📈 Price Variables" icon="chart-line">
-    • `current_price_TICKER`  
-    • `closing_price_TICKER`  
-    • `opening_price_TICKER`  
-    • `high_price_TICKER`  
-    • `low_price_TICKER`
-  </Card>
-  
-  <Card title="📊 Volume & Momentum" icon="chart-bar">
-    • `volume_TICKER`  
-    • `average_volume_Nd_TICKER`  
-    • `momentum_Nd_TICKER`  
-    • `ATR_TICKER`
-  </Card>
-  
-  <Card title="🎯 Technical Analysis" icon="crosshairs">
-    • `moving_average_Nd_TICKER`  
-    • `EMA_Nd_TICKER`  
-    • `RSI_Nd_TICKER`  
-    • `MACD_line_TICKER`  
-    • `Bollinger_Band_TICKER`
-  </Card>
-</CardGroup>
-
-### ⚡ Trading Actions Available
-
-<Accordion title="🔔 Alert Actions">
-**Description:** Send notifications when conditions are met
-
-**Usage:** Simply mention "alert me when..." in your conversation
-
-**Example:** *"Alert me when AAPL RSI goes below 30"*
-</Accordion>
-
-<Accordion title="📝 Order Types">
-**Available Order Types:**
-- **🎯 Market Order**: Execute at current market price  
-- **💰 Limit Order**: Execute at specified price or better  
-- **🛑 Stop Order**: Execute when price reaches stop level  
-- **📈 Trailing Stop**: Follows price movements maintaining set distance
-
-**Example:** *"Place a limit buy order for MSFT at $320"*
-</Accordion>
-
-<Accordion title="⚙️ Strategy Control">
-**Start Strategies:** Activate other strategies when conditions are met  
-**Stop Strategies:** Deactivate strategies based on triggers
-
-**Example:** *"Stop my momentum strategy when VIX goes above 25"*
-</Accordion>
-
-## 🎯 Best Practices for AI Conversations
-
-### ✅ Do's
-
-<Card title="🎨 Effective Communication" icon="comments">
-**📢 Be Specific with Numbers**  
-*"Buy AAPL at $150"* ✅  
-*"Buy AAPL when it's cheap"* ❌
-
-**🎯 Use Clear Tickers**  
-*"Alert me when TSLA reaches $250"* ✅  
-*"Alert me when Tesla reaches 250"* ⚠️
-
-**🛡️ Mention Risk Tolerance**  
-*"I want moderate risk with 2% position sizing"* ✅  
-*"I don't want to lose money"* ❌
-
-**⏰ Specify Timeframes**  
-*"Use 14-day RSI"* ✅  
-*"Use RSI"* ⚠️
+<Card
+  title="Start Chatting with AI"
+  icon="rocket"
+  href="https://platform.ezorro.app"
+>
+  Begin creating trading strategies by talking to our AI in plain English. No technical jargon or programming required.
 </Card>
 
-### ❌ Common Pitfalls to Avoid
+## How AI Communication Works
 
-<Warning>
-**🚫 Unsupported Elements**
+<Steps>
+  <Step title="Describe Your Idea">
+    Tell the AI your trading idea in plain English: "I want to buy Apple when it drops to $200."
+  </Step>
+  <Step title="AI Asks Questions">
+    The AI asks clarifying questions about position size, risk management, and timing to complete your strategy.
+  </Step>
+  <Step title="Confirm Your Strategy">
+    Review the final strategy in clear language and confirm before activation.
+  </Step>
+</Steps>
 
-The AI will politely exclude anything not supported:
-- Complex derivatives or options strategies
-- Fundamental ratios not in supported variables
-- News sentiment or social media indicators
-- Custom indicators not in the supported list
-
-**💡 Pro Tip**: If you mention unsupported elements, the AI will suggest alternatives from the supported variables list.
-</Warning>
-
-## 🔄 Conversation Patterns
-
-### 🎯 Pattern 1: Quick Strategy Setup
-
-```
-👤 "Buy AAPL at $150, sell at $180, stop loss at $140"
-🤖 "I'll set up limit orders for AAPL: buy at $150, sell at $180, stop at $140. What position size?"
-👤 "5% of my portfolio"
-🤖 "Perfect! Strategy confirmed: Buy AAPL with limit at $150, sell limit at $180, stop loss at $140, using 5% position size."
-```
-
-### 🧠 Pattern 2: Strategy Optimization  
-
-```
-👤 "I want to trade momentum stocks"
-🤖 "Great! For momentum strategies: 1) Which stocks/sectors? 2) What indicators (RSI, MACD, moving averages)? 3) Risk tolerance?"
-👤 "Tech stocks, RSI above 60, moderate risk"
-🤖 "How about: Monitor AAPL, MSFT, GOOGL. Alert when 14-day RSI > 60. Use 3% position sizing for moderate risk?"
-👤 "Perfect!"
-🤖 "✅ Strategy confirmed and ready!"
-```
-
-### 📊 Pattern 3: Complex Multi-Condition
-
-```
-👤 "Alert me when TSLA RSI is oversold AND volume is above average"
-🤖 "I'll create alerts when TSLA 14-day RSI < 30 AND volume > 20-day average volume. Correct timeframes?"
-👤 "Yes, exactly"
-🤖 "✅ Complex condition strategy confirmed!"
-```
-
-## 🚀 Advanced AI Features
-
-### 🎯 Strategy Suggestions
-
-The AI can **proactively suggest** strategy improvements:
-
-- **📈 Risk-Adjusted Position Sizing**: *"Consider using 2% risk per trade for better risk management"*
-- **🔄 Multiple Timeframe Confirmation**: *"Would you like to add a weekly trend filter for better entry timing?"*
-- **🛡️ Additional Risk Controls**: *"Should I add a maximum drawdown limit to protect your capital?"*
-
-### 🧠 Learning from Context
-
-The AI remembers context within conversations:
-
-- **Your risk preferences** from earlier in the chat
-- **Ticker symbols** you've mentioned
-- **Strategy patterns** you prefer
-- **Position sizing methods** you use
-
-<Tip>
-**🎨 Pro Tip**: The AI gets smarter as you chat longer. If you're building multiple related strategies, keep them in the same conversation for better context awareness!
-</Tip>
-
-## 📋 Next Steps
+## AI Capabilities
 
 <CardGroup cols={2}>
-  <Card title="📅 Schedule Your Strategy" icon="calendar">
-    Learn how to schedule confirmed strategies for automatic execution
+  <Card title="Natural Language" icon="comments">
+    Understands everyday trading language. Say "Buy Apple when it's cheap" and AI knows what you mean.
   </Card>
   
-  <Card title="⚙️ Strategy Management" icon="settings">
-    Monitor, modify, and optimize your running strategies
+  <Card title="Strategy Improvement" icon="brain">
+    Suggests better entry points, technical indicators, and safety measures you might forget.
+  </Card>
+  
+  <Card title="Risk Management" icon="shield">
+    Automatically adds stop losses, position sizing, and portfolio protection to keep you safe.
+  </Card>
+  
+  <Card title="Market Knowledge" icon="chart-line">
+    Trained on thousands of successful strategies to give you proven approaches.
   </Card>
 </CardGroup>
 
----
+## Conversation Examples
 
-**💡 Remember**: The AI agent is designed to be your strategic partner. Don't hesitate to ask questions, request clarifications, or iterate on ideas until you have the perfect strategy! 🎯
+<Steps>
+  <Step title="Simple Request">
+    "I want to buy Tesla when it drops to $200 and sell at $250."
+  </Step>
+  <Step title="AI Clarifies">
+    "Should I place actual orders or just alerts? How much do you want to invest? What about a stop loss?"
+  </Step>
+  <Step title="Final Strategy">
+    "Buy $1,000 of Tesla at $200, sell at $250, with stop loss at $180. Ready to activate?"
+  </Step>
+</Steps>
+
+## Advanced Features
+
+<CardGroup cols={2}>
+  <Card title="Strategy Suggestions" icon="lightbulb">
+    AI recommends proven approaches: "Consider adding RSI indicator for better timing."
+  </Card>
+  
+  <Card title="Risk Analysis" icon="shield">
+    Automatic risk assessment: "This strategy has 15% maximum drawdown based on historical data."
+  </Card>
+  
+  <Card title="Market Context" icon="chart-line">
+    AI provides market insights: "This works best in trending markets, not sideways periods."
+  </Card>
+  
+  <Card title="Performance Estimates" icon="target">
+    Expected results: "Similar strategies have achieved 65% win rate with 8% average returns."
+  </Card>
+</CardGroup>
+
+## Communication Tips
+
+<Steps>
+  <Step title="Be Specific">
+    "Buy AAPL at $150" is better than "Buy Apple when it's cheap." Include exact prices and quantities.
+  </Step>
+  <Step title="Mention Risk Tolerance">
+    "I want moderate risk with 2% position sizing" helps AI suggest appropriate safety measures.
+  </Step>
+  <Step title="Include Timeframes">
+    "Use 14-day RSI" or "Hold for 30 days maximum" gives AI clear parameters to work with.
+  </Step>
+</Steps>
+
+## Available Indicators and Actions
+
+<CardGroup cols={2}>
+  <Card title="Technical Indicators" icon="chart-line">
+    RSI, MACD, Moving Averages, Bollinger Bands, ATR, Volume indicators, and price variables.
+  </Card>
+  
+  <Card title="Order Types" icon="shopping-cart">
+    Market orders, limit orders, stop orders, and trailing stops for complete trade execution.
+  </Card>
+  
+  <Card title="Alert System" icon="bell">
+    Set notifications for price levels, indicator conditions, or strategy triggers.
+  </Card>
+  
+  <Card title="Strategy Control" icon="settings">
+    Start, stop, or modify strategies based on market conditions or performance metrics.
+  </Card>
+</CardGroup>
+
+## Get Started
+
+<Card
+  title="Talk to AI Assistant"
+  icon="rocket"
+  href="https://platform.ezorro.app"
+>
+  Start creating trading strategies by chatting with our AI in plain English. No technical knowledge required.
+</Card>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="Strategy Construction"
+    icon="hammer"
+    href="/technical/strategy-construction"
+  >
+    Learn how to build complete trading strategies using AI conversations.
+  </Card>
+  <Card
+    title="Beginner Strategies"
+    icon="graduation-cap"
+    href="/trading-strategies/beginner-strategies"
+  >
+    See examples of strategies created through AI conversations.
+  </Card>
+  <Card
+    title="Risk Management"
+    icon="shield"
+    href="/trading-strategies/risk-management"
+  >
+    Understand how to communicate risk preferences to the AI assistant.
+  </Card>
+  <Card
+    title="Technical Indicators"
+    icon="chart-line"
+    href="/technical/indicators"
+  >
+    Learn about the indicators available for your AI-powered strategies.
+  </Card>
+</CardGroup>
