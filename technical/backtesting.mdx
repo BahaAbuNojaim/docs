@@ -1,79 +1,79 @@
 ---
 title: "Professional Strategy Backtesting"
-description: "Test your trading strategies on real historical data before risking capital. See exactly how your strategies would have performed."
+description: "Test your trading strategies on historical market data before using them live. Explore how strategies might have behaved under different conditions."
 ---
 
-Never risk your money on untested strategies. eZorro's advanced backtesting shows exactly how your strategy would have performed using real historical data with all trading costs included.
+Backtesting helps evaluate how a strategy could have behaved in the past. eZorro's advanced backtesting uses historical data and trading cost assumptions to provide realistic insights into potential performance.
 
-<Card
-  title="Test Your Strategy"
-  icon="rocket"
-  href="https://platform.ezorro.app"
->
-  Backtest your trading strategies on real historical data. See performance metrics and adjust before going live.
+<Card title="Test Your Strategy" icon="rocket" href="https://platform.ezorro.app">
+  Backtest your trading strategies on historical data. Review performance metrics and refine before going live.
 </Card>
 
 ## Why Backtesting Matters
 
 <CardGroup cols={3}>
   <Card title="Realistic Costs" icon="receipt">
-    Includes commissions, slippage, and market impact for accurate return calculations.
+    Incorporates commissions, slippage, and market impact to give more realistic results.
   </Card>
-  
-  <Card title="Real Market Data" icon="database">
-    Uses complete historical data including failed companies and corporate actions.
+
+  <Card title="Historical Market Data" icon="database">
+    Uses complete historical data, including companies that failed and corporate actions.
   </Card>
-  
-  <Card title="Professional Testing" icon="chart-mixed">
-    Walk-forward analysis and Monte Carlo testing like hedge funds use.
+
+  <Card title="Advanced Methods" icon="chart-mixed">
+    Supports walk-forward analysis and Monte Carlo testing, commonly used in professional research.
   </Card>
 </CardGroup>
 
-## How Professional Backtesting Works
+## How Backtesting Works
 
 <Steps>
   <Step title="Historical Data Testing">
-    Test your strategy on 3-5 years of real market data to see how it would have performed across different market conditions.
+    Run your strategy on 3–5 years of market data to see how it might have behaved across different conditions.
   </Step>
-  <Step title="Realistic Cost Inclusion">
-    Include all trading costs: commissions, slippage, and market impact for accurate return calculations.
+
+  <Step title="Trading Cost Simulation">
+    Factor in commissions, slippage, and market impact to approximate realistic execution.
   </Step>
-  <Step title="Performance Analysis">
-    Review key metrics: total returns, win rate, maximum drawdown, and risk-adjusted performance.
+
+  <Step title="Performance Review">
+    Review metrics such as total return, win rate, maximum drawdown, and risk-adjusted outcomes.
   </Step>
 </Steps>
 
-## Key Performance Metrics
+## Common Performance Metrics
 
 <CardGroup cols={2}>
   <Card title="Total Returns" icon="chart-line">
-    How much your strategy would have made annually, including all costs and realistic execution.
+    Shows overall gains or losses during the test period, including costs.
   </Card>
-  
+
   <Card title="Win Rate" icon="percentage">
-    Percentage of profitable trades. Target above 55% for reliable strategies.
+    The percentage of trades that closed profitably. Provides insight into consistency.
   </Card>
-  
+
   <Card title="Maximum Drawdown" icon="arrow-down">
-    Worst peak-to-trough decline. Shows how much you could lose in worst-case scenarios.
+    The largest peak-to-trough decline. Highlights potential downside risk.
   </Card>
-  
+
   <Card title="Sharpe Ratio" icon="balance-scale">
-    Risk-adjusted returns. Above 1.0 indicates good returns relative to risk taken.
+    A measure comparing returns to volatility. Often used to evaluate risk-adjusted results.
   </Card>
 </CardGroup>
 
-## Understanding Your Results
+## Interpreting Results
 
 <Steps>
-  <Step title="Good Strategy Indicators">
-    Look for win rates above 55%, consistent returns across different years, and drawdowns under 20%.
+  <Step title="Identify Strengths">
+    Look for strategies that perform reasonably across different years and market conditions.
   </Step>
-  <Step title="Red Flags to Avoid">
-    Avoid strategies that only work in one market type, have huge drawdowns, or rely on very few trades.
+
+  <Step title="Spot Red Flags">
+    Be cautious of strategies that only perform in one type of market, have very large drawdowns, or rely on very few trades.
   </Step>
-  <Step title="Market Condition Analysis">
-    Ensure your strategy performs reasonably well in bull markets, bear markets, and sideways periods.
+
+  <Step title="Condition Testing">
+    Evaluate how your strategy behaves in bull, bear, and sideways markets to understand potential robustness.
   </Step>
 </Steps>
 
@@ -81,62 +81,48 @@ Never risk your money on untested strategies. eZorro's advanced backtesting show
 
 <CardGroup cols={2}>
   <Card title="Complete Data" icon="database">
-    Includes all stocks from testing period, even companies that failed. No survivorship bias.
+    Includes all stocks from the testing period, even those that no longer exist, to avoid survivorship bias.
   </Card>
-  
+
   <Card title="Realistic Costs" icon="receipt">
-    All trading costs included: commissions, slippage, and market impact for honest results.
+    Incorporates commissions, slippage, and market impact to approximate live trading conditions.
   </Card>
-  
+
   <Card title="No Future Peeking" icon="eye-slash">
-    Only uses information available on each trading day. No crystal ball backtests.
+    Only uses information available at the time of each trade in the test. Prevents look-ahead bias.
   </Card>
-  
+
   <Card title="Corporate Actions" icon="building">
-    Handles stock splits, dividends, mergers, and spin-offs automatically for accuracy.
+    Accounts for stock splits, dividends, mergers, and spin-offs automatically.
   </Card>
 </CardGroup>
 
 ## Get Started
 
-<Card
-  title="Backtest Your Strategy"
-  icon="rocket"
-  href="https://platform.ezorro.app"
->
-  Test your trading strategies on real historical data with professional-grade backtesting. See honest results before risking capital.
+<Card title="Backtest Your Strategy" icon="rocket" href="https://platform.ezorro.app">
+  Test your trading strategies on historical data with professional-grade backtesting. Gain insights before committing real capital.
 </Card>
 
 ## Next Steps
 
 <CardGroup cols={2}>
-  <Card
-    title="Strategy Construction"
-    icon="hammer"
-    href="/technical/strategy-construction"
-  >
-    Learn how to build strategies that backtest well and perform in live markets.
+  <Card title="Strategy Construction" icon="hammer" href="/technical/strategy-construction">
+    Learn how to build strategies that can be evaluated through backtesting.
   </Card>
-  <Card
-    title="Technical Indicators"
-    icon="chart-line"
-    href="/technical/indicators"
-  >
-    Understand the indicators you can use to build and test your strategies.
+
+  <Card title="Technical Indicators" icon="chart-line" href="/technical/indicators">
+    Explore indicators commonly used in backtested strategies.
   </Card>
-  <Card
-    title="Risk Management"
-    icon="shield"
-    href="/trading-strategies/risk-management"
-  >
-    Learn how to incorporate proper risk controls that show up in backtesting.
+
+  <Card title="Risk Management" icon="shield" href="/trading-strategies/risk-management">
+    Understand how to apply risk controls that affect backtest outcomes.
   </Card>
-  <Card
-    title="Beginner Strategies"
-    icon="graduation-cap"
-    href="/trading-strategies/beginner-strategies"
-  >
-    See pre-tested strategies with full backtesting results and performance metrics.
+
+  <Card title="Beginner Strategies" icon="graduation-cap" href="/trading-strategies/beginner-strategies">
+    Explore sample strategies with backtesting results and metrics.
   </Card>
 </CardGroup>
 
+---
+
+<sub>⚠️ Backtesting results are hypothetical and based on historical data. They do not guarantee future performance. Trading involves risk, including the possible loss of capital.</sub>
