@@ -5,7 +5,9 @@
       "Bash(apt install:*)",
       "Bash(rm:*)",
       "WebFetch(domain:docs.deepmyst.com)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ],
     "deny": []
   }
