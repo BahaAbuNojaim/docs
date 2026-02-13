@@ -3,654 +3,380 @@ title: "Complete User Guide"
 description: "Complete guide to using eZorro's AI-powered trading and portfolio management platform"
 ---
 
-# Introduction
+# eZorro Platform User Guide
 
-Welcome to eZorro – your AI-powered trading and portfolio management platform.
+Chat-first AI trading assistant
 
-eZorro is designed for traders, investors, and financial enthusiasts who want to simplify strategy building, portfolio tracking, and market analysis. By combining AI assistance, market data, automated strategy execution, and portfolio insights, eZorro helps you make more informed, data-driven decisions.
+## Quick Start
 
-## 1.1 What You Can Do with eZorro
+eZorro is designed around chat. Ask questions, generate outputs (charts, news, tables), create strategies, backtest, and (optionally) connect a brokerage account to view portfolio data and enable trading with approvals.
 
-### Build AI-Driven Strategies
-Create trading strategies in plain language with the help of eZorro's AI assistant. Backtest them against historical data, iterate based on AI suggestions, and optionally enable automation.
+### 1. Create an account and sign in
 
-![AI-Driven Strategies](/images/chat1.png)
+#### Login Page
 
-### Track and Manage Portfolios
-View linked brokerage accounts in one place. Explore portfolio value, performance trends, holdings, and allocation with interactive charts and analytics.
+![Login Page](/images/login.png)
 
-![Track and Manage Portfolios](/images/port.png)
+The login page lets you access eZorro using either Google sign-in or email + password. It also includes quick links for Forgot password, Sign up, and the platform's Terms of Use and Privacy Policy.
 
-### Access Market Intelligence
-Stay informed with stock and crypto data, heatmaps, news feeds, and calendars of upcoming economic events.
+#### Option A — Sign in with Google (recommended)
 
-![Access Market Intelligence](/images/mark.png)
+Use this when you want the fastest login and fewer passwords to manage.
 
-### Automate and Execute
-Schedule strategies to run on your chosen frequency and receive alerts for important triggers or market conditions.
+1. Click **Continue with Google**.
+2. Choose the Google account you want to use (or sign in to your Google account if prompted).
+3. Approve the consent screen (if shown).
+4. You'll be returned to eZorro automatically and signed in.
 
-![Automate and Execute](/images/stra.png)
+This flow follows Google "Sign in with Google" patterns and is typically implemented via Google Identity Services.
 
-### Stay Informed Anywhere
-Access eZorro insights directly from the platform or via optional WhatsApp notifications.
+#### Option B — Sign in with email and password
 
-## 1.2 Why eZorro?
+Use this when you prefer a standard username/password login.
 
-* **AI-Powered Simplicity** – Turn ideas into actionable trading rules without coding.
-* **One Unified Dashboard** – Stocks, crypto, and portfolios in a single view.
-* **Flexible Automation** – From backtesting to live evaluation, strategies can run on a schedule you choose.
-* **Tailored Insights** – Personalized news and alerts based on your portfolio.
-* **Scalable for Everyone** – From beginners to advanced traders, eZorro adapts to your workflow.
+1. Under **Or continue with email**, enter your Email.
+2. Enter your Password.
+3. (Optional) Use the eye icon to show/hide the password while typing.
+4. Click **Sign in**.
 
-# 2. Getting Started
+<Note>For security, login forms handle errors safely (e.g., not revealing whether an email exists) and protect against brute force/credential stuffing.</Note>
 
-Before exploring eZorro's features, you need to create an account, link your brokerage, and choose a plan.
+#### Forgot your password?
 
-## 2.1 Signup & Login
+1. Click **Forgot password?**
+2. Enter the email used for your account.
+3. Follow the reset instructions you receive (email link/code), then sign in again.
 
-### Sign Up
-
-To create a new account:
-
-1. On the login screen, click **Sign Up**.
-2. Enter:
-   - Email address
-   - Password (minimum 8 characters, must include uppercase, number, and symbol)
-   - Confirm password
-   - (Optional) Phone number
-
-Alternatively, sign up using:
-- Google
-- Facebook
-
-3. Click **Sign Up** to complete registration.
-4. You will receive an OTP (One-Time Password) via email/phone. Enter it to verify your account.
+#### Create a new account (Sign up)
 
 ![Sign Up](/images/signup.png)
 
-### Login
+If you don't have an account yet:
 
-For returning users:
-1. Go to the Sign In screen.
-2. Enter your email and password, or log in with Google/Facebook.
-3. If you select "Remember Me", your session will stay active on the device.
+**Option A — Sign up with Google (recommended)**
 
-![Login](/images/login.png)
+1. Click **Sign up with Google**.
+2. Choose your Google account (or sign in if prompted).
+3. Approve the consent screen (if shown).
+4. You'll be returned to eZorro and your account will be created automatically.
 
-### Forgot Password
+**Option B — Sign up with email**
 
-If you forget your password:
-1. Click **Forgot Password** on the login screen.
-2. Enter your email address.
-3. You'll receive a verification link or code to reset your password.
+1. Enter Full Name.
+2. Enter your Email (this will be your login username).
+3. Enter a Password.
+4. Re-enter the password in Confirm Password.
+5. Tick **I agree to the Terms of Use and Privacy Policy**.
+6. Click **Create account**.
 
-![Forgot Password](/images/forg.png)
+#### Terms and privacy
 
-## 2.2 Account Linking (SnapTrade Integration)
+Before signing in, users can open:
+- Terms of Use
+- Privacy Policy
 
-To trade or view portfolio data, link your brokerage accounts. eZorro uses SnapTrade for secure integration.
+These links explain account, data, and usage policies.
 
-### Steps to Link Your Account:
-1. Click the Settings (⚙️) icon in the top-right corner.
-2. Select **Link Account**.
-3. You'll be redirected to SnapTrade.
-4. Log in to your brokerage (e.g., Alpaca, Interactive Brokers).
-5. Authorize access.
-6. Once confirmed, your account appears under **Portfolio** in eZorro.
+### 2. Start a New Chat and ask for market data, news, or analysis
 
-![Account Linking](/images/link.png)
+![Landing Page](/images/chat1.png)
 
-<Note>**Security Note**: eZorro does not store your brokerage credentials. Connections are encrypted via SnapTrade.</Note>
+The landing page is designed to help you start a chat fast, either by clicking a starter tile or by typing your own question.
 
-## 2.3 Plans & Upgrades
+#### Start a new chat
 
-eZorro offers subscription plans for different needs. You can upgrade anytime from **Upgrade Plan** in the sidebar.
+1. In the left sidebar, click **New Chat**.
+2. A fresh conversation opens in the main workspace.
+3. Type your message in the input box at the bottom.
+4. Press **Enter** to send. Use **Shift + Enter** to add a new line.
 
-### Starter – $39.99/month
-* Up to 5 saved strategies
-* Run up to 2 live strategies simultaneously
-* Basic backtesting (limited historical data)
-* Link 1 brokerage account
-* Stock & crypto dashboards
-* Email support
-* **Free Trial**: 14 days with Starter features
+#### Continue an existing chat
 
-### Pro – $99/month (Most Popular)
-* Up to 50 saved strategies
-* Run up to 10 live strategies simultaneously
-* Advanced backtesting (broader datasets + scenario analysis)
-* Automated execution & scheduling
-* Link up to 5 brokerage accounts
-* AI-driven insights & analytics
-* Downloadable reports (strategies, backtests, runs)
-* Priority support (email + chat)
+1. In the left sidebar, scroll the chat list and click any previous chat.
+2. The conversation reopens so you can continue with follow-ups (e.g., "backtest that strategy" or "show the 1H chart").
+3. Use the **Search chats…** field to find older chats by keyword (symbol, strategy name, topic).
 
-### Enterprise – Contact Us
-* Increased strategy and live run limits
-* Team accounts with role-based permissions
-* Custom integrations (APIs, Webhooks, WhatsApp alerts)
-* Dedicated onboarding & support
-* Advanced analytics dashboards
-* SSO authentication & custom branding
-* **Free Trial**: Demo access on request
+<Note>Keeping continuity in the same thread helps the assistant stay aligned with your prior context and reduces re-explaining.</Note>
 
-![Plans & Upgrades](/images/plan.png)
+#### Use the landing tiles to kick off a chat
 
-# 3. Core Features
+In the center of the page you'll see quick tiles (examples: Market Overview, Stock Analysis, News & Insights, Create Strategy, Backtest Strategy, etc.). Use these when you want a guided starting point:
 
-## 3.1 AI Assistant
+1. Click the tile that matches your goal.
+2. eZorro starts the relevant chat flow and produces an output in the workspace.
+3. Continue the flow by asking follow-ups (e.g., "add RSI(14) and EMA(50)" or "compare it to SPY").
 
-The AI Assistant is your conversational interface inside eZorro. Ask market questions, create and refine strategies, and surface insights in plain language.
+#### Best way to initiate chat (trader-focused)
 
-![AI Assistant](/images/aia.png)
+**A) Ask a clear market question (fastest results)**
 
-### What You Can Do with the AI Assistant
+Include:
+- Symbol(s)
+- Timeframe (e.g., 15m / 1H / 1D)
+- Horizon (intraday / swing / long-term)
+- Output you want (chart, table, news summary)
 
-#### 1. Start a Conversation
-- Open the AI Assistant from the left sidebar.
-- Click **New Chat** to begin.
-- Type in your question or strategy idea in plain English.
-- The assistant will respond with insights, suggestions, or a draft trading strategy.
+**Examples:**
+- "Analyze NVDA on 1D and 4H: trend, support/resistance, RSI(14), and key catalysts this week."
+- "Show XAGUSD 1D chart with Bollinger Bands + EMA(20/50) and summarize the trend."
 
-**Example (illustrative):**
-* **You**: "Show today's notable gainers in tech stocks."
-* **AI**: "Here are technology tickers with the largest percentage gains today."
+**B) Ask a strategy request (when you know your style)**
 
-![Start a Conversation](/images/yes.png)
+Include:
+- Strategy type (breakout / mean reversion / trend)
+- Entry + exit rules
+- Risk rules (stop, take-profit, sizing)
+- Max trades / cooldown
 
-#### 2. Ask Market Questions
-Request market context such as:
-* Stock or crypto prices
-* Technical indicators (e.g., "What's the RSI of AAPL?")
-* Economic calendar events
-* Recent headlines about a ticker
+**Example:**
+"Create a breakout strategy for SPY on 1H candles. Entry: close above 20-day high + volume filter. Exit: ATR trailing stop. Risk: 1% stop, max 1 trade/day."
 
-![Ask Market Questions](/images/what.png)
+**C) Make your question easy to answer.**
 
-#### 3. Generate Trading Strategies
-Describe your trading idea, and the AI will build a structured strategy.
+### 3. Use the built-in Call-to-Actions (buttons) at the end of responses
 
-**Example**: "Create a strategy to buy Apple when RSI < 30 and sell when RSI > 70."
+At the end of many responses in eZorro, you'll see a Quick Actions area with clickable buttons (Call-to-Actions). These buttons are shortcuts that send a follow-up request for you—so you can move to the next step without re-typing.
 
-The AI can:
-* Parse your request
-* Propose a rule-based strategy
-* Explain in simple terms
-* Save it under your **Strategies** panel
+#### What happens when you click a button?
 
-![Generate Trading Strategies](/images/strate.png)
+When you click a Quick Action button, eZorro automatically:
+- Uses the current context (symbol, timeframe, analysis you just saw), and
+- Submits a pre-built follow-up prompt (similar to "suggested actions / quick replies" used in many chatbot frameworks).
 
-#### 4. Refine and Save Strategies
-* Adjust conditions, assets, or risk parameters in chat.
-* Once finalized, the strategy appears in **Artifacts & Strategies** (right panel).
-* From there, you can:
-  * Save
-  * Run / Pause
-  * Backtest
-  * Schedule evaluation
+So clicking **Create Strategy** is equivalent to you typing something like:
+"Create a strategy using the analysis above."
 
-![Refine and Save Strategies](/images/art.png)
+#### Common Quick Actions you may see
 
-### Proactive Assistant Features
-* The AI can highlight potential improvements or note when conditions match your saved rules.
-* **Example**: "Your Tesla strategy conditions have been met — run it now?"
+Quick Actions typically fall into a few categories:
 
-## 3.2 Strategies Page
+**1) Continue research**
+- **Get News / More News** → fetch and summarize related headlines
+- **Compare** (or similar) → run a comparison view using the same timeframe/context
 
-The Strategies Page is where all your AI-generated and manually created strategies are managed. From here, you can create, edit, run, backtest, and download reports for your trading strategies.
+**2) Go deeper on analysis**
+- **Analyze [Symbol]** (e.g., Analyze SLV) → expands technical/market analysis
 
-### Creating a Strategy
-* Strategies originate via the AI Assistant (see Section 3.1).
-* Saved strategies appear in the list with columns:
-  * **Name** – strategy title
-  * **Status** – active/inactive
-  * **Asset** – linked stock or crypto tickers
-  * **Frequency** – evaluation interval
-  * **Last Evaluated** – most recent run time
+**3) Turn analysis into a strategy**
+- **Create Strategy / Create Silver Strategy** → generates a draft strategy using the context you've been discussing
 
-**Example**: "RSI-Based Strategy for AAPL and MSFT"
+**4) Portfolio & automation**
+- **Show My Portfolio** → pulls portfolio context (if broker is linked)
+- **Set Price Alert** → opens the alert creation flow
 
-![Creating a Strategy](/images/start.png)
+#### Best practice: how to use Quick Actions effectively
 
-### Running, Pausing, and Stopping Strategies
-* **Run** ▶️: Starts scheduled evaluation against market data
-* **Pause** ⏸️: Temporarily suspends evaluation
-* **Stop** ⏹️: Ends evaluation until restarted
+- **Use Quick Actions when the button matches your intent** — It's usually the fastest path because it preserves context automatically.
+- **Buttons are optional—typing is always allowed** — Quick Actions help guide the flow, but free text gives you full control.
+- **Expect buttons to be "single-turn" choices**
 
-When running, strategies monitor market data from integrated providers (e.g., Polygon, Alpaca).
+### 4. Create or refine a strategy, then backtest and run it
 
-### Frequency Settings
-1. Click **Add Frequency** next to a strategy.
-2. In the Scheduling popup:
-   * Choose interval (e.g., 5 minutes, 1 hour, daily).
-   * Select Start time (Now or specific time).
-   * Define End time (Never or specific time).
-3. Save to activate scheduling.
+See the Strategies section below for detailed instructions.
 
-![Frequency Settings](/images/freq.png)
+### 5. Link a brokerage account (optional)
 
-### Backtesting a Strategy
-Backtesting simulates past behavior using historical data.
-
-1. Select a strategy.
-2. Click **Run Backtest**.
-3. Historical data is retrieved from providers (e.g., Polygon, Alpaca).
-4. Results may include:
-   * Return metrics
-   * Sharpe Ratio, Drawdowns, Win Rate
-   * Trade history (entries, exits, triggers)
-   * Performance visualizations
-
-![Backtesting Results](/images/eva.png)
-
-**Illustrative Note**: Backtest outputs are hypothetical and based on past data/assumptions.
-
-### Downloading Reports
-Generate PDF reports for strategies, backtests, or runs.
-
-1. Select a strategy and click **Download Report**.
-2. Reports can include:
-   * Strategy rules and parameters
-   * Backtest metrics (e.g., Sharpe Ratio, drawdowns)
-   * Charts (portfolio value, trade signals)
-   * Run history summaries
-
-![Downloading Reports](/images/down.png)
-
-## 3.3 Portfolio Page
-
-The Portfolio Page gives you a complete overview of your investments across all linked brokerage accounts. It consolidates stocks, crypto, cash balances, and performance analytics into one intuitive dashboard.
-
-![Portfolio Page](/images/port.png)
-
-### Viewing All Linked Accounts
-* After connecting via SnapTrade, accounts appear automatically.
-* Default shows a combined portfolio view.
-* Toggle between **All Accounts** and specific brokers (e.g., Alpaca, Interactive Brokers).
-
-### Portfolio Overview (Header Section)
-* **Total Portfolio Value**
-* **Daily Change %**
-* **Quick Actions** – link/unlink accounts, refresh balances
-
-### Performance Analytics
-
-#### 1. Portfolio Trend Chart
-* Portfolio value over time
-* Time ranges: 1W | 1M | 3M | 1Y | All
-* Filter by All Accounts or a specific broker
-
-**Illustrative Example**: "Portfolio change over last 30 days: +4.5%."
-
-#### 2. Key Metrics (Cards)
-* **Buying Power**
-* **Cash Balance** (or **Margin Balance** if applicable)
-* **Total Assets**
-* **P&L Summary** (daily or monthly snapshot)
-
-#### 3. Asset Allocation (Pie or Bar Chart)
-* Distribution across categories such as Stocks, Crypto, Cash, Others
-
-**Illustrative Example**: "Allocation — Stocks 72%, Crypto 18%, Cash 10%."
-
-#### 4. Holdings Breakdown (Table)
-Each holding is displayed in a clear table with sortable columns:
-
-| Ticker | Asset Name | Quantity | Price | Value | % Allocation | P&L % |
-|--------|------------|----------|-------|-------|-------------|-------|
-| AAPL | Apple Inc. | 50 | $227 | $11,350 | 10% | +5.2% |
-| TSLA | Tesla Inc. | 30 | $340 | $10,200 | 9% | -3.1% |
-| NVDA | NVIDIA Corp. | 20 | $177 | $3,540 | 3% | +12.4% |
-
-### Additional Features
-* **Refresh Data**
-* **Export** holdings as CSV/PDF
-* **Custom Views** by sector, asset type, or account
-
-Narrative flow:
-1. **Total Value & Trends**
-2. **Key Metrics & Allocation**
-3. **Holdings Breakdown**
-
-## 3.4 Stock Features
-
-The Stock Section provides comprehensive insights into the equity markets, including real-time prices, indices, company fundamentals, upcoming events, and tailored news. This is your hub for researching stocks and identifying trading opportunities.
-
-### Market Overview
-* Snapshot of major indices, notable movers, sector performance
-* Heatmap for sector activity
-
-**Illustrative Example**: "Tech sector up +2.1% today."
-
-![Stock Screener](/images/mar.png)
-
-### Market Data (Indices & Stocks)
-* Live updates for major indices (S&P 500, NASDAQ, Dow)
-* Stock details:
-  * Price & % change
-  * Market cap
-  * Volume & 52-week range
-* Optional highlight: "Magnificent 7" snapshot
-
-### Market Calendar
-Track events that may affect markets:
-* Earnings reports
-* Dividends & splits
-* Economic indicators (e.g., CPI, rate announcements)
-
-Filter by **Date** and **Category**.
-
-### Market News
-* **General News**
-* **Company-Specific News**
-* **Portfolio-Linked News**
-
-### Stock Screener
-Filter stocks by:
-* Market Cap
-* Price Range
-* Technical Indicators (RSI, Moving Averages, MACD)
-* Analyst Ratings
-* Sector & Industry
-
-Sort by:
-* Daily % Change
-* Volume
-* P/E
-* Dividend Yield
-
-**Example Query**: "Large-cap tech stocks with RSI < 30."
-
-### How to Use Stock Features
-1. **Overview** for trends
-2. **Calendar** for events
-3. **Screener** for filters
-4. **News** for updates
-
-## 3.5 Crypto Features
-
-The Crypto Section provides real-time insights into the cryptocurrency markets, including prices, market caps, trading volumes, upcoming events, and tailored news. Like the Stock section, this is your hub for researching digital assets and building strategies around them.
-
-### Market Overview
-* Global market cap, trading volume, BTC/ETH dominance
-* Top gainers/losers and trending coins
-* Heatmap view
-
-**Illustrative Example**: "BTC dominance at 52%."
-
-![Crypto Screener](/images/cry.png)
-
-### Market Data (Coins & Tokens)
-Each asset shows:
-* Price & daily % change
-* Market cap
-* 24h trading volume
-* Supply (where available)
-
-### Market Calendar
-Crypto-specific events:
-* Token unlocks & vesting
-* Protocol upgrades/hard forks
-* Regulatory updates or listings
-
-Filters:
-* **Date**
-* **Event Type**
-
-### Market News
-* **Global News** (market, regulation, adoption)
-* **Coin-Specific News**
-* **Portfolio-Linked News**
-
-### Crypto Screener
-Filters:
-* Market Cap
-* Price Range
-* 24h Volume
-* Technicals (RSI, MACD, MAs)
-* Category (L1, DeFi, Metaverse, Stablecoins)
-
-Sort by:
-* % Change (1h/24h/7d)
-* Volume
-* Market Cap
-* Volatility
-
-**Example Query**: "Small-cap coins with high volume and RSI < 30."
-
-### How to Use Crypto Features
-1. **Overview** for market snapshot
-2. **Calendar** for upcoming events
-3. **Screener** for discovery
-4. **News** for updates
-
-## 3.6 News
-
-The News Section keeps you up to date with financial market developments, tailored to your portfolio and trading interests. It combines global financial headlines, company- or coin-specific news, and AI-curated insights.
-
-### Overview
-* Aggregates news from multiple sources
-* Personalized to your linked accounts and holdings
-* Updated continuously
-
-![News](/images/news.png)
-
-### Types of News
-
-#### 1. General Market News
-Broad market movements, economic updates, and industry trends.
-
-**Illustrative Example**: "Dow rises after inflation report."
-
-#### 2. Portfolio-Linked News
-Stories tied to assets you hold.
-
-#### 3. Asset-Specific News (Stocks & Crypto)
-Filter by ticker or coin.
-
-#### 4. AI-Curated Insights
-The AI can:
-* Highlight relevant stories
-* Suggest potential context for your portfolio
-* Provide summaries of lengthy reports
-
-**Illustrative Example**: "This Nvidia update may be relevant if you hold semiconductor stocks."
-
-### How to Use the News Page
-1. Open **News**
-2. Browse **Headlines**
-3. Filter by **Portfolio** or **Assets**
-4. Open a story for details
-5. Ask the AI to summarize or discuss potential context
-
-### Key Benefits
-* **Stay Updated** in one place
-* **Save Time** with portfolio-linked feeds
-* **Contextual Insights** via AI summaries
-
-# 4. Automation & Scheduling
-
-Automation in eZorro allows you to set strategies on autopilot. Instead of manually running checks, you can define how often a strategy should be evaluated, and eZorro will execute it at the specified intervals.
-
-## Setting Frequency
-
-1. Go to **Strategies**.
-2. Select a strategy.
-3. Click **Add Frequency / Schedule**.
-4. In the popup:
-   * **Repeat Interval**: 1, 5, 15, 30, 60 minutes, or Daily
-   * **Start Time**: Now or specific time
-   * **End Time**: Never or a specific time
-   * **Date Range (optional)**
-5. Click **Save Schedule**.
-
-**Illustrative Example**: "Run Tesla RSI strategy every 15 minutes between 9:00 AM and 4:00 PM, weekdays."
-
-## Start / Stop Strategies
-
-* **Start** ▶️ – Activates evaluation on schedule
-* **Pause** ⏸️ – Temporarily suspends
-* **Stop** ⏹️ – Ends until restarted
-
-<Note>Only strategy owners can start/stop their strategies.</Note>
-
-![Frequency Settings](/images/freq.png)
-
-## Cron Job-Based Execution (Technical Workflow)
-
-### How it Works
-1. **Cron Job Runs** on a fixed cadence
-2. **Check Schedules** in the database
-3. **Filter Active Strategies** by interval/time/range
-4. **Trigger Evaluation**
-5. **Save Results** and any alerts
-
-### Advantages
-* **Efficient** – evaluates only active schedules
-* **Scalable** – supports many strategies
-* **Flexible** – works across intervals and conditions
-
-## Use Cases for Automation
-
-* **Short-Term**: Momentum checks every 1–5 minutes
-* **Swing**: Hourly or daily runs
-* **Event-Based**: Market hours or specific dates
-
-# 5. Reports & Analytics
-
-The Reports & Analytics section allows you to track, validate, and optimize your strategies. eZorro provides three types of reports: Backtest Reports, Run Reports, and Strategy Reports. Each report includes performance metrics, visualizations, and actionable insights.
-
-## 5.1 Backtest Reports
-
-Backtest Reports show how a strategy would have performed using historical market data. This helps you test ideas before committing real capital.
-
-### Generate a Backtest Report
-1. Open **Strategies**
-2. Select a strategy
-3. Click **Run Backtest**
-4. When complete, click **Download Backtest Report**
-
-![Backtesting Results](/images/eva.png)
-
-### What's Included
-
-**Key Metrics:**
-* Returns (period-based)
-* Sharpe Ratio
-* Max Drawdown
-* Win Rate (%)
-* Total Trades
-
-**Visualizations:**
-* Portfolio value over the test period
-* Buy/Sell markers on price chart
-* Benchmark comparison
-
-**Insights:**
-* Risk/return context
-* Potential refinements (e.g., stops, timeframe)
-
-## 5.2 Run Reports
-
-Run Reports are generated each time a strategy executes during live or scheduled trading. They allow you to track real-world performance over time.
-
-### View a Run Report
-1. Open **Strategies**
-2. Select a strategy → **View Runs**
-3. Choose a run → **Download Run Report**
-
-### What's Included
-* **Run Overview**: Execution time, market context at run
-* **Metrics**: Returns for the run, win rate, trade count, profit factor
-* **Trade Analysis**: Entries, exits, sizes, triggers
-* **Visualizations**: Portfolio trend, trade markers
-
-**Illustrative Note**: Live performance depends on market conditions and execution.
-
-## 5.3 Strategy Reports
-
-Strategy Reports provide a comprehensive summary of an entire strategy, combining both backtest and run data into one document.
-
-### Download a Strategy Report
-1. Go to **Strategies**
-2. Select a strategy
-3. Click **Download Strategy Report**
-
-### What's Included
-
-**Strategy Rules & Parameters**
-* Assets, conditions, triggers, risk settings
-
-**Backtest Summary**
-* Returns, Sharpe Ratio, drawdowns, benchmarks
-* Simulated trades
-
-**Run History**
-* Aggregated performance across runs
-* Time-based charts
-
-**Visualizations**
-* Portfolio value curve
-* Normalized prices vs. strategy
-* Alerts & execution points
-
-## Why Reports Matter
-
-* **Backtest Reports** → Evaluate ideas before live use
-* **Run Reports** → Track observed results over time
-* **Strategy Reports** → One consolidated view
-
-# 6. Technical Overview (For Developers & Advanced Users)
-
-The Technical Overview provides insight into the data models, database design, and external services that power eZorro.
-
-## 6.1 Strategy Data Models
-
-eZorro uses several internal models to store, execute, and report on strategies:
-
-### Strategy Model
-Holds all information about a user's trading strategy — including title, rules, summary, structured details, and linked backtest or report results.
-
-### Schedule Model
-Defines how often a strategy should run (for example, every 5 minutes, hourly, or daily) along with start/end times or optional date ranges.
-
-### Run Model
-Stores the results of each live execution of a strategy. It records when the run occurred, the outcomes, and performance data.
-
-### Report Model
-Links strategies to their reports, storing references to performance documents and results that can be downloaded by users.
-
-### Backtest Result Model
-Contains the outcomes of simulations run on historical market data, including return percentages, drawdowns, Sharpe Ratio, win rate, and performance charts.
-
-## 6.2 Database Relationships
-
-* A **User** can have multiple **Strategies**
-* Each **Strategy** can have multiple **Schedules**, **Runs**, and **Reports**
-* **Backtest Results** link directly to a **Strategy**
-* **Reports** may reference both backtests and runs
-
-## 6.3 Service Integrations
-
-* **Polygon.io** – Market and fundamentals
-* **QuiverQuant** – Alternative datasets
-* **Alpaca** – Brokerage integration for execution
-* **SnapTrade** – Secure account linking/sync
-* **Firebase** – Chat sessions, logs
-* **TimescaleDB** – Time-series storage
-* **Render** – Hosting and cron-based schedulers
-
-## 6.4 Execution Workflow (High-Level)
-
-1. User creates/refines a strategy via the AI Assistant
-2. Strategy saved with structured parameters
-3. If automation is enabled, a scheduler checks and triggers active strategies
-4. During each run:
-   * Market data is fetched (e.g., Polygon, QuiverQuant)
-   * If linked, trades may be routed via Alpaca or SnapTrade
-   * Results are recorded and attached to reports
-5. Backtests follow similar logic but use historical data instead of live feeds
+Link a brokerage account to view portfolio and enable automated trading. See the Settings section below for details.
 
 ---
 
-<sub>⚠️ Trading and investing involve risk, including the possible loss of capital. Backtested results are hypothetical and based on historical data/assumptions; they do not guarantee future performance. eZorro does not guarantee profits or eliminate the risk of trading losses. Features and integrations are subject to availability and change.</sub>
+## Platform Layout
+
+- **Chats (left)**: Search chats, start new chats, and open chat history.
+- **Chat workspace (center)**: The conversation and generated outputs appear here.
+- **Artifacts (right)**: Saved outputs from chat such as Strategies, Charts, News, Docs, and Diagrams.
+
+![Platform Layout](/images/aia.png)
+
+---
+
+## 1. Using Chats (Core Workflow)
+
+Chats are the main way to use eZorro. You can ask questions in natural language and request specific output formats such as charts, news cards, tables, or strategy artifacts.
+
+### 1.1 Start a New Chat
+
+1. Click **New Chat** in the left sidebar.
+2. Type your question in the message box at the bottom of the workspace.
+3. Press **Enter** to send (Shift+Enter for a new line).
+
+### 1.2 Find and Reuse Past Chats
+
+- Use the **Search chats** box to quickly find a prior conversation by keyword (symbol, topic, strategy name).
+- Click any chat in the left list to reopen it and continue where you left off.
+
+### 1.3 Ask for Market Data and Technical Analysis
+
+Examples of what you can request:
+- Current price, daily/weekly change, and volume for a symbol.
+- Trend summary and key levels (support/resistance).
+- Technical indicators such as RSI, MACD, EMA/SMA, Bollinger Bands, ATR.
+- Multi-timeframe checks (e.g., 15m + 1H + 1D).
+
+![Chart with Indicators](/images/mark.png)
+
+### 1.4 Ask for Market News
+
+You can request latest headlines for a symbol, sector, or theme and filter/sort results when available (e.g., sentiment or recency).
+
+**Examples:**
+- "Show me the latest news for NVDA and summarize the top 5 items."
+- "What are today's key catalysts for gold and silver?"
+- "Summarize today's macro headlines that impact USD and yields."
+
+![News Cards](/images/news.png)
+
+### 1.5 Call-to-Actions (Next Step Buttons)
+
+At the end of many responses, eZorro provides Call-to-Actions you can click to continue the workflow without re-typing.
+
+- **Analyze (symbol)**: opens a deeper analysis flow for the same instrument.
+- **Create Strategy**: launches strategy creation using the current context.
+- **More News**: expands the news feed and highlights additional items.
+
+### 1.6 Get Better Answers (Trader Prompting Tips)
+
+For the most actionable outputs, include these details in your question:
+
+| Detail | Examples |
+|--------|----------|
+| Instrument(s) | ticker(s) or pairs (e.g., NVDA, XAUUSD, EURUSD) |
+| Time horizon | intraday / swing (days) / long-term (weeks+) |
+| Timeframe | 5m, 15m, 1H, 4H, 1D, etc. |
+| Goal | trend-following, breakout, mean reversion, hedging, portfolio risk |
+| Risk constraints | stop-loss method, take-profit method, max drawdown, max trades/day |
+| Output format | chart, table, Mermaid diagram, or a saved strategy |
+
+<Note>If you request a strategy, always specify timeframe + entry/exit logic + risk rules. This improves backtests and reduces noisy signals.</Note>
+
+### Copy/Paste Prompt Templates
+
+**Market snapshot:**
+"Give me a snapshot for SPY, QQQ, VIX, DXY, and 10Y yield. Include trend, key levels, and top 3 news drivers."
+
+**Trade checklist:**
+"Evaluate a swing trade on NVDA (3–10 days). Confirm daily + 4H trend, key levels, RSI/MACD, and catalysts this week. Output a checklist + risk notes."
+
+**Strategy request:**
+"Create a breakout strategy for TSLA on 1H candles. Entry: close breaks above 20-day high with volume > 20-day avg. Exit: trailing stop 2× ATR(14) or RSI(14) > 75. Risk: 1% stop, max 1 trade/day. Save the strategy."
+
+**Optimization:**
+"Optimize this strategy for robustness across bull/bear/range regimes. Sweep RSI 25–35 and EMA 20–100. Return top 5 parameter sets with drawdown and win rate as a table."
+
+---
+
+## 2. Strategies (Create, Backtest, Run)
+
+Strategies are usually created from chat. Once saved, they can be reviewed in Artifacts and managed in the Strategies area.
+
+### 2.1 Create a Strategy from Chat
+
+1. In chat, describe the strategy idea (entry, exit, risk rules, timeframe, symbols).
+2. Click the **Create Strategy** Call-to-Action (or ask explicitly to save the strategy).
+3. Review the saved strategy in Artifacts and refine if needed.
+
+### 2.2 Review and Manage Strategy Artifacts
+
+- Strategies include a summary (rules count, symbols, indicators).
+- Entry/exit rules are shown in readable form and can be iterated by chatting.
+- Artifacts also include charts, docs, and diagrams produced during strategy building.
+
+![Strategy Artifact View](/images/stra.png)
+
+### 2.3 Backtest a Strategy
+
+After the agent creates a strategy, you can run a backtest directly from the chat:
+
+- Type in the chat: **Backtest the strategy**
+- Or click the **Backtest** call-to-action button at the end of the agent's response.
+
+![Backtesting Results](/images/eva.png)
+
+### 2.4 Run / Schedule a Strategy
+
+After a strategy is backtested and validated by the agent as a good/profitable strategy, the system will provide an option to save the strategy to the Strategies list.
+
+From there, the user can:
+
+- **Run**: start running the saved strategy to evaluate market data and generate trade decisions.
+- **Schedule (Time & Dates)**: configure the strategy to run automatically on selected times and dates (or on a chosen frequency such as 5m, 1H, daily).
+- **Pause**: temporarily stop the strategy from running without deleting its setup.
+- **Stop**: fully stop the strategy until the user starts it again.
+
+![Frequency Settings](/images/freq.png)
+
+While running, the system will provide evaluation results and reports showing how the strategy performed during its run.
+
+---
+
+## 3. Approvals, Orders, and Alerts
+
+### 3.1 Approvals
+
+Approvals is a safety control. When enabled, AI-generated trades appear here for review before they are sent to your broker.
+
+1. Open **Approvals** from the header.
+2. Review pending items (symbol, action, size, rationale).
+3. Approve or reject, then refresh to update status.
+
+### 3.2 Orders
+
+Orders shows order activity from your linked broker (manual or strategy-driven).
+
+1. Open **Orders** from the header.
+2. Review recent orders (commonly last 30 days).
+3. Refresh to fetch the latest broker status.
+
+### 3.3 Alerts (Price Alerts)
+
+1. Open **Alerts**.
+2. Click **New Alert** (or **Create Price Alert**).
+3. Choose symbol, condition (above/below), and target price.
+4. Save the alert.
+
+---
+
+## 4. Navigation and Settings
+
+### 4.1 Header Navigation
+
+- **Approvals**: review trades pending confirmation.
+- **Orders**: view recent broker orders.
+- **Artifacts**: browse saved outputs from chat (Strategies, Charts, News, Docs, Diagrams).
+- **Settings**: manage linked accounts and appearance.
+- **Strategies**: manage strategies, backtests, schedules, and runs.
+- **Alerts**: manage price alerts.
+
+### 4.2 Appearance
+
+Use **Settings → Appearance** to control the platform theme:
+
+- Light
+- Dark
+- System (match your device settings)
+
+### 4.3 Link a Brokerage Account (Optional)
+
+Linking a brokerage enables portfolio features and can enable automated trading. Linking is initiated inside eZorro from **Settings → Linked Accounts**.
+
+1. Open **Settings → Linked Accounts**.
+2. Click **Link Account**.
+3. Complete the secure connection flow in the provider window (broker selection + authorization).
+4. Return to eZorro and refresh if needed.
+
+![Linked Accounts](/images/link.png)
+
+<Note>eZorro uses SnapTrade's Connection Portal to guide users through brokerage selection and secure authentication/authorization.</Note>
+
+---
+
+## 5. Practical Risk & Quality Checklist
+
+- **Avoid overfitting**: prefer simple rules that survive multiple market regimes.
+- **Include realistic assumptions** (fees and slippage) where possible.
+- **Start small** and monitor live behavior before scaling.
+- **Define risk limits**: stop-loss method, max position size, max daily loss, max drawdown.
+
+---
+
+<sub>Trading and investing involve risk, including the possible loss of capital. Backtested results are hypothetical and based on historical data/assumptions; they do not guarantee future performance. eZorro does not guarantee profits or eliminate the risk of trading losses. Features and integrations are subject to availability and change.</sub>
